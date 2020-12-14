@@ -13,5 +13,6 @@ public class LocalGuide extends User {
 	}
 	
 	// Love my job!
+	//I Really love my job
 
 }
