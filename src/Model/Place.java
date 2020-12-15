@@ -3,9 +3,9 @@ package Model;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Place {
-	String name;
-	String city;
-	String country;		
+	protected String name;
+	protected String city;
+	protected String country;		
 	protected static final AtomicInteger cnt = new AtomicInteger(9999);
 	protected final Integer placeID;
 
