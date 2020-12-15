@@ -8,9 +8,10 @@ public class LocalGuide extends User {
 			String aboutMe, boolean emailNotifacations) {
 		super(email, password, firstName, lastName, dateOfBirth, gender, city, country, phoneNumber, language, travelStyle,
 				aboutMe, emailNotifacations);
-		// TODO Auto-generated constructor stub
 		
 	}
-	
+	public String returnCityAndCountry () {
+		return country+", "+city;
+	}
 
 }
