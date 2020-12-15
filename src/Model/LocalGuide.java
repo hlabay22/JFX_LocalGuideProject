@@ -10,13 +10,6 @@ public class LocalGuide extends User {
 				aboutMe, emailNotifacations);
 		
 	}
-	public String returnCityAndCountry () {
-		return country+", "+city;
-	}
-	
-	public String returnEmailandPassWord() {
-		return this.email+","+this.password;
-		
-	}
+
 
 }
