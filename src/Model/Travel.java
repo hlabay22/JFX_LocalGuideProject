@@ -20,6 +20,8 @@ public class Travel {
 		this.traveller = traveller;
 		this.date = date;
 		this.placesInTravel=placesInTravel;
+		
+		
 	}
 
 

@@ -1,12 +1,6 @@
-<<<<<<< Updated upstream
 /FXML/
-/Exceptions/
 /Controllers/
-<<<<<<< Updated upstream
-=======
-/Model/
->>>>>>> Stashed changes
-=======
-/Model/
+/Contollers/
 /application/
->>>>>>> Stashed changes
+/img/
+/Model/
