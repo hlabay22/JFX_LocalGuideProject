@@ -10,13 +10,17 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Exceptions.LoginException;
 import Model.LocalGuide;
 import Model.SystemGuide4u;
 import Model.Traveller;
@@ -73,22 +77,40 @@ public class LoginController implements Initializable {
 
 	    @FXML
 	    void btnSignInClick(ActionEvent event) { ///////פה הוספתי
-	    	if(system.checkPassword(txtPassword)) {
-	    		if(system.getLocalGuidesList().containsKey(txtEmail.getText()))
+	        String email=txtEmail.getText();
+	        if(!(system.checkValidateEmail(email) || (system.checkPassword(txtPassword)))){
+	    		popUpLoginError();
+	    		this.txtEmail.clear();
+	    		this.txtPassword.clear();
+	    		
+	    	}else {
+	    		
+	    	try {
+	    
+	    		if(system.getLocalGuidesList().containsKey(txtEmail.getText()) && 
+	    				system.checkPasswordAndEmailGuide(email, txtPassword.getText()))
 	    		{
-	    				LocalGuide localGuide = system.getGuideByEmail(txtEmail.getText());
+	    				LocalGuide localGuide = system.getGuideByEmail(email);
 	    				loadLocalGuideDashboad(localGuide);	    			
 	    		}
-	    		if (system.getTravellersList().containsKey(txtEmail.getText())) {
-	    			Traveller traveller=system.getTravellerByMail(txtEmail.getText());
+	    		if (system.getTravellersList().containsKey(email) && 
+	    				system.checkPasswordAndEmailTraveller(email, txtPassword.getText())) {
+	    			Traveller traveller=system.getTravellerByMail(email);
 	    			loadTravellerDashboad(traveller);
 
 	    		}
-    	}
+	    		else throw new LoginException();
+	    		}
 	    	
+	    	catch(LoginException e) {
+    			e.printStackTrace();
+    			popUpLoginError();
+    			this.txtEmail.clear();
+    			this.txtPassword.clear();
+    		}
 
 	    }
-
+	    }
 
 	    @FXML
 	    void lblSignUpClick(MouseEvent event) {
@@ -149,4 +171,27 @@ public class LoginController implements Initializable {
 	public void loadLocalGuideDashboad(LocalGuide localGuide) {
 		
 	}
+	private void popUpLoginError() {
+        try {
+        	Stage popUpLoginErr = new Stage();
+        	FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("popUpLoginError.fxml"));
+            AnchorPane rootLayout = (AnchorPane) loader.load();
+            Scene scene = new Scene(rootLayout);
+	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        popUpLoginErr.setScene(scene);
+	        popUpLoginErr.setTitle("Xademy - Login Error");
+	        popUpLoginErr.setResizable(false);
+	        popUpLoginErr.show();
+	        
+	        
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+
 }

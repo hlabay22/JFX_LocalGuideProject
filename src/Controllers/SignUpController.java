@@ -164,55 +164,59 @@ public class SignUpController {
 
     @FXML
     void btnSignInClick(ActionEvent event) {
-    	LocalDate localDate = comBoxDOB.getValue();
-    	Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-    	Date date = (Date) Date.from(instant);
-    	boolean emailNotes=false;
-    	if(checkBoxEmailNots.equals(true))
-    		emailNotes=true;
-    	//String date2 = comBoxDOB.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-	    Language language=new Language(comBoxLang1.getValue().toString());
-	    TravelStyle travelStyle= new TravelStyle(comBoxTravelStyle1.getValue().toString());
-	    Gender gender= Gender.Female;
-	    if(comBoxGender.getValue().equals("Male"))
-	    	gender=Gender.Male;
-    	if(comBoxUserType.getValue().equals("Local guide")) {
-			 LocalGuide localGuide = new LocalGuide(txtEmail.getText(),
-					 txtPassword.getText(),
-					 txtFirstName.getText(), 
-					 txtLastName.getText(),
-					 date, 
-					 gender,
-					 txtCity.getText(),
-					 comBoxCountry.getValue().toString(),
-					 Integer.parseInt(txtPhone.getText()), 
-					 language,
-					 travelStyle, 
-					 txtAboutMe.getText(), 
-					 emailNotes);
-	
-			 system.addGuide(localGuide);
-
-    	}
-    	else {
-    		Traveller traveller= new Traveller(txtEmail.getText(),
-					 txtPassword.getText(),
-					 txtFirstName.getText(), 
-					 txtLastName.getText(),
-					 date, 
-					 gender,
-					 txtCity.getText(),
-					 comBoxCountry.getValue().toString(),
-					 Integer.parseInt(txtPhone.getText()), 
-					 language,
-					 travelStyle, 
-					 txtAboutMe.getText(), 
-					 emailNotes);
-	       system.addTraveller(traveller);
-    		
-    	}
+    	if((system.checkPassword(txtPassword)) 
+    	&& (system.checkValidateEmail(txtEmail.getText()))
+    	&& (system.checkFirstName(txtFirstName.getText()))){
+		    	LocalDate localDate = comBoxDOB.getValue();
+		    	Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+		    	Date date = (Date) Date.from(instant);
+		    	boolean emailNotes=false;
+		    	if(checkBoxEmailNots.equals(true))
+		    		emailNotes=true;
+		    	//String date2 = comBoxDOB.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			    Language language=new Language(comBoxLang1.getValue().toString());
+			    TravelStyle travelStyle= new TravelStyle(comBoxTravelStyle1.getValue().toString());
+			    Gender gender= Gender.Female;
+			    if(comBoxGender.getValue().equals("Male"))
+			    	gender=Gender.Male;
+			    
+		    	if(comBoxUserType.getValue().equals("Local guide")) {
+					 LocalGuide localGuide = new LocalGuide(txtEmail.getText(),
+							 txtPassword.getText(),
+							 txtFirstName.getText(), 
+							 txtLastName.getText(),
+							 date, 
+							 gender,
+							 txtCity.getText(),
+							 comBoxCountry.getValue().toString(),
+							 Integer.parseInt(txtPhone.getText()), 
+							 language,
+							 travelStyle, 
+							 txtAboutMe.getText(), 
+							 emailNotes);
+			
+					 system.addGuide(localGuide);
+		
+		    	}
+		    	else {
+		    		Traveller traveller= new Traveller(txtEmail.getText(),
+							 txtPassword.getText(),
+							 txtFirstName.getText(), 
+							 txtLastName.getText(),
+							 date, 
+							 gender,
+							 txtCity.getText(),
+							 comBoxCountry.getValue().toString(),
+							 Integer.parseInt(txtPhone.getText()), 
+							 language,
+							 travelStyle, 
+							 txtAboutMe.getText(), 
+							 emailNotes);
+			       system.addTraveller(traveller);
+		    		
+		    	}
     }
-
+    }
     }
 
 
