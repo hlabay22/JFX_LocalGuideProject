@@ -74,43 +74,48 @@ public class LoginController implements Initializable {
 	    	System.exit(0);
 
 	    }
-
-	    @FXML
-	    void btnSignInClick(ActionEvent event) { ///////פה הוספתי
-	        String email=txtEmail.getText();
-	        if(!(system.checkValidateEmail(email) || (system.checkPassword(txtPassword)))){
-	    		popUpLoginError();
-	    		this.txtEmail.clear();
-	    		this.txtPassword.clear();
-	    		
-	    	}else {
-	    		
-	    	try {
 	    
-	    		if(system.getLocalGuidesList().containsKey(txtEmail.getText()) && 
-	    				system.checkPasswordAndEmailGuide(email, txtPassword.getText()))
-	    		{
-	    				LocalGuide localGuide = system.getGuideByEmail(email);
-	    				loadLocalGuideDashboad(localGuide);	    			
-	    		}
-	    		if (system.getTravellersList().containsKey(email) && 
-	    				system.checkPasswordAndEmailTraveller(email, txtPassword.getText())) {
-	    			Traveller traveller=system.getTravellerByMail(email);
-	    			loadTravellerDashboad(traveller);
-
-	    		}
-	    		else throw new LoginException();
-	    		}
+	    @FXML
+	    void btnSignInClick(ActionEvent event) {
 	    	
-	    	catch(LoginException e) {
-    			e.printStackTrace();
-    			popUpLoginError();
-    			this.txtEmail.clear();
-    			this.txtPassword.clear();
-    		}
+	    	  String email=txtEmail.getText();
+		        if(!(system.checkValidateEmail(email) || (system.checkPassword(txtPassword)))){
+		    		popUpLoginError();
+		    		this.txtEmail.clear();
+		    		this.txtPassword.clear();
+		    		
+		    	}else {
+		    		
+		    	try {
+		    
+		    		if(system.getLocalGuidesList().containsKey(txtEmail.getText()) && 
+		    				system.checkPasswordAndEmailGuide(email, txtPassword.getText()))
+		    		{
+		    				LocalGuide localGuide = system.getGuideByEmail(email);
+		    				loadLocalGuideDashboad(localGuide);	    			
+		    		}
+		    		if (system.getTravellersList().containsKey(email) && 
+		    				system.checkPasswordAndEmailTraveller(email, txtPassword.getText())) {
+		    			Traveller traveller=system.getTravellerByMail(email);
+		    			loadTravellerDashboad(traveller);
+
+		    		}
+		    		else throw new LoginException();
+		    		}
+		    	
+		    	catch(LoginException e) {
+	    			e.printStackTrace();
+	    			popUpLoginError();
+	    			this.txtEmail.clear();
+	    			this.txtPassword.clear();
+	    		}
+
+		    }
+	      
 
 	    }
-	    }
+
+
 
 	    @FXML
 	    void lblSignUpClick(MouseEvent event) {
