@@ -17,6 +17,9 @@ import javafx.stage.StageStyle;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Model.LocalGuide;
+import Model.SystemGuide4u;
+import Model.Traveller;
 import application.Main;
 import javafx.fxml.Initializable;
 
@@ -59,6 +62,7 @@ public class LoginController implements Initializable {
 	    @FXML
 	    private Button btnExit;
 
+	    SystemGuide4u system= SystemGuide4u.getInstance();
 
 	    @FXML
 	    void btnExitClick(ActionEvent event) {
@@ -68,9 +72,20 @@ public class LoginController implements Initializable {
 	    }
 
 	    @FXML
-	    void btnSignInClick(ActionEvent event) {
+	    void btnSignInClick(ActionEvent event) { ///////פה הוספתי
+	    	if(system.checkPassword(txtPassword)) {
+	    		if(system.getLocalGuidesList().containsKey(txtEmail.getText()))
+	    		{
+	    				LocalGuide localGuide = system.getGuideByEmail(txtEmail.getText());
+	    				loadLocalGuideDashboad(localGuide);	    			
+	    		}
+	    		if (system.getTravellersList().containsKey(txtEmail.getText())) {
+	    			Traveller traveller=system.getTravellerByMail(txtEmail.getText());
+	    			loadTravellerDashboad(traveller);
+
+	    		}
+    	}
 	    	
-	    	loadTravellerDashboad();
 
 	    }
 
@@ -108,7 +123,7 @@ public class LoginController implements Initializable {
 		}
 	}
 	
-	public void loadTravellerDashboad() {
+	public void loadTravellerDashboad(Traveller traveller) {
 		
 		
 		try {
@@ -130,7 +145,8 @@ public class LoginController implements Initializable {
 		
 		
 	}
-	
-	// Heelllooooooo!!!!!
-
+	///תוסיף לכאן את מה שצריך
+	public void loadLocalGuideDashboad(LocalGuide localGuide) {
+		
+	}
 }
