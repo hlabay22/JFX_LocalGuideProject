@@ -167,7 +167,7 @@ public class SignUpController {
     }
 
     @FXML
-    void btnSignInClick(ActionEvent event) {
+    void btnSignInClick(ActionEvent event) throws comboBoxNotSelected {
     	System.out.println("TTTTTTTTTT");
     	if((system.checkPassword(txtPassword)) 
     	&& (system.checkValidateEmail(txtEmail.getText()))
