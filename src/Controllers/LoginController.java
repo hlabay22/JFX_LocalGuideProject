@@ -82,9 +82,10 @@ public class LoginController implements Initializable {
 		    		this.txtEmail.clear();
 		    		this.txtPassword.clear();
 		    		
-		    	}else {
+		    	}
+		        else {
 		    		
-		    	try {
+		        	try {
 		    
 		    		if(system.getLocalGuidesList().containsKey(txtEmail.getText()) && 
 		    				system.checkPasswordAndEmailGuide(email, txtPassword.getText()))
