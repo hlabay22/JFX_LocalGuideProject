@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="725.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
+   <children>
+      <ImageView fx:id="imgBackground" fitHeight="776.0" fitWidth="1132.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/loginPage.jpg" />
+         </image>
+      </ImageView>
+      <Pane fx:id="paneLogin" layoutX="332.0" layoutY="194.0" opacity="0.88" prefHeight="338.0" prefWidth="467.0" style="-fx-background-color: #001a33;">
+         <children>
+            <Label fx:id="lblLogin" alignment="TOP_CENTER" layoutX="175.0" layoutY="69.0" prefHeight="41.0" prefWidth="117.0" text="Login" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+               <font>
+                  <Font name="Gisha Bold" size="30.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtEmail" layoutX="175.0" layoutY="140.0" />
+            <Label fx:id="lblEmail" layoutX="72.0" layoutY="138.0" prefHeight="29.0" prefWidth="99.0" text="User Email" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPassword" layoutX="72.0" layoutY="188.0" prefHeight="29.0" prefWidth="92.0" text="Password" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnSignIn" layoutX="206.0" layoutY="240.0" mnemonicParsing="false" onAction="#btnSignInClick" prefHeight="35.0" prefWidth="72.0" style="-fx-background-color: #1a8cff;" text="Sign In" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </Button>
+            <PasswordField fx:id="txtPassword" layoutX="175.0" layoutY="185.0" />
+            <Button fx:id="btnSignUp" layoutX="114.0" layoutY="299.0" mnemonicParsing="false" onAction="#btnSignUpClick" prefHeight="32.0" prefWidth="252.0" style="-fx-background-color: transparent;" text="Don't Have an Account? Sign Up Now" textFill="WHITE" underline="true" />
+         </children>
+      </Pane>
+      <Button fx:id="btnExit" layoutX="1021.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnExitClick" prefHeight="41.0" prefWidth="72.0" style="-fx-background-color: transparent;" text="X" textFill="#001a33">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblLogo" layoutX="483.0" layoutY="92.0" prefHeight="88.0" prefWidth="152.0" text="Guide4U" textFill="#001a33">
+         <font>
+            <Font name="Gill Sans MT Ext Condensed Bold" size="72.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
