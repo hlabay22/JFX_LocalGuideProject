@@ -92,7 +92,7 @@ public class LoginController implements Initializable {
 		    				LocalGuide localGuide = system.getGuideByEmail(email);
 		    				loadLocalGuideDashboad(localGuide);	    			
 		    		}
-		    		if (system.getTravellersList().containsKey(email) && 
+		    		else if (system.getTravellersList().containsKey(email) && 
 		    				system.checkPasswordAndEmailTraveller(email, txtPassword.getText())) {
 		    			Traveller traveller=system.getTravellerByMail(email);
 		    			loadTravellerDashboad(traveller);
@@ -128,6 +128,8 @@ public class LoginController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		system.populateLocalGuideExample();
+		system.populateTravellerExample();
 		
 		
 	}
@@ -164,7 +166,7 @@ public class LoginController implements Initializable {
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Traveller Dashboard");
 			stage.show();
-			stage.setFullScreen(true);
+			this.btnSignIn.getScene().getWindow().hide();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -177,11 +179,13 @@ public class LoginController implements Initializable {
 	public void loadLocalGuideDashboad(LocalGuide localGuide) {
 		
 	}
+	
+	
 	private void popUpLoginError() {
         try {
         	Stage popUpLoginErr = new Stage();
         	FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("popUpLoginError.fxml"));
+            loader.setLocation(Main.class.getResource("/FXML/popUpLoginError.fxml"));
             AnchorPane rootLayout = (AnchorPane) loader.load();
             Scene scene = new Scene(rootLayout);
 	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

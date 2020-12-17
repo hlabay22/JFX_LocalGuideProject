@@ -1,9 +1,10 @@
 package Model;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Pattern;
-
 import javafx.scene.control.TextField;
+
 
 public class SystemGuide4u {
 	protected HashMap<String, LocalGuide > localGuidesList;
@@ -80,7 +81,26 @@ public class SystemGuide4u {
 	public boolean checkPasswordAndEmailGuide(String email, String password) {
 		return password.equals(this.localGuidesList.get(email).password);
 	}
+	
 	public boolean checkPasswordAndEmailTraveller(String email, String password) {
 		return password.equals(this.travellersList.get(email).password);
 	}
+	
+	// populate methods
+	
+	public void populateLocalGuideExample() {
+		LocalGuide lg1 = new LocalGuide("xxx@gmail.com", "asd123", "Shim", "Metz", new Date(1992,2,5), Gender.Male, "Haifa", "Israel", 503309824 , new Language("Hebrew"), new TravelStyle("Hiking"), "I Love Food", true);
+		lg1.setRating(7.8);
+		this.localGuidesList.put(lg1.getEmail(), lg1);
+		System.out.println("Populated");
+		
 	}
+	
+	public void populateTravellerExample() {
+		Traveller t1 = new Traveller("har@gmail.com", "asd123", "Haron", "Labay", new Date(1992,2,5), Gender.Male, "Haifa", "Israel", 503309824 , new Language("Hebrew"), new TravelStyle("Hiking"), "I Love Food", true);
+		this.travellersList.put(t1.getEmail(), t1);
+		System.out.println("Populated Travellers");
+		
+	}
+	
+}
