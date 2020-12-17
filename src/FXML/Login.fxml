@@ -44,11 +44,8 @@
                   <Cursor fx:constant="NONE" />
                </cursor>
             </Button>
-            <Label fx:id="lblSignUp" layoutX="133.0" layoutY="290.0" onMouseClicked="#lblSignUpClick" prefHeight="17.0" prefWidth="218.0" text="Don't Have an Account? Sign Up" textFill="WHITE" underline="true">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
             <PasswordField fx:id="txtPassword" layoutX="175.0" layoutY="185.0" />
+            <Button fx:id="btnSignUp" layoutX="114.0" layoutY="299.0" mnemonicParsing="false" onAction="#btnSignUpClick" prefHeight="32.0" prefWidth="252.0" style="-fx-background-color: transparent;" text="Don't Have an Account? Sign Up Now" textFill="WHITE" underline="true" />
          </children>
       </Pane>
       <Button fx:id="btnExit" layoutX="1021.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnExitClick" prefHeight="41.0" prefWidth="72.0" style="-fx-background-color: transparent;" text="X" textFill="#001a33">

@@ -164,6 +164,7 @@ public class SignUpController {
 
     @FXML
     void btnSignInClick(ActionEvent event) {
+    	System.out.println("TTTTTTTTTT");
     	if((system.checkPassword(txtPassword)) 
     	&& (system.checkValidateEmail(txtEmail.getText()))
     	&& (system.checkFirstName(txtFirstName.getText()))){

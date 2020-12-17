@@ -4,6 +4,7 @@ import java.util.Date;
 public class LocalGuide extends User {
 	
 	protected Integer rating;
+	protected Integer raters=0;
 
 
 
@@ -23,6 +24,10 @@ public class LocalGuide extends User {
 		this.rating = rating;
 	}
 	
+	public void calcRating(Integer rating) {
+		Integer newRating = (this.rating+rating)/++this.raters;
+		setRating(newRating);
+	}
 	
 
 

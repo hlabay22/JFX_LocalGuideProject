@@ -15,11 +15,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import Exceptions.LoginException;
 import Model.LocalGuide;
 import Model.SystemGuide4u;
@@ -57,7 +55,7 @@ public class LoginController implements Initializable {
 	    private Button btnSignIn;
 
 	    @FXML
-	    private Label lblSignUp;
+	    private Button btnSignUp;
 	    
 
 	    @FXML
@@ -111,18 +109,21 @@ public class LoginController implements Initializable {
 	    		}
 
 		    }
-	      
 
 	    }
+	    
 
-
-
+	    
 	    @FXML
-	    void lblSignUpClick(MouseEvent event) {
+	    void btnSignUpClick(ActionEvent event) {
 	    	loadSignUpPage();
-	    	this.btnSignIn.getScene().getWindow().hide();
+	    	btnSignUp.getScene().getWindow().hide();
 
 	    }
+
+
+
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -131,7 +132,7 @@ public class LoginController implements Initializable {
 		
 	}
 	
-	
+
 	public void loadSignUpPage() {
 		
 		try {
@@ -159,7 +160,7 @@ public class LoginController implements Initializable {
 			int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
 			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
 			Scene scene = new Scene(root,screenWidth,screenHeight);
-			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Traveller Dashboard");
 			stage.show();
