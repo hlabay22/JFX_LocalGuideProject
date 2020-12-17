@@ -1,3 +1,4 @@
-LocalGuide,shimi,metzger,timond44@gmail.com,1234,17-01-1994,male,israel,nof hagalil,0549245622,hebrew, sport, love the life, yes
+Local Guide,shimi,metzger,timond44@gmail.com,1234,17-01-1994,male,israel,nof hagalil,0549245622,hebrew, sport, love the life, yes
 traveller,haron,labay,haron@gmail.com,1234,13-12-1991,male,israel,kafar kama,0546546570, hebrew,shoping, im a king,no
- traveller,alon,kras,alon@gmail.com,1234,24-05-1990,male,israel,dvora,0532456887,english,tracking,i work in refael,yes 
+traveller,hadas,metz,hadas@gmail.com,1234,26-09-1993,female,israel,nof hagalil,0507818382,hebrew,rest,shimon is the best,yes 
+Both,alon,kras,alon@gmail.com,1234,24-05-1990,male,israel,dvora,0532456887,english,tracking,i work in refael,yes

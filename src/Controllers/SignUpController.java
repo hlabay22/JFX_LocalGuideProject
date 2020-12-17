@@ -79,7 +79,7 @@ public class SignUpController {
     private Label lblGender;
 
     @FXML
-    private ComboBox<?> comBoxGender;
+    private ComboBox<String> comBoxGender;
 
     @FXML
     private Label lblPhone;
@@ -94,49 +94,49 @@ public class SignUpController {
     private Label lblCity;
 
     @FXML
-    private ComboBox<?> comBoxCountry;
+    private ComboBox<String> comBoxCountry;
 
     @FXML
     private Label lblCountry;
 
     @FXML
-    private ComboBox<?> comBoxLang1;
+    private ComboBox<String> comBoxLang1;
 
     @FXML
     private Label lblLang1;
 
     @FXML
-    private ComboBox<?> comBoxLang2;
+    private ComboBox<String> comBoxLang2;
 
     @FXML
     private Label lblLang2;
 
     @FXML
-    private ComboBox<?> comBoxLang3;
+    private ComboBox<String> comBoxLang3;
 
     @FXML
     private Label lblLang3;
 
     @FXML
-    private ComboBox<?> comBoxTravelStyle1;
+    private ComboBox<String> comBoxTravelStyle1;
 
     @FXML
     private Label lblTravelStyle1;
 
     @FXML
-    private ComboBox<?> comBoxTravelStyle2;
+    private ComboBox<String> comBoxTravelStyle2;
 
     @FXML
     private Label lblTravelStyle2;
 
     @FXML
-    private ComboBox<?> comBoxTravelStyle3;
+    private ComboBox<String> comBoxTravelStyle3;
 
     @FXML
     private Label lblTravelStyle3;
 
     @FXML
-    private ComboBox<?> comBoxTransportType;
+    private ComboBox<String> comBoxTransportType;
 
     @FXML
     private Label lblTransportType;
@@ -159,6 +159,16 @@ public class SignUpController {
     @FXML
     public void initialize() {
     	comBoxUserType.getItems().setAll("Local Guide", "Traveller", "Traveller and Local Guide");
+    	comBoxGender.getItems().setAll("Male","Female");
+    	comBoxLang1.getItems().setAll("English","Hebrew","France","Arab","Russian");
+    	comBoxLang2.getItems().setAll("English","Hebrew","France","Arab","Russian");
+    	comBoxLang3.getItems().setAll("English","Hebrew","France","Arab","Russian");
+    	comBoxTravelStyle1.getItems().setAll("Hiking", "Music", "Art", "Nature", "Sport", "Shoping");
+    	comBoxTravelStyle2.getItems().setAll("Hiking", "Music", "Art", "Nature", "Sport", "Shoping");
+    	comBoxTravelStyle3.getItems().setAll("Hiking", "Music", "Art", "Nature", "Sport", "Shoping");
+    	comBoxTransportType.getItems().setAll("Privet Vehicle", "public transportation");
+    
+    	
     }
     @FXML
     void btnExitClick(ActionEvent event) {

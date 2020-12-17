@@ -103,20 +103,23 @@ public class SystemGuide4u {
 		
 	}
 	
-}
+
 	public void printAllData() {
+		System.out.println("Local guides: ");
 		for(String mail: this.localGuidesList.keySet()) {
 			LocalGuide temp=this.localGuidesList.get(mail);
 			//System.out.println(temp.toString());
 			System.out.print(temp.firstName+", ");
 			System.out.println(temp.email);
 			}
+		System.out.println("\nTravellers: ");
 		for(String mail: this.travellersList.keySet()) {
 			Traveller temp=this.travellersList.get(mail);
 			//System.out.println(temp.toString());
 			System.out.print(temp.firstName+", ");
 			System.out.println(temp.email);
 			}
+		System.out.println("\n");
 		}
 	}
 	
