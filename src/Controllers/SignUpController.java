@@ -79,7 +79,7 @@ public class SignUpController {
     private Label lblGender;
 
     @FXML
-    private ComboBox<?> comBoxGender;
+    private ComboBox<String> comBoxGender;
 
     @FXML
     private Label lblPhone;
@@ -118,25 +118,25 @@ public class SignUpController {
     private Label lblLang3;
 
     @FXML
-    private ComboBox<?> comBoxTravelStyle1;
+    private ComboBox<String> comBoxTravelStyle1;
 
     @FXML
     private Label lblTravelStyle1;
 
     @FXML
-    private ComboBox<?> comBoxTravelStyle2;
+    private ComboBox<String> comBoxTravelStyle2;
 
     @FXML
     private Label lblTravelStyle2;
 
     @FXML
-    private ComboBox<?> comBoxTravelStyle3;
+    private ComboBox<String> comBoxTravelStyle3;
 
     @FXML
     private Label lblTravelStyle3;
 
     @FXML
-    private ComboBox<?> comBoxTransportType;
+    private ComboBox<String> comBoxTransportType;
 
     @FXML
     private Label lblTransportType;

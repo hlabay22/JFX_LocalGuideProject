@@ -56,19 +56,19 @@ public class Main extends Application {
                     String aboutMe=lineArray[12];
                     boolean emailNotifacations=lineArray[13].equalsIgnoreCase("yes");
                     
-                    if (lineArray[0].equalsIgnoreCase("LocalGuide")) {
+                    if (lineArray[0].equalsIgnoreCase("Local Guide")) {
                     system.addGuide(new LocalGuide(email, password, firstName,
                     							lastName, date, gender, city,
                     							country, phone, language, travelStyle,
                     							aboutMe, emailNotifacations));
                     }
-                    else if (lineArray[0].equalsIgnoreCase("traveller")) {
+                    else if (lineArray[0].equalsIgnoreCase("Traveller")) {
                     	system.addTraveller(new Traveller(email, password, firstName,
     							lastName, date, gender, city,
     							country, phone, language, travelStyle,
     							aboutMe, emailNotifacations));
                     }
-                    else if (lineArray[0].equalsIgnoreCase("both")) {
+                    else if (lineArray[0].equalsIgnoreCase("Both")) {
                     	system.addTraveller(new Traveller(email, password, firstName,
     							lastName, date, gender, city,
     							country, phone, language, travelStyle,
