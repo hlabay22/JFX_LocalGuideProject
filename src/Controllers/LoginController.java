@@ -158,11 +158,15 @@ public class LoginController implements Initializable {
 		
 		
 		try {
+
 			stage=new Stage();
-			Parent root = FXMLLoader.load(Main.class.getResource("/FXML/TravellerDashboard.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/TravellerDashboard.fxml"));
+			Parent root = loader.load();
 			int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
 			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
 			Scene scene = new Scene(root,screenWidth,screenHeight);
+			TravellerDashboardController TDashController = loader.<TravellerDashboardController>getController();
+			TDashController.setTraveller(traveller);					
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Traveller Dashboard");
@@ -176,8 +180,28 @@ public class LoginController implements Initializable {
 		
 		
 	}
-	///תוסיף לכאן את מה שצריך
+	
 	public void loadLocalGuideDashboad(LocalGuide localGuide) {
+		
+		try {
+
+			stage=new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LocalGuideDashboard.fxml"));
+			Parent root = loader.load();
+			int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
+			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
+			Scene scene = new Scene(root,screenWidth,screenHeight);
+			LocalGuideDashboardController LGDashController = loader.<LocalGuideDashboardController>getController();
+			LGDashController.setLocalGuide(localGuide);					
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.setTitle("Guide4U - Local Guide Dashboard");
+			stage.show();
+			this.btnSignIn.getScene().getWindow().hide();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

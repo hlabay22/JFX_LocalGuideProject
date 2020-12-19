@@ -48,7 +48,7 @@
           </Tab>
           <Tab fx:id="tabFindAGuide" text="Find A Guide">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #001a33;">
                      <children>
                         <TableView fx:id="tableLocalGuide" layoutX="14.0" layoutY="112.0" prefHeight="839.0" prefWidth="1850.0">
                           <columns>

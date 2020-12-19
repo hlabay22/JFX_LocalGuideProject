@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.beans.EventHandler;
 import java.net.URL;
 import java.util.Date;
 import java.util.Map.Entry;
@@ -11,22 +12,30 @@ import Model.LocalGuide;
 import Model.SystemGuide4u;
 import Model.TravelStyle;
 import Model.Traveller;
+import application.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 
@@ -119,11 +128,36 @@ public class TravellerDashboardController implements Initializable {
 
     @FXML
     void btnLogOutClick(ActionEvent event) {
+    	
+    	btnLogOut.getScene().getWindow().hide();
+    	system.reloadLoginPage();
 
     }
 
-    @FXML
+
+
+	@FXML
     void btnMatchmakerSearchClick(ActionEvent event) {
+    	
+    	try {
+
+			Stage stage=new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MatchmakerSearch.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			MatchmakerSearchController MSController = loader.<MatchmakerSearchController>getController();
+			MSController.setTraveller(this.traveller);
+			MSController.showHideResult(false);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.setTitle("Guide4U - Matchmaker Search");
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.show();
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 
     }
     
@@ -201,20 +235,61 @@ public class TravellerDashboardController implements Initializable {
 			
 	}
 	
+	public void tableClickDetect() {
+		this.tableLocalGuide.setRowFactory( tv -> {
+		    TableRow<LocalGuide> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		        	LocalGuide localGuide = row.getItem();
+		        	loadLocalGuideInfoPage(localGuide);
+
+		        }
+		    });
+		    return row ;
+		});
+	}
 	
 	
 	
-    public Traveller getTraveller() {
+	
+	
+    public void loadLocalGuideInfoPage(LocalGuide localGuide) {
+		
+		try {
+
+			Stage stage=new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LocalGuideProfile.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			LocalGuideProfileController lgProfileController = loader.<LocalGuideProfileController>getController();
+			lgProfileController.setLocalGuide(localGuide);
+			lgProfileController.setProfileData();
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.setTitle("Guide4U - Local Guide Profile");
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.show();
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	public Traveller getTraveller() {
 		return traveller;
 	}
 
 	public void setTraveller(Traveller traveller) {
 		this.traveller = traveller;
+		this.lblUserName.setText(traveller.getFirstName()+" "+traveller.getLastName());
 		
 	}
 	
-	
-	
+
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -222,7 +297,7 @@ public class TravellerDashboardController implements Initializable {
 		this.system = SystemGuide4u.getInstance();
 		initLocalGuideTable();
 		filterdSearchInit();
-		
+		tableClickDetect();
 		
 	}
 

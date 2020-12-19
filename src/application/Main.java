@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -32,23 +35,15 @@ public class Main extends Application {
             
             FileReader reader = new FileReader("guide4u.txt");
             Scanner in = new Scanner(reader);
-            
-          
             while (in.hasNextLine()) {
             	String line=in.nextLine();
                 String[] lineArray = line.split(",");
-               
-                
-                
-   
                     String firstName = lineArray[1];
                     String lastName = lineArray[2];
                     String email=lineArray[3];
                     String password=lineArray[4];
-//                    String date=lineArray[5];
-//                    DateFormat df = new SimpleDateFormat("dd MM yyyy");
-//                    Date result =  df.parse(date);
-                    Date result=new Date();
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    LocalDate date = LocalDate.parse(lineArray[5],df);
                     Gender gender= Gender.Female;
                     if( lineArray[6].equalsIgnoreCase("Male")) {
                     	gender= Gender.Male;
@@ -63,23 +58,23 @@ public class Main extends Application {
                     
                     if (lineArray[0].equalsIgnoreCase("LocalGuide")) {
                     system.addGuide(new LocalGuide(email, password, firstName,
-                    							lastName, result, gender, city,
+                    							lastName, date, gender, city,
                     							country, phone, language, travelStyle,
                     							aboutMe, emailNotifacations));
                     }
                     else if (lineArray[0].equalsIgnoreCase("traveller")) {
                     	system.addTraveller(new Traveller(email, password, firstName,
-    							lastName, result, gender, city,
+    							lastName, date, gender, city,
     							country, phone, language, travelStyle,
     							aboutMe, emailNotifacations));
                     }
                     else if (lineArray[0].equalsIgnoreCase("both")) {
                     	system.addTraveller(new Traveller(email, password, firstName,
-    							lastName, result, gender, city,
+    							lastName, date, gender, city,
     							country, phone, language, travelStyle,
     							aboutMe, emailNotifacations));
                     	 system.addGuide(new LocalGuide(email, password, firstName,
-     							lastName, result, gender, city,
+     							lastName, date, gender, city,
      							country, phone, language, travelStyle,
      							aboutMe, emailNotifacations));
                     }
@@ -116,7 +111,6 @@ public class Main extends Application {
 	
 	public static void main(String[] args) throws ParseException {
 		importDataFromTxtFile();
-		system.printAllData();
 		launch(args);
 	}
 }

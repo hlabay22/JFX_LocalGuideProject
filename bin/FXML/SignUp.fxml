@@ -98,19 +98,19 @@
                   <Font name="Guttman-Toledo Bold" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="comBoxLang1" layoutX="444.0" layoutY="273.0" prefWidth="150.0" promptText="Required" />
+            <ComboBox fx:id="comBoxLang1" layoutX="444.0" layoutY="273.0" prefWidth="150.0" />
             <Label fx:id="lblLang1" layoutX="345.0" layoutY="272.0" text="Language 1 " textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="comBoxLang2" layoutX="444.0" layoutY="325.0" prefWidth="150.0" promptText="Optional" />
+            <ComboBox fx:id="comBoxLang2" layoutX="444.0" layoutY="325.0" prefWidth="150.0" />
             <Label fx:id="lblLang2" layoutX="345.0" layoutY="329.0" text="Language 2 " textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="comBoxLang3" layoutX="444.0" layoutY="385.0" prefWidth="150.0" promptText="Optional" />
+            <ComboBox fx:id="comBoxLang3" layoutX="444.0" layoutY="385.0" prefWidth="150.0" />
             <Label fx:id="lblLang3" layoutX="345.0" layoutY="389.0" text="Language 3" textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="14.0" />

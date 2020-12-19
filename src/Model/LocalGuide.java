@@ -1,4 +1,5 @@
 package Model;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class LocalGuide extends User {
@@ -8,7 +9,7 @@ public class LocalGuide extends User {
 
 
 
-	public LocalGuide(String email, String password, String firstName, String lastName, Date dateOfBirth, Gender gender,
+	public LocalGuide(String email, String password, String firstName, String lastName, LocalDate dateOfBirth, Gender gender,
 			String city, String country, Integer phoneNumber, Language language, TravelStyle travelStyle,
 			String aboutMe, boolean emailNotifacations) {
 		super(email, password, firstName, lastName, dateOfBirth, gender, city, country, phoneNumber, language, travelStyle,
@@ -18,6 +19,13 @@ public class LocalGuide extends User {
 	
 	public Double getRating() {
 		return rating;
+	}
+	
+	public String getRatingAsString() {
+		if(rating == null)
+			return "X.X";
+		else 
+			return rating.toString(this.rating);
 	}
 
 	public void setRating(Double rating) {
@@ -58,7 +66,8 @@ public class LocalGuide extends User {
 	}
 	
 	public String getDateOfBirthForTable() {
-		return this.getDateOfBirth().getDay()+"/"+getDateOfBirth().getMonth()+"/"+getDateOfBirth().getYear();
+		//return this.getDateOfBirth().getDay()+"/"+getDateOfBirth().getMonth()+"/"+getDateOfBirth().getYear();
+		return this.dateOfBirth.toString();
 	}
 	
 	

@@ -94,25 +94,25 @@ public class SignUpController {
     private Label lblCity;
 
     @FXML
-    private ComboBox<?> comBoxCountry;
+    private ComboBox<String> comBoxCountry;
 
     @FXML
     private Label lblCountry;
 
     @FXML
-    private ComboBox<?> comBoxLang1;
+    private ComboBox<String> comBoxLang1;
 
     @FXML
     private Label lblLang1;
 
     @FXML
-    private ComboBox<?> comBoxLang2;
+    private ComboBox<String> comBoxLang2;
 
     @FXML
     private Label lblLang2;
 
     @FXML
-    private ComboBox<?> comBoxLang3;
+    private ComboBox<String> comBoxLang3;
 
     @FXML
     private Label lblLang3;
@@ -156,26 +156,36 @@ public class SignUpController {
     @FXML
     private Label lblLogo;
     SystemGuide4u system= SystemGuide4u.getInstance();
+    
+    
+    
+    
+    
     @FXML
     public void initialize() {
     	comBoxUserType.getItems().setAll("Local Guide", "Traveller", "Traveller and Local Guide");
+    	system.initCountryComBox(this.comBoxCountry);
+    	system.initLanguageComBox(this.comBoxLang1);
+    	system.initLanguageComBox(this.comBoxLang2);
+    	system.initLanguageComBox(this.comBoxLang3);
+    	
     }
     @FXML
     void btnExitClick(ActionEvent event) {
     	System.exit(0);
 
     }
+    
 
     @FXML
     void btnSignInClick(ActionEvent event) throws comboBoxNotSelected {
-    	System.out.println("TTTTTTTTTT");
     	if((system.checkPassword(txtPassword)) 
     	&& (system.checkValidateEmail(txtEmail.getText()))
     	&& (system.checkFirstName(txtFirstName.getText()))){
     		
 		    	LocalDate localDate = comBoxDOB.getValue();
-		    	Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-		    	Date date = (Date) Date.from(instant);
+//		    	Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+//		    	Date date = (Date) Date.from(instant);
 		    	Language language;
 		    	TravelStyle travelStyle;
 		    	boolean emailNotes=false;
@@ -194,6 +204,7 @@ public class SignUpController {
 		    	else throw new comboBoxNotSelected();
 		    	
 			    Gender gender= Gender.Female;
+			    
 			    if(comBoxGender.getValue().equals("Male"))
 			    	gender=Gender.Male;
 			    
@@ -202,7 +213,7 @@ public class SignUpController {
 							 txtPassword.getText(),
 							 txtFirstName.getText(), 
 							 txtLastName.getText(),
-							 date, 
+							 localDate, 
 							 gender,
 							 txtCity.getText(),
 							 comBoxCountry.getValue().toString(),
@@ -215,7 +226,7 @@ public class SignUpController {
 						 txtPassword.getText(),
 						 txtFirstName.getText(), 
 						 txtLastName.getText(),
-						 date, 
+						 localDate, 
 						 gender,
 						 txtCity.getText(),
 						 comBoxCountry.getValue().toString(),

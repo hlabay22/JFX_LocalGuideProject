@@ -1,6 +1,7 @@
 package Model;
 
 import java.awt.image.BufferedImage;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class User {
@@ -11,7 +12,7 @@ public class User {
 	protected String password;
 	protected String firstName;
 	protected String lastName;
-	protected Date dateOfBirth;
+	protected LocalDate dateOfBirth;
 	protected Gender gender;
 	protected String city;
 	protected String country;
@@ -24,7 +25,7 @@ public class User {
 	
 	// C'tor 
 	
-	public User(String email, String password, String firstName, String lastName, Date dateOfBirth, Gender gender,
+	public User(String email, String password, String firstName, String lastName, LocalDate dateOfBirth, Gender gender,
 			String city, String country, Integer phoneNumber, Language language, TravelStyle travelStyle,
 			String aboutMe, boolean emailNotifacations) {
 		super();
@@ -66,7 +67,7 @@ public class User {
 	}
 
 
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
@@ -130,7 +131,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
