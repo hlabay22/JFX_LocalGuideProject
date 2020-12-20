@@ -174,7 +174,14 @@ public class SignUpController {
     @FXML
     public void initialize() {
     	comBoxUserType.getItems().setAll("Local Guide", "Traveller", "Traveller and Local Guide");
-    	comBoxTravelStyle1.getItems().setAll("Art","Sport","Shoping");
+    	comBoxTravelStyle1.getItems().setAll("Art","Sport","Shoping","Adventure", "Entertaiment", "Local Culture", "Nature");
+    	comBoxTravelStyle2.getItems().setAll("Art","Sport","Shoping","Adventure", "Entertaiment", "Local Culture", "Nature");
+    	comBoxTravelStyle3.getItems().setAll("Art","Sport","Shoping","Adventure", "Entertaiment", "Local Culture", "Nature");
+        comBoxLang1.setPromptText("Required");
+        comBoxLang2.setPromptText("Optional");
+        comBoxLang3.setPromptText("Optional");
+        comBoxTransportType.getItems().setAll("Privat Vehicle","Public Transportation");
+
     	comBoxGender.getItems().setAll("Male","Female","Other");
     	system.initCountryComBox(this.comBoxCountry);
     	system.initLanguageComBox(this.comBoxLang1);

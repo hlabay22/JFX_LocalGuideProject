@@ -300,21 +300,4 @@ public class TravellerDashboardController implements Initializable {
 		tableClickDetect();
 		
 	}
-	  @FXML
-	    void findMatch(ActionEvent event) {
-		  
-              for(String mail:system.getLocalGuidesList().keySet()) {
-            	  LocalGuide localGuide=system.getLocalGuidesList().get(mail);
-            	  if(localGuide.getCity().equalsIgnoreCase(txtCity.getText())) {
-            		  
-            		System.out.println("find for you: "+localGuide.getFirstName());  
-  		        	loadLocalGuideInfoPage(localGuide);
-
-            	  }
-            		  
-              }
-	    }
-	  @FXML
-	    private TextField txtCity;
-
 }
