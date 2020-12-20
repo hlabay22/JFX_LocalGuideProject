@@ -1,6 +1,7 @@
 package Model;
 
 import java.awt.List;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+import Controllers.PopUpLoginErrorController;
 import application.Main;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -30,7 +33,7 @@ public class SystemGuide4u {
 	protected static SystemGuide4u instance = new SystemGuide4u();
 
 
-	public SystemGuide4u() {
+	private SystemGuide4u() {
 		super();
 		this.localGuidesList = new HashMap<String, LocalGuide>();
 		this.travellersList = new HashMap<String, Traveller>();
@@ -192,6 +195,26 @@ public class SystemGuide4u {
          
     }
     
+    
+    public  void initTravelStyleComBox(ComboBox <String> comBox){
+    	
+    	comBox.getItems().setAll("Art","Sport","Shoping","Adventure", "Entertaiment", "Local Culture", "Nature");
+    	
+    }
+    
+    
+    public void initTransportTypeComBox(ComboBox <String> comBox) {
+    	
+    	comBox.getItems().setAll("Privat Vehicle","Public Transportation");
+    
+    }
+    
+    
+    public void initGenderComBox(ComboBox <String> comBox) {
+    	comBox.getItems().setAll("Male","Female");
+    }
+    
+    
     public void reloadLoginPage() {
     	try {
     		Stage primaryStage = new Stage();
@@ -210,6 +233,31 @@ public class SystemGuide4u {
 			e.printStackTrace();
 		}
     }
+    
+	public void popUpLoginError(String msg) {
+        try {
+        	Stage popUpLoginErr = new Stage();
+        	FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/FXML/popUpLoginError.fxml"));
+            AnchorPane rootLayout = (AnchorPane) loader.load();
+            Scene scene = new Scene(rootLayout);
+            PopUpLoginErrorController p = loader.getController();
+            p.setLblError(msg);
+	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        popUpLoginErr.setScene(scene);
+	        popUpLoginErr.setTitle("Xademy - Login Error");
+	        popUpLoginErr.setResizable(false);
+	        popUpLoginErr.show();
+	        
+	        
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
     
     
 

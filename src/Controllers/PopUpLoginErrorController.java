@@ -18,5 +18,9 @@ public class PopUpLoginErrorController {
     	btnOK.getScene().getWindow().hide();
 
     }
+    
+    public void setLblError(String msg) {
+    	this.lblError.setText(msg);
+    }
 
 }

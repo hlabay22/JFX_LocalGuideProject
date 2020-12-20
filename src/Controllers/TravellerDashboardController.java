@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.Date;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
-
 import Model.Gender;
 import Model.Language;
 import Model.LocalGuide;
@@ -188,6 +187,7 @@ public class TravellerDashboardController implements Initializable {
 	}
 	
 	public void filterdSearchInit() {
+		
 		filterdData = new FilteredList<>(localGuideData, b -> true);
 		txtSearchBox.textProperty().addListener((observable,oldValue,newValue) -> {
 			filterdData.setPredicate(localGuide -> {
@@ -232,7 +232,7 @@ public class TravellerDashboardController implements Initializable {
 		tableLocalGuide.setItems(sortedData);
 	
 			
-			
+			  
 	}
 	
 	public void tableClickDetect() {
