@@ -19,6 +19,7 @@ import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -33,6 +34,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class SignUpController {
 
@@ -202,19 +204,31 @@ public class SignUpController {
     	try {
     	if((system.checkPassword(txtPassword)) 
     	&& (system.checkValidateEmail(txtEmail.getText()))
-    	&& (system.checkFirstName(txtFirstName.getText()))){
+    	&& (system.checkFirstName(txtFirstName.getText())) 
+    	&& (system.checkFirstName(txtLastName.getText()))
+    	&& (system.checkPhone(txtPhone)) && (txtCity.getText()!=null)){
+    		
+    		////combo boxes
 		    	LocalDate localDate = comBoxDOB.getValue();
-//		    	Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-//		    	Date date = (Date) Date.from(instant);
 		    	Language language=new Language("");
 		    	TravelStyle travelStyle=new TravelStyle("");
+			    Gender gender= Gender.Female;
+			    if(comBoxGender.getValue().equals("Male"))
+			    	gender=Gender.Male;
 		    	boolean emailNotes=false;
 		    	if(checkBoxEmailNots.equals(true))
 		    		emailNotes=true;
 		    	//String date2 = comBoxDOB.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		    	try {
+		    	String lang1=comBoxLang1.getValue().toString();
+		    	String lang2=comBoxLang2.getValue().toString();
+		    	String lang3=comBoxLang3.getValue().toString();
+                String travel1=comBoxTravelStyle1.getValue().toString();
+                String travel2=comBoxTravelStyle2.getValue().toString();
+                String travel3=comBoxTravelStyle3.getValue().toString();
+
 		    	if(comBoxLang1.getValue()!=null) {
-				     language.setLanguage1(comBoxLang1.getValue().toString());
+				     language.setLanguage1(lang1);
 		    	}
 		    	else throw new comboBoxNotSelected();
 		    	
@@ -223,8 +237,21 @@ public class SignUpController {
 		    	}
 		    	else throw new comboBoxNotSelected();
 		    	
-		    	if(comBoxUserType.getValue()==null) {
-		    		throw new comboBoxNotSelected();
+		    	if(comBoxUserType.getValue()==null || comBoxGender.getValue()==null || comBoxDOB.getValue()==null ||
+		    	   comBoxGender.getValue()==null || comBoxCountry.getValue()==null || comBoxCountry.getValue()==null) {
+		    	 	throw new comboBoxNotSelected();
+		    	}
+		    	if(comBoxLang2.getValue()!=null) {
+		    		language=new Language(lang1, lang2);
+		    	}
+		    	if(comBoxLang3.getValue()!=null) {
+		    		language=new Language(lang1, lang2, lang3);
+		    	}
+		    	if(comBoxTravelStyle2.getValue()!=null) {
+		    		travelStyle= new TravelStyle(travel1, travel2);
+		    	}
+		    	if(comBoxTravelStyle3.getValue()!=null) {
+		    		travelStyle= new TravelStyle(travel1, travel2, travel3);
 		    	}
 		    	}catch(comboBoxNotSelected e){
 		    		e.printStackTrace();
@@ -235,12 +262,18 @@ public class SignUpController {
 		    			 comBoxTravelStyle1.setStyle("-fx-background-color:red;");
 		    		 if(comBoxUserType.getValue()==null) 
 		    			 comBoxUserType.setStyle("-fx-background-color:red;");
-		    		
+		    		 if(comBoxGender.getValue()==null) 
+		    			 comBoxUserType.setStyle("-fx-background-color:red;");
+		    		 if(comBoxCountry.getValue()==null) 
+		    			 comBoxCountry.setStyle("-fx-background-color:red;");
+		    		 if(comBoxTransportType.getValue()==null) 
+		    			 comBoxTransportType.setStyle("-fx-background-color:red;");
+		    		 if(comBoxDOB.getValue()==null) 
+		    			 comBoxDOB.setStyle("-fx-background-color:red;");
 		    	}
-			    Gender gender= Gender.Female;
+		    	
 			    
-			    if(comBoxGender.getValue().equals("Male"))
-			    	gender=Gender.Male;
+			    
 			    
 		    	
 				LocalGuide localGuide = new LocalGuide(txtEmail.getText(),
@@ -285,7 +318,7 @@ public class SignUpController {
 
 				}
         		system.printAllData();
-
+        		System.exit(0);
 		    	}
 		    	//else throw new comboBoxNotSelected();
     	else {throw new LoginException();}
@@ -300,16 +333,43 @@ public class SignUpController {
 				this.txtEmail.clear();
 				this.txtEmail.setStyle("-fx-text-box-border:#ec0606");
 	    	}
-
 	    	if (!system.checkFirstName(txtFirstName.getText())) {
 				this.txtFirstName.setStyle("-fx-text-box-border:#ec0606");
 				this.txtFirstName.clear();
 	    	}
-			
+	    	if (!system.checkFirstName(txtLastName.getText())) {
+				this.txtLastName.setStyle("-fx-text-box-border:#ec0606");
+				this.txtLastName.clear();
+	    	}
+	    	if(!system.checkPhone(txtPhone)) {
+	    		this.txtPhone.setStyle("-fx-text-box-border:#ec0606");
+				this.txtPhone.clear();
+	    	}	
+	    		
+	    		if (txtCity.getText()!=null) {
+	    			this.txtCity.setStyle("-fx-text-box-border:#ec0606");
+					this.txtCity.clear();
+	    	}
 		}
     	
     }
-
+    public void signUpSucssesfull(Stage primaryStage) {
+		try {
+			Parent root = FXMLLoader.load(Main.class.getResource("/FXML/Login.fxml"));
+			Scene scene = new Scene(root,1130,725);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Guide4U - Login");
+			primaryStage.initStyle(StageStyle.UNDECORATED);
+			primaryStage.show();
+			primaryStage.setResizable(false);
+			
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	private void popUpComboError() {
         try {
         	Stage popUpLoginErr = new Stage();

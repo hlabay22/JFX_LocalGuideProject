@@ -68,7 +68,13 @@ public class SystemGuide4u {
 		}
 		return false;
 	}
-	
+	public boolean checkPhone(TextField phone) {
+		String regEx = "^[0-9]{10}$";
+		if(phone.getText().matches(regEx)) {
+			return true;
+		}
+		return false;
+	}
 	public boolean checkPassword(TextField password) {
 		String regEx = "^[a-z]{3}[0-9]{3}$";
 		if(password.getText().matches(regEx)) {
