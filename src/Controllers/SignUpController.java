@@ -1,10 +1,13 @@
 package Controllers;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.awt.Color;
 
+import Exceptions.LoginException;
 import Exceptions.comboBoxNotSelected;
 import Model.Gender;
 import Model.Language;
@@ -12,8 +15,11 @@ import Model.LocalGuide;
 import Model.SystemGuide4u;
 import Model.TravelStyle;
 import Model.Traveller;
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -23,7 +29,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 
 public class SignUpController {
 
@@ -156,7 +165,8 @@ public class SignUpController {
     @FXML
     private Label lblLogo;
     SystemGuide4u system= SystemGuide4u.getInstance();
-    
+    //SystemGuide4u system=Main.system;
+
     
     
     
@@ -164,6 +174,8 @@ public class SignUpController {
     @FXML
     public void initialize() {
     	comBoxUserType.getItems().setAll("Local Guide", "Traveller", "Traveller and Local Guide");
+    	comBoxTravelStyle1.getItems().setAll("Art","Sport","Shoping");
+    	comBoxGender.getItems().setAll("Male","Female","Other");
     	system.initCountryComBox(this.comBoxCountry);
     	system.initLanguageComBox(this.comBoxLang1);
     	system.initLanguageComBox(this.comBoxLang2);
@@ -172,6 +184,7 @@ public class SignUpController {
     }
     @FXML
     void btnExitClick(ActionEvent event) {
+
     	System.exit(0);
 
     }
@@ -179,30 +192,44 @@ public class SignUpController {
 
     @FXML
     void btnSignInClick(ActionEvent event) throws comboBoxNotSelected {
+    	try {
     	if((system.checkPassword(txtPassword)) 
     	&& (system.checkValidateEmail(txtEmail.getText()))
     	&& (system.checkFirstName(txtFirstName.getText()))){
-    		
 		    	LocalDate localDate = comBoxDOB.getValue();
 //		    	Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 //		    	Date date = (Date) Date.from(instant);
-		    	Language language;
-		    	TravelStyle travelStyle;
+		    	Language language=new Language("");
+		    	TravelStyle travelStyle=new TravelStyle("");
 		    	boolean emailNotes=false;
 		    	if(checkBoxEmailNots.equals(true))
 		    		emailNotes=true;
 		    	//String date2 = comBoxDOB.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		    	
+		    	try {
 		    	if(comBoxLang1.getValue()!=null) {
-				     language=new Language(comBoxLang1.getValue().toString());
+				     language.setLanguage1(comBoxLang1.getValue().toString());
 		    	}
 		    	else throw new comboBoxNotSelected();
 		    	
 		    	if(comBoxTravelStyle1.getValue()!=null) {
-				    travelStyle= new TravelStyle(comBoxTravelStyle1.getValue().toString());
+				    travelStyle.setTravelStyle1(comBoxTravelStyle1.getValue().toString());
 		    	}
 		    	else throw new comboBoxNotSelected();
 		    	
+		    	if(comBoxUserType.getValue()==null) {
+		    		throw new comboBoxNotSelected();
+		    	}
+		    	}catch(comboBoxNotSelected e){
+		    		e.printStackTrace();
+		    		 popUpComboError();
+		    		 if(comBoxLang1.getValue()==null) 
+		    			 comBoxLang1.setStyle("-fx-background-color:red;");
+		    		 if(comBoxTravelStyle1.getValue()==null) 
+		    			 comBoxTravelStyle1.setStyle("-fx-background-color:red;");
+		    		 if(comBoxUserType.getValue()==null) 
+		    			 comBoxUserType.setStyle("-fx-background-color:red;");
+		    		
+		    	}
 			    Gender gender= Gender.Female;
 			    
 			    if(comBoxGender.getValue().equals("Male"))
@@ -236,19 +263,90 @@ public class SignUpController {
 						 txtAboutMe.getText(), 
 						 emailNotes);
 		    	
-				if(comBoxUserType.getValue().equals("Local Guide")) 
+				if(comBoxUserType.getValue().equals("Local Guide")) {
 					 system.addGuide(localGuide);
-	
-		    	if(comBoxUserType.getValue().equals("Traveller"))
+					 System.out.println("local add");
+				}
+				if(comBoxUserType.getValue().equals("Traveller")) {
 			       system.addTraveller(traveller);
-		    	if(comBoxUserType.getValue().equals("Traveller and Local Guide"))	
-		    	   system.addGuide(localGuide);system.addTraveller(traveller);}
-		    	else throw new comboBoxNotSelected();////���� ������ �� ����� ��
-    	
-    	    
-		
+					 System.out.println("trav add");
+
+				}
+				if(comBoxUserType.getValue().equals("Traveller and Local Guide")) {
+					system.addGuide(localGuide);system.addTraveller(traveller);
+					 System.out.println("both add");
+
+				}
+        		system.printAllData();
+
+		    	}
+		    	//else throw new comboBoxNotSelected();
+    	else {throw new LoginException();}
+    	}	catch(LoginException e) {
+			e.printStackTrace();
+			popUpLoginError();
+			if(!system.checkPassword(txtPassword)) {
+				this.txtPassword.clear();
+                this.txtPassword.setStyle("-fx-text-box-border:#ec0606");
+			}
+	    	if (!system.checkValidateEmail(txtEmail.getText())) {
+				this.txtEmail.clear();
+				this.txtEmail.setStyle("-fx-text-box-border:#ec0606");
+	    	}
+
+	    	if (!system.checkFirstName(txtFirstName.getText())) {
+				this.txtFirstName.setStyle("-fx-text-box-border:#ec0606");
+				this.txtFirstName.clear();
+	    	}
+			
+		}
     	
     }
+
+	private void popUpComboError() {
+        try {
+        	Stage popUpLoginErr = new Stage();
+        	FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/FXML/ComboNotSelected.fxml"));
+            AnchorPane rootLayout = (AnchorPane) loader.load();
+            Scene scene = new Scene(rootLayout);
+	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        popUpLoginErr.setScene(scene);
+	        popUpLoginErr.setTitle("Error");
+	        popUpLoginErr.setResizable(false);
+	        popUpLoginErr.show();
+	        
+	        
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+	private void popUpLoginError() {
+        try {
+        	Stage popUpLoginErr = new Stage();
+        	FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/FXML/popUpLoginError.fxml"));
+            AnchorPane rootLayout = (AnchorPane) loader.load();
+            Scene scene = new Scene(rootLayout);
+	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        popUpLoginErr.setScene(scene);
+	        popUpLoginErr.setTitle("Xademy - Login Error");
+	        popUpLoginErr.setResizable(false);
+	        popUpLoginErr.show();
+	        
+	        
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
 
 }
 

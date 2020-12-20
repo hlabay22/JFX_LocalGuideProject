@@ -65,7 +65,7 @@ public class LoginController implements Initializable {
 	    private Button btnExit;
 
 	    SystemGuide4u system= SystemGuide4u.getInstance();
-
+	  //  SystemGuide4u system=Main.system;
 	    @FXML
 	    void btnExitClick(ActionEvent event) {
 	    	
@@ -79,6 +79,7 @@ public class LoginController implements Initializable {
 	    	  String email=txtEmail.getText();
 		        if(!(system.checkValidateEmail(email) || (system.checkPassword(txtPassword)))){
 		    		popUpLoginError();
+		    		
 		    		this.txtEmail.clear();
 		    		this.txtPassword.clear();
 		    		
@@ -105,6 +106,7 @@ public class LoginController implements Initializable {
 		    	catch(LoginException e) {
 	    			e.printStackTrace();
 	    			popUpLoginError();
+	    			
 	    			this.txtEmail.clear();
 	    			this.txtPassword.clear();
 	    		}

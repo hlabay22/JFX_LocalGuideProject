@@ -1,7 +1,11 @@
 package application;
 	
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +13,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import Model.Gender;
@@ -90,6 +95,45 @@ public class Main extends Application {
         }
 
     }
+private static void serialize(String fileName) {
+        
+        try {
+            
+            FileOutputStream fileOut = 
+                    new FileOutputStream(fileName);
+            
+            ObjectOutputStream out =
+                    new ObjectOutputStream(fileOut);
+        
+    
+            out.writeObject(system);
+            
+            out.close();
+            fileOut.close();
+            System.out.println("Serialized Data is saved");
+            
+        } catch (IOException e) {
+            
+            System.out.println(e.getMessage());
+            
+        }
+
+    }
+//	public static  void deserialize() {
+//		try {
+//			FileInputStream fileIn = new FileInputStream("guide4u.ser");
+//			ObjectInputStream in = new ObjectInputStream(fileIn);
+//			system= (SystemGuide4u) in.readObject();
+//
+//			in.close();
+//			fileIn.close();
+//		} catch (IOException i) {
+//			i.printStackTrace();
+//		} catch (ClassNotFoundException c) {
+//			c.printStackTrace();
+//		}
+//	}
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -111,6 +155,10 @@ public class Main extends Application {
 	
 	public static void main(String[] args) throws ParseException {
 		importDataFromTxtFile();
+		system.printAllData();
+		serialize("guide4u.ser");
+        System.out.println("Serialized Data is saved");
+	//	deserialize();
 		launch(args);
 	}
 }

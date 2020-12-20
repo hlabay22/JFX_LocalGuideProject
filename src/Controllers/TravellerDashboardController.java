@@ -109,11 +109,11 @@ public class TravellerDashboardController implements Initializable {
 
     @FXML
     private Tab tabAbout;
-    
+  
 	private final ObservableList<LocalGuide> localGuideData =
             FXCollections.observableArrayList();
 	
-	SystemGuide4u system;
+    SystemGuide4u system=Main.system;
 	
 	Traveller traveller;
     
@@ -300,5 +300,21 @@ public class TravellerDashboardController implements Initializable {
 		tableClickDetect();
 		
 	}
+	  @FXML
+	    void findMatch(ActionEvent event) {
+		  
+              for(String mail:system.getLocalGuidesList().keySet()) {
+            	  LocalGuide localGuide=system.getLocalGuidesList().get(mail);
+            	  if(localGuide.getCity().equalsIgnoreCase(txtCity.getText())) {
+            		  
+            		System.out.println("find for you: "+localGuide.getFirstName());  
+  		        	loadLocalGuideInfoPage(localGuide);
+
+            	  }
+            		  
+              }
+	    }
+	  @FXML
+	    private TextField txtCity;
 
 }
