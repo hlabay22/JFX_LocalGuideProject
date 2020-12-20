@@ -88,7 +88,7 @@ public class LocalGuideProfileController implements Initializable {
 
 	@FXML
     void btnContactClick(ActionEvent event) {
-
+         
     }
 
     @FXML

@@ -71,9 +71,9 @@ public class SystemGuide4u {
 		}
 		return false;
 	}
-	public boolean checkPhone(TextField phone) {
+	public boolean checkPhone(String phone) {
 		String regEx = "^[0-9]{10}$";
-		if(phone.getText().matches(regEx)) {
+		if(phone.matches(regEx)) {
 			return true;
 		}
 		return false;

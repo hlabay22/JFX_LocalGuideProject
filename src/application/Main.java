@@ -56,10 +56,25 @@ public class Main extends Application {
                     String country=lineArray[7];
                     String city=lineArray[8];
                     Integer phone=Integer.parseInt(lineArray[9]);
+                    
                     Language language=new Language(lineArray[10]);
-                    TravelStyle travelStyle= new TravelStyle(lineArray[11]);
-                    String aboutMe=lineArray[12];
-                    boolean emailNotifacations=lineArray[13].equalsIgnoreCase("yes");
+                    if(lineArray[11]!=null) {
+                    	language=new Language(lineArray[10], lineArray[11]);
+                    	if(lineArray[12]!=null) {
+                    		language=new Language(lineArray[10], lineArray[11], lineArray[12]);
+                    	}
+                    }
+                    
+                    TravelStyle travelStyle= new TravelStyle(lineArray[13]);
+                    if(lineArray[14]!=null) {
+                    	travelStyle=new TravelStyle(lineArray[13], lineArray[14]);
+                    	if(lineArray[15]!=null) {
+                    		travelStyle=new TravelStyle(lineArray[13], lineArray[14], lineArray[15]);
+                    	}
+                    }
+                    
+                    String aboutMe=lineArray[16];
+                    boolean emailNotifacations=lineArray[17].equalsIgnoreCase("yes");
                     
                     if (lineArray[0].equalsIgnoreCase("Local Guide")) {
                     system.addGuide(new LocalGuide(email, password, firstName,

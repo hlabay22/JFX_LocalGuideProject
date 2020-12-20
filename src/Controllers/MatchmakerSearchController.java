@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -14,7 +15,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -22,7 +25,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 public class MatchmakerSearchController implements Initializable{
 
@@ -130,8 +136,33 @@ public class MatchmakerSearchController implements Initializable{
 	SystemGuide4u system;
 
     @FXML
-    void btnContactClick(ActionEvent event) {
+    void btnContactClick(ActionEvent event) throws IOException {
+    	LocalGuide local=this.localGuide;
+    	LocalDate localDate = this.datePick.getValue();
 
+    	makeTravel(local,localDate);
+    //	Travel travel=new Travel(travelID, local, traveller, date, id, placesInTravel)
+    }
+    public void makeTravel( LocalGuide guide, LocalDate date) throws IOException {
+    	Stage makeTravel = new Stage();
+    	FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/FXML/MakeTravel.fxml"));
+        AnchorPane travelLayout = (AnchorPane) loader.load();
+        // Pass Student Object To StudentController
+        MakeTravelController travel = loader.getController();
+        travel.setDetails(guide, date);
+        
+        // Show the scene containing the root layout.
+    	int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
+		int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
+        Scene scene = new Scene(travelLayout);
+        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        makeTravel.setScene(scene);
+        makeTravel.setTitle("Finish Login");
+        makeTravel.show();
+        btnContact.getScene().getWindow().hide();
+        
+         
     }
 
     @FXML
@@ -150,7 +181,7 @@ public class MatchmakerSearchController implements Initializable{
     void btnSearchClick(ActionEvent event) {
     	
     	showHideResult(true);
-    	//matchmakerSearchAlgorithem();
+    	matchmakerSearchAlgorithem();
 
     }
     
@@ -162,10 +193,12 @@ public class MatchmakerSearchController implements Initializable{
     	
     	
     	for (Entry<String, LocalGuide> value : this.system.getLocalGuidesList().entrySet()) {
-			  LocalGuide localGuide = value.getValue(); 
+			  LocalGuide tempLocalGuide = value.getValue(); 
 			  
     	// The very first condition is the date , if its available then we can carry on to match other conditions
-    	
+    	     if(tempLocalGuide.getCity().equalsIgnoreCase(city)) {
+    	    	  localGuide=tempLocalGuide;
+    	     }
 			  
     	
     	
