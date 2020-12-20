@@ -1,4 +1,4 @@
-/application/
 /Controllers/
+/Exceptions/
 /Model/
-/FXML/
+/application/

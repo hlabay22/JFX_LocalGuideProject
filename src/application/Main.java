@@ -137,6 +137,8 @@ private static void serialize(String fileName) {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			system.populateLocalGuideExample();
+			system.populateTravellerExample();
 			Parent root = FXMLLoader.load(Main.class.getResource("/FXML/Login.fxml"));
 			Scene scene = new Scene(root,1130,725);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

@@ -193,8 +193,8 @@ public class SignUpController {
     }
     @FXML
     void btnExitClick(ActionEvent event) {
-
-    	System.exit(0);
+    	
+    	system.reloadLoginPage();
 
     }
     
@@ -272,8 +272,6 @@ public class SignUpController {
 		    			 comBoxDOB.setStyle("-fx-background-color:red;");
 		    	}
 		    	
-			    
-			    
 			    
 		    	
 				LocalGuide localGuide = new LocalGuide(txtEmail.getText(),

@@ -7,3 +7,4 @@ src/Model/Traveller.java
 *.java
 src/Model/Traveller.java
 .classpath
+src/Controllers/SignUpController.java
