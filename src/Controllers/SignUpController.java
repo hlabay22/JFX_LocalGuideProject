@@ -15,6 +15,7 @@ import Model.LocalGuide;
 import Model.SystemGuide4u;
 import Model.TravelStyle;
 import Model.Traveller;
+import Model.User;
 import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +34,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -206,7 +208,7 @@ public class SignUpController {
     	&& (system.checkValidateEmail(txtEmail.getText()))
     	&& (system.checkFirstName(txtFirstName.getText())) 
     	&& (system.checkFirstName(txtLastName.getText()))
-    	&& (system.checkPhone(txtPhone)) && (txtCity.getText()!=null)){
+    	&& (system.checkPhone(txtPhone.getText())) && (system.checkFirstName(txtCity.getText()))){
     		
     		////combo boxes
 		    	LocalDate localDate = comBoxDOB.getValue();
@@ -220,12 +222,30 @@ public class SignUpController {
 		    		emailNotes=true;
 		    	//String date2 = comBoxDOB.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		    	try {
-		    	String lang1=comBoxLang1.getValue().toString();
-		    	String lang2=comBoxLang2.getValue().toString();
-		    	String lang3=comBoxLang3.getValue().toString();
-                String travel1=comBoxTravelStyle1.getValue().toString();
-                String travel2=comBoxTravelStyle2.getValue().toString();
-                String travel3=comBoxTravelStyle3.getValue().toString();
+		    		String lang1=comBoxLang1.getValue().toString();
+		    		if(comBoxLang2.getValue()!=null) 
+		    		{
+		    			String lang2=comBoxLang1.getValue().toString();
+		    			language=new Language(lang1, lang2);
+		    			if(comBoxLang3.getValue()!=null) 
+		    			{
+		    				String lang3=comBoxLang1.getValue().toString();
+		    				language=new Language(lang1,lang2, lang3);
+		    			}	
+                    }
+		    		
+		    		String travel1=comBoxTravelStyle1.getValue().toString();
+		    		if(comBoxTravelStyle2.getValue()!=null) 
+		    		{ 
+		    			String travel2=comBoxTravelStyle1.getValue().toString();
+		    			travelStyle= new TravelStyle(travel1, travel2);
+		    			if(comBoxTravelStyle3.getValue()!=null) 
+		    			{
+		    				String travel3=comBoxTravelStyle1.getValue().toString();
+		    					travelStyle= new TravelStyle(travel1, travel2, travel3);
+}
+
+		
 
 		    	if(comBoxLang1.getValue()!=null) {
 				     language.setLanguage1(lang1);
@@ -241,18 +261,8 @@ public class SignUpController {
 		    	   comBoxGender.getValue()==null || comBoxCountry.getValue()==null || comBoxCountry.getValue()==null) {
 		    	 	throw new comboBoxNotSelected();
 		    	}
-		    	if(comBoxLang2.getValue()!=null) {
-		    		language=new Language(lang1, lang2);
-		    	}
-		    	if(comBoxLang3.getValue()!=null) {
-		    		language=new Language(lang1, lang2, lang3);
-		    	}
-		    	if(comBoxTravelStyle2.getValue()!=null) {
-		    		travelStyle= new TravelStyle(travel1, travel2);
-		    	}
-		    	if(comBoxTravelStyle3.getValue()!=null) {
-		    		travelStyle= new TravelStyle(travel1, travel2, travel3);
-		    	}
+		    
+		    		}
 		    	}catch(comboBoxNotSelected e){
 		    		e.printStackTrace();
 		    		 popUpComboError();
@@ -304,19 +314,23 @@ public class SignUpController {
 				if(comBoxUserType.getValue().equals("Local Guide")) {
 					 system.addGuide(localGuide);
 					 System.out.println("local add");
+		        	 signUpSucssesfull(localGuide);
+
 				}
 				if(comBoxUserType.getValue().equals("Traveller")) {
 			       system.addTraveller(traveller);
 					 System.out.println("trav add");
+		        	 signUpSucssesfull(traveller);
 
 				}
 				if(comBoxUserType.getValue().equals("Traveller and Local Guide")) {
 					system.addGuide(localGuide);system.addTraveller(traveller);
 					 System.out.println("both add");
+		        	 signUpSucssesfull(traveller);
+
 
 				}
         		system.printAllData();
-        		System.exit(0);
 		    	}
 		    	//else throw new comboBoxNotSelected();
     	else {throw new LoginException();}
@@ -339,28 +353,40 @@ public class SignUpController {
 				this.txtLastName.setStyle("-fx-text-box-border:#ec0606");
 				this.txtLastName.clear();
 	    	}
-	    	if(!system.checkPhone(txtPhone)) {
+	    	if(!system.checkPhone(txtPhone.getText())) {
 	    		this.txtPhone.setStyle("-fx-text-box-border:#ec0606");
 				this.txtPhone.clear();
 	    	}	
 	    		
-	    		if (txtCity.getText()!=null) {
+	    		if (!system.checkFirstName(txtCity.getText())) {
 	    			this.txtCity.setStyle("-fx-text-box-border:#ec0606");
 					this.txtCity.clear();
 	    	}
 		}
     	
     }
-    public void signUpSucssesfull(Stage primaryStage) {
+    public void signUpSucssesfull(User user) {
 		try {
-			Parent root = FXMLLoader.load(Main.class.getResource("/FXML/Login.fxml"));
-			Scene scene = new Scene(root,1130,725);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.setTitle("Guide4U - Login");
-			primaryStage.initStyle(StageStyle.UNDECORATED);
-			primaryStage.show();
-			primaryStage.setResizable(false);
+			
+			Stage signUpSucssesfull = new Stage();
+        	FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/FXML/SignUpSucsessController.fxml"));
+            AnchorPane signUpLayout = (AnchorPane) loader.load();
+            // Pass Student Object To StudentController
+            SignUpSucsessController signUp = loader.getController();
+            signUp.setUser(user);
+            System.out.println(user.getFirstName());
+	        // Show the scene containing the root layout.
+	    	int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
+			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
+	        Scene scene = new Scene(signUpLayout);
+	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        signUpSucssesfull.setScene(scene);
+	        signUpSucssesfull.setTitle("Finish Login");
+	        signUpSucssesfull.show();
+	        btnSignIn.getScene().getWindow().hide();
+	        
+	        
 			
 			
 			
@@ -399,7 +425,7 @@ public class SignUpController {
             Scene scene = new Scene(rootLayout);
 	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        popUpLoginErr.setScene(scene);
-	        popUpLoginErr.setTitle("Xademy - Login Error");
+	        popUpLoginErr.setTitle("Login Error");
 	        popUpLoginErr.setResizable(false);
 	        popUpLoginErr.show();
 	        
