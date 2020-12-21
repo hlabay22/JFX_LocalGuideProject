@@ -193,8 +193,9 @@ public class LoginController implements Initializable {
 			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
 			Scene scene = new Scene(root,screenWidth,screenHeight);
 			LocalGuideDashboardController LGDashController = loader.<LocalGuideDashboardController>getController();
-			LGDashController.setLocalGuide(localGuide);		
+			LGDashController.setLocalGuide(localGuide);	
 			LGDashController.initData();
+			LGDashController.initReviewTableData();
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Local Guide Dashboard");

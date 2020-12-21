@@ -1,11 +1,14 @@
 package Model;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class LocalGuide extends User {
 	
 	protected Double rating;
 	protected int raters=0;
+	protected ArrayList<LocalDate> unavailableDates=new ArrayList<LocalDate>();
+
 
 
 
@@ -68,6 +71,15 @@ public class LocalGuide extends User {
 	public String getDateOfBirthForTable() {
 		//return this.getDateOfBirth().getDay()+"/"+getDateOfBirth().getMonth()+"/"+getDateOfBirth().getYear();
 		return this.dateOfBirth.toString();
+	}
+	
+
+	public ArrayList<LocalDate> getUnavailableDates() {
+		return unavailableDates;
+	}
+
+	public void setUnavailableDates(ArrayList<LocalDate> unavailableDates) {
+		this.unavailableDates = unavailableDates;
 	}
 	
 	

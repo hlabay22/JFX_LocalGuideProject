@@ -33,6 +33,7 @@ import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
+	
 	public static SystemGuide4u system= SystemGuide4u.getInstance();
 
 	private static void importDataFromTxtFile() throws ParseException {
@@ -110,7 +111,8 @@ public class Main extends Application {
         }
 
     }
-private static void serialize(String fileName) {
+	
+	public static void serialize(String fileName) {
         
         try {
             
@@ -134,26 +136,44 @@ private static void serialize(String fileName) {
         }
 
     }
-//	public static  void deserialize() {
-//		try {
-//			FileInputStream fileIn = new FileInputStream("guide4u.ser");
-//			ObjectInputStream in = new ObjectInputStream(fileIn);
-//			system= (SystemGuide4u) in.readObject();
-//
-//			in.close();
-//			fileIn.close();
-//		} catch (IOException i) {
-//			i.printStackTrace();
-//		} catch (ClassNotFoundException c) {
-//			c.printStackTrace();
-//		}
-//	}
+	public static  void deserialize() {
+		try {
+			FileInputStream fileIn = new FileInputStream("guide4u.ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			system= (SystemGuide4u) in.readObject();
+			in.close();
+			fileIn.close();
+			System.out.println("Loaded!");
+		} catch (IOException i) {
+			i.printStackTrace();
+		} catch (ClassNotFoundException c) {
+			c.printStackTrace();
+		}
+	}
+	
+	public static SystemGuide4u deserializeSystem() {
+		try {
+			FileInputStream fileIn = new FileInputStream("guide4u.ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			system= (SystemGuide4u) in.readObject();
+			in.close();
+			fileIn.close();
+			System.out.println("Loaded!");
+			return system;
+		} catch (IOException i) {
+			i.printStackTrace();
+		} catch (ClassNotFoundException c) {
+			c.printStackTrace();
+		}
+		return system;
+	}
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			system.populateLocalGuideExample();
 			system.populateTravellerExample();
+			system.populateReviewsExample();
 			Parent root = FXMLLoader.load(Main.class.getResource("/FXML/Login.fxml"));
 			Scene scene = new Scene(root,1130,725);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -173,9 +193,11 @@ private static void serialize(String fileName) {
 	public static void main(String[] args) throws ParseException {
 		importDataFromTxtFile();
 		system.printAllData();
-		serialize("guide4u.ser");
-        System.out.println("Serialized Data is saved");
-	//	deserialize();
+		SystemGuide4u.readFile();
+		system.printAllData();
+//      	serialize("guide4u.ser");
+//        System.out.println("Serialized Data is saved");
+//		deserializeSystem();
 		launch(args);
 	}
 }

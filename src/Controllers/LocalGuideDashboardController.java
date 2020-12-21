@@ -1,8 +1,14 @@
 package Controllers;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.Map.Entry;
+
 import Model.*;
+import application.Main;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,8 +19,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class LocalGuideDashboardController implements Initializable {
 
@@ -145,11 +154,51 @@ public class LocalGuideDashboardController implements Initializable {
     @FXML
     private Button btnSaveEdit;
     
+    @FXML
+    private TableView<Review> tableReview;
+
+    @FXML
+    private TableColumn<Review, LocalDate> c1_Date;
+
+    @FXML
+    private TableColumn<Review, String> c2_travellerName;
+
+    @FXML
+    private TableColumn<Review, String> c3_city;
+
+    @FXML
+    private TableColumn<Review, String> c4_country;
+
+    @FXML
+    private TableColumn<Review, String> c5_reviewText;
+
+    @FXML
+    private TableColumn<Review, Double> c6_rating;
+
+    @FXML
+    private Label lblMangeAvailibilty;
+
+    @FXML
+    private DatePicker datePickAvailbilty;
+
+    @FXML
+    private Button btnUpdateAvailibilty;
+
+    @FXML
+    private Label lblNoteAvailibilty;
     
-    
+    @FXML
+    private Label lblRating;
+
+    @FXML
+    private Label valueRating;
+ 
     LocalGuide localGuide;
 
     SystemGuide4u system; 
+    
+	private final ObservableList<Review> reviewData =
+            FXCollections.observableArrayList();
     
     public LocalGuide getLocalGuide() {
 		return localGuide;
@@ -173,8 +222,10 @@ public class LocalGuideDashboardController implements Initializable {
     @FXML
     void btnEditClick(ActionEvent event) {
     	
-    	initViewComboBox();
     	setDataEditable(true);
+    	initViewComboBox();
+//    	initData();
+    	
     	this.btnEdit.setVisible(false);
     	this.btnSaveEdit.setVisible(true);
 
@@ -186,11 +237,30 @@ public class LocalGuideDashboardController implements Initializable {
     	
     	
     	updateChanges();
+    	setDataEditable(false);
+    	initViewComboBox();
     	initData();
     	btnSaveEdit.setVisible(false);
     	btnEdit.setVisible(true);
-    	setDataEditable(false);
     	
+    	
+
+    }
+    
+    @FXML
+    void btnUpdateAvailibiltyClick(ActionEvent event) {
+    	
+    	LocalDate date = this.datePickAvailbilty.getValue();
+    	
+    	if(date != null) {
+    		if(!this.localGuide.getUnavailableDates().contains(date)) {
+    			this.localGuide.getUnavailableDates().add(date);
+    			this.lblNoteAvailibilty.setText("** "+date+" Was Successfully set as Unavailable Date! **");
+    			
+    		}else {
+    			this.lblNoteAvailibilty.setText("** "+date+" Is alreay set as Unavailable Date! **");
+    		}
+    	}
 
     }
 	
@@ -259,6 +329,7 @@ public class LocalGuideDashboardController implements Initializable {
 		    system.getGuideByEmail(this.localGuide.getEmail()).setAboutMe(aboutMe);
 		    
 		    setLocalGuide(system.getGuideByEmail(email));
+		    system.writeFile();
 			
 		}catch(Exception e) {
 			system.popUpLoginError("Error While Saving Changes - Try Again");
@@ -310,6 +381,7 @@ public class LocalGuideDashboardController implements Initializable {
 		this.comBoxTravelStyle3.setValue(this.localGuide.getTravelStyle().getTravelStyle3());
 		//this.comBoxTransportType.setPromptText();
 		this.txtAboutMe.setText(this.localGuide.getAboutMe());
+		this.valueRating.setText(this.localGuide.getRatingAsString());
 
 		
 	}
@@ -335,11 +407,34 @@ public class LocalGuideDashboardController implements Initializable {
 		
 	}
 	
-
-
+	
+	public void initReviewTableData() {
+		
+		this.tableReview.setItems(reviewData);
+		this.c1_Date.setCellValueFactory(new PropertyValueFactory<Review, LocalDate>("date"));
+		this.c2_travellerName.setCellValueFactory(new PropertyValueFactory<Review, String>("travellerName"));
+		this.c3_city.setCellValueFactory(new PropertyValueFactory<Review, String>("city"));
+		this.c4_country.setCellValueFactory(new PropertyValueFactory<Review, String>("country"));
+		this.c5_reviewText.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewText"));
+		this.c6_rating.setCellValueFactory(new PropertyValueFactory<Review, Double>("rating"));
+		
+		  for (Review rev : system.getReviewsList()) {
+			  if(rev.getLocalGuide().getEmail().equals(this.localGuide.getEmail())) {
+				  reviewData.add(rev);
+			  }else {
+				  System.out.println("No Match!");
+			  }
+			  
+ 
+		  }
+		
+		
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		system = SystemGuide4u.getInstance();
+		
 		
 		
 	}

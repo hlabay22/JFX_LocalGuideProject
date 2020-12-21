@@ -1,7 +1,12 @@
 package Model;
 
 import java.awt.List;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,7 +17,7 @@ import java.util.regex.Pattern;
 
 import Controllers.PopUpLoginErrorController;
 import application.Main;
-
+import Model.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javafx.collections.FXCollections;
@@ -27,9 +32,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
-public class SystemGuide4u {
+public class SystemGuide4u implements Serializable{
 	protected HashMap<String, LocalGuide > localGuidesList;
 	protected HashMap<String, Traveller > travellersList;
+	protected ArrayList<Review> reviewsList;
+
+
 	protected static SystemGuide4u instance = new SystemGuide4u();
 
 
@@ -37,6 +45,7 @@ public class SystemGuide4u {
 		super();
 		this.localGuidesList = new HashMap<String, LocalGuide>();
 		this.travellersList = new HashMap<String, Traveller>();
+		this.reviewsList = new ArrayList<Review>();
 	}
 	public HashMap<String, LocalGuide> getLocalGuidesList() {
 		return localGuidesList;
@@ -56,6 +65,14 @@ public class SystemGuide4u {
 	public static void setInstance(SystemGuide4u instance) {
 		SystemGuide4u.instance = instance;
 	}
+	
+	public ArrayList<Review> getReviewsList() {
+		return reviewsList;
+	}
+	public void setReviewsList(ArrayList<Review> reviewsList) {
+		this.reviewsList = reviewsList;
+	}
+	
     ///add
 	public void addGuide(LocalGuide guide) {
 		this.localGuidesList.put(guide.getEmail(), guide);
@@ -130,6 +147,14 @@ public class SystemGuide4u {
 		
 	}
 	
+	public void populateReviewsExample() {
+		Traveller t1 = new Traveller("har@gmail.com", "asd123", "Haron", "Labay", LocalDate.of(1992,2,5), Gender.Male, "Haifa", "Israel", 503309824 , new Language("Hebrew"), new TravelStyle("Hiking"), "I Love Food", true);
+		LocalGuide lg1 = new LocalGuide("xxx@gmail.com", "asd123", "Shim", "Metz", LocalDate.of(1992,2,5), Gender.Male, "Haifa", "Israel", 503309824 , new Language("Hebrew"), new TravelStyle("Hiking"), "I Love Food", true);
+		Review r1 = new Review(lg1, LocalDate.now(), t1, "Haifa", "Israel", "Great Guide, A little bit too French and Red head", 7.8);
+		this.reviewsList.add(r1);
+		
+	}
+	
 
 	public void printAllData() {
 		System.out.println("Local guides: ");
@@ -150,7 +175,7 @@ public class SystemGuide4u {
 		}
 	
 	
-    public <T> void initCountryComBox(ComboBox<T> comBox) {
+    public <T> void initCountryComBox(ComboBox<String> comBox) {
     	
     	ObservableList<String> countries = FXCollections.observableArrayList();
     	 String[] locales1 = Locale.getISOCountries();
@@ -161,7 +186,7 @@ public class SystemGuide4u {
                  countries.add(obj.getDisplayCountry());
              }
          }
-         comBox.setItems((ObservableList<T>) countries);
+         comBox.setItems((ObservableList<String>) countries);
     }
     
 //    public <T> void initLanguageComBox(ComboBox <T> comBox) {
@@ -181,7 +206,7 @@ public class SystemGuide4u {
 //         
 //    }
     
-    public <T> void initLanguageComBox(ComboBox <T> comBox) {
+    public <T> void initLanguageComBox(ComboBox <String> comBox) {
     	
         SortedSet<String> allLanguages = new TreeSet<String>();
         String[] languages = Locale.getISOLanguages();
@@ -191,7 +216,7 @@ public class SystemGuide4u {
         }
     	
     	ObservableList<String> languagesX = FXCollections.observableArrayList(allLanguages);
-        comBox.setItems((ObservableList<T>) languagesX);
+        comBox.setItems((ObservableList<String>) languagesX);
          
     }
     
@@ -257,6 +282,41 @@ public class SystemGuide4u {
 		
 		
 		
+	}
+	
+	//serialize 
+	
+	public static void writeFile() {
+		try {
+			FileOutputStream fileOut = new FileOutputStream("Hospital.ser");//name of the folder we create
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(SystemGuide4u.getInstance());
+			out.close();
+			fileOut.close();
+			System.out.println("Writen to file");
+			
+		
+		} catch (IOException i) {
+			i.printStackTrace();
+		}
+	}
+	
+	//deserialize
+	public static void readFile() {
+		try {
+			
+			FileInputStream file = new FileInputStream("guide4u.ser");
+			ObjectInputStream in = new ObjectInputStream(file);
+			instance = (SystemGuide4u) in.readObject();
+			in.close();
+			file.close();
+			System.out.println("file found");
+
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		} catch (ClassNotFoundException e3) {
+			e3.printStackTrace();
+		}
 	}
     
     
