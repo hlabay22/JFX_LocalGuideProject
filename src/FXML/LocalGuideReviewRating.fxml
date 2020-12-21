@@ -2,14 +2,18 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="725.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LocalGuideProfileController">
+<AnchorPane prefHeight="725.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LocalGuideReviewRatingController">
    <children>
       <ImageView fx:id="imgBackground" fitHeight="776.0" fitWidth="1132.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -18,7 +22,7 @@
       </ImageView>
       <Pane fx:id="paneLogin" layoutX="11.0" layoutY="13.0" opacity="0.88" prefHeight="722.0" prefWidth="1113.0" style="-fx-background-color: #001a33;">
          <children>
-            <Label fx:id="lblTitle" alignment="TOP_CENTER" layoutX="42.0" layoutY="34.0" prefHeight="41.0" prefWidth="307.0" text="Local Guide Profile" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+            <Label fx:id="lblTitle" alignment="TOP_CENTER" layoutX="63.0" layoutY="34.0" prefHeight="41.0" prefWidth="286.0" text="Review &amp; Rate" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font name="Gisha Bold" size="30.0" />
                </font>
@@ -28,7 +32,7 @@
                   <Font name="Guttman-Toledo Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="btnContact" layoutX="863.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnContactClick" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Contact" textFill="WHITE" wrapText="true">
+            <Button fx:id="btnSubmit" layoutX="867.0" layoutY="602.0" mnemonicParsing="false" onAction="#btnSubmit" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Submit" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -56,52 +60,37 @@
                   <Font name="Gill Sans MT Ext Condensed Bold" size="72.0" />
                </font>
             </Label>
-            <Label fx:id="lblLangTitle" layoutX="447.0" layoutY="112.0" prefHeight="40.0" prefWidth="145.0" text="Languages" textFill="#1a8cff">
+            <Label fx:id="lblTravelDetails" layoutX="447.0" layoutY="112.0" prefHeight="40.0" prefWidth="145.0" text="Travel Details" textFill="#1a8cff">
                <font>
                   <Font name="Guttman-Toledo Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lblLang1" layoutX="447.0" layoutY="164.0" prefHeight="29.0" prefWidth="173.0" text="language1" textFill="WHITE">
+            <Label fx:id="lblDate" layoutX="447.0" layoutY="164.0" prefHeight="29.0" prefWidth="173.0" text="Date" textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblLang2" layoutX="447.0" layoutY="206.0" prefHeight="29.0" prefWidth="173.0" text="language2" textFill="WHITE">
+            <Label fx:id="lblCityDetails" layoutX="447.0" layoutY="206.0" prefHeight="29.0" prefWidth="173.0" text="City" textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblTravelStyleTitle" layoutX="447.0" layoutY="324.0" prefHeight="40.0" prefWidth="145.0" text="Travel Style" textFill="#1a8cff">
+            <Label fx:id="lblReview" layoutX="447.0" layoutY="324.0" prefHeight="40.0" prefWidth="145.0" text="Review" textFill="#1a8cff">
                <font>
                   <Font name="Guttman-Toledo Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lblTravelStyle1" layoutX="447.0" layoutY="376.0" prefHeight="29.0" prefWidth="173.0" text="travelStryle1" textFill="WHITE">
+            <Label fx:id="lblDescription" layoutX="447.0" layoutY="376.0" prefHeight="29.0" prefWidth="173.0" text="Description" textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblTravelStyle2" layoutX="447.0" layoutY="418.0" prefHeight="29.0" prefWidth="173.0" text="travelStryle2" textFill="WHITE">
+            <Label fx:id="lblRating" layoutX="447.0" layoutY="540.0" prefHeight="29.0" prefWidth="173.0" text="Rating" textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblLang3" layoutX="447.0" layoutY="254.0" prefHeight="29.0" prefWidth="173.0" text="language3" textFill="WHITE">
-               <font>
-                  <Font name="Guttman-Toledo Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblTravelStyle3" layoutX="447.0" layoutY="458.0" prefHeight="29.0" prefWidth="173.0" text="travelStryle3" textFill="WHITE">
-               <font>
-                  <Font name="Guttman-Toledo Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblAboutTitle" layoutX="722.0" layoutY="113.0" prefHeight="40.0" prefWidth="145.0" text="About" textFill="#1a8cff">
-               <font>
-                  <Font name="Guttman-Toledo Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblAbout" alignment="TOP_LEFT" layoutX="722.0" layoutY="164.0" prefHeight="331.0" prefWidth="353.0" text="about the guide" textFill="WHITE">
+            <Label fx:id="lblCountryDetails" layoutX="447.0" layoutY="254.0" prefHeight="29.0" prefWidth="173.0" text="Country" textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="18.0" />
                </font>
@@ -116,22 +105,11 @@
                   <Font name="Guttman-Toledo Bold" size="30.0" />
                </font>
             </Label>
-            <Button fx:id="btnReviewRate" layoutX="696.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnReviewRateClick" prefHeight="49.0" prefWidth="138.0" style="-fx-background-color: grey;" text="Review &amp; Rate" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="NONE" />
-               </cursor>
-            </Button>
-            <Button fx:id="btnShowReviews" layoutX="534.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnShowReviews" prefHeight="49.0" prefWidth="138.0" style="-fx-background-color: grey;" text="Show Reviews" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="NONE" />
-               </cursor>
-            </Button>
+            <DatePicker fx:id="datePickDate" layoutX="659.0" layoutY="166.0" />
+            <TextField fx:id="txtCity" layoutX="659.0" layoutY="208.0" prefHeight="25.0" prefWidth="174.0" />
+            <ComboBox fx:id="comBoxCountry" layoutX="659.0" layoutY="256.0" prefHeight="25.0" prefWidth="174.0" />
+            <TextField fx:id="txtRating" layoutX="659.0" layoutY="542.0" prefHeight="25.0" prefWidth="174.0" />
+            <TextArea fx:id="txtReveiwText" layoutX="654.0" layoutY="373.0" prefHeight="140.0" prefWidth="426.0" />
          </children>
       </Pane>
       <Button fx:id="btnExit" layoutX="1021.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnExitClick" prefHeight="49.0" prefWidth="80.0" style="-fx-background-color: transparent;" text="X" textFill="WHITE">

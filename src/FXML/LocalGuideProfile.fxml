@@ -124,6 +124,14 @@
                   <Cursor fx:constant="NONE" />
                </cursor>
             </Button>
+            <Button fx:id="btnShowReviews" layoutX="534.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnShowReviews" prefHeight="49.0" prefWidth="138.0" style="-fx-background-color: grey;" text="Show Reviews" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </Button>
          </children>
       </Pane>
       <Button fx:id="btnExit" layoutX="1021.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnExitClick" prefHeight="49.0" prefWidth="80.0" style="-fx-background-color: transparent;" text="X" textFill="WHITE">

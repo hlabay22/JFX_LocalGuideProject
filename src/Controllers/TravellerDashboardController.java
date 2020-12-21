@@ -241,7 +241,7 @@ public class TravellerDashboardController implements Initializable {
 		    row.setOnMouseClicked(event -> {
 		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 		        	LocalGuide localGuide = row.getItem();
-		        	loadLocalGuideInfoPage(localGuide);
+		        	loadLocalGuideInfoPage(localGuide,this.traveller);
 
 		        }
 		    });
@@ -253,7 +253,7 @@ public class TravellerDashboardController implements Initializable {
 	
 	
 	
-    public void loadLocalGuideInfoPage(LocalGuide localGuide) {
+    public void loadLocalGuideInfoPage(LocalGuide localGuide,Traveller traveller) {
 		
 		try {
 
@@ -264,6 +264,7 @@ public class TravellerDashboardController implements Initializable {
 			LocalGuideProfileController lgProfileController = loader.<LocalGuideProfileController>getController();
 			lgProfileController.setLocalGuide(localGuide);
 			lgProfileController.setProfileData();
+			lgProfileController.setTraveller(traveller);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Local Guide Profile");

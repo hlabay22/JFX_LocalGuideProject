@@ -5,11 +5,16 @@ import java.util.ResourceBundle;
 import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class LocalGuideProfileController implements Initializable {
 
@@ -82,7 +87,14 @@ public class LocalGuideProfileController implements Initializable {
     @FXML
     private Button btnExit;
     
+    @FXML
+    private Button btnShowReviews;
+    
     LocalGuide localGuide;
+    
+    Traveller traveller;
+
+
 
 
 
@@ -100,6 +112,17 @@ public class LocalGuideProfileController implements Initializable {
 
     @FXML
     void btnReviewRateClick(ActionEvent event) {
+    	
+    	loadLocalGuideReviewRate(this.localGuide,this.traveller);
+    	
+    	
+
+    }
+    
+    @FXML
+    void btnShowReviews(ActionEvent event) {
+    	
+    	loadLocalGuideShowReviews(this.localGuide);
 
     }
     
@@ -161,6 +184,69 @@ public class LocalGuideProfileController implements Initializable {
 			this.lblTravelStyle2.setText(this.localGuide.getTravelStyle().getTravelStyle2());
 			this.lblTravelStyle3.setText(this.localGuide.getTravelStyle().getTravelStyle3());
 		}
+	}
+	
+	
+	public void loadLocalGuideShowReviews(LocalGuide localGuide) {
+		
+		try {
+
+			Stage stage=new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LocalGuideShowReviews.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			LocalGuideShowReviewsController showRevController = loader.<LocalGuideShowReviewsController>getController();
+			showRevController.setLocalGuide(localGuide);
+			showRevController.initReviewTableData();
+			showRevController.setProfileData();
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.setTitle("Guide4U - Local Guide Reviews");
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.show();
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	public void loadLocalGuideReviewRate(LocalGuide localGuide,Traveller traveller) {
+		
+		try {
+
+			Stage stage=new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LocalGuideReviewRating.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			LocalGuideReviewRatingController reviewRatingController = loader.<LocalGuideReviewRatingController>getController();
+			reviewRatingController.setLocalGuide(localGuide);
+			reviewRatingController.setProfileData();
+			reviewRatingController.setTraveller(traveller);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.setTitle("Guide4U - Local Guide Reviews");
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.show();
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	public Traveller getTraveller() {
+		return traveller;
+	}
+
+	public void setTraveller(Traveller traveller) {
+		this.traveller = traveller;
 	}
     
     

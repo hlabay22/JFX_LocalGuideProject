@@ -427,8 +427,7 @@ public class LocalGuideDashboardController implements Initializable {
 			  
  
 		  }
-		
-		
+			
 	}
 	
 	@Override

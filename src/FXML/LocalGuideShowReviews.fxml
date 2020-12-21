@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="725.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LocalGuideShowReviewsController">
+   <children>
+      <ImageView fx:id="imgBackground" fitHeight="776.0" fitWidth="1132.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/nyc.jpg" />
+         </image>
+      </ImageView>
+      <Pane fx:id="paneLogin" layoutX="11.0" layoutY="13.0" opacity="0.88" prefHeight="722.0" prefWidth="1113.0" style="-fx-background-color: #001a33;">
+         <children>
+            <Label fx:id="lblTitle" alignment="TOP_LEFT" layoutX="42.0" layoutY="34.0" prefHeight="41.0" prefWidth="246.0" text="Review &amp; Rating" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+               <font>
+                  <Font name="Gisha Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblFullName" layoutX="72.0" layoutY="113.0" prefHeight="40.0" prefWidth="286.0" text="Full Name" textFill="#1a8cff">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnAddReview" layoutX="951.0" layoutY="611.0" mnemonicParsing="false" onAction="#btnAddReviewClick" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Add Review" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </Button>
+            <Label fx:id="lblCity" layoutX="63.0" layoutY="423.0" prefHeight="40.0" prefWidth="269.0" text="City" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCountry" layoutX="63.0" layoutY="465.0" prefHeight="40.0" prefWidth="269.0" text="Country" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="24.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imgProfileImage" fitHeight="209.0" fitWidth="204.0" layoutX="69.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/profilePic.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblLogo" layoutX="481.0" layoutY="10.0" prefHeight="88.0" prefWidth="152.0" text="Guide4U" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans MT Ext Condensed Bold" size="72.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblReviewsTitle" layoutX="394.0" layoutY="113.0" prefHeight="40.0" prefWidth="145.0" text="Reviews" textFill="#1a8cff">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblRating" layoutX="97.0" layoutY="611.0" prefHeight="49.0" prefWidth="62.0" text="X.X" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblOfTen" layoutX="160.0" layoutY="611.0" prefHeight="49.0" prefWidth="72.0" text="/ 10" textFill="#1a8cff">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="30.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tableReview" layoutX="394.0" layoutY="167.0" prefHeight="414.0" prefWidth="687.0">
+              <columns>
+                <TableColumn fx:id="c1_Date" prefWidth="54.399993896484375" text="Date" />
+                <TableColumn fx:id="c2_travellerName" prefWidth="109.60003662109375" text="Traveller" />
+                  <TableColumn fx:id="c3_city" prefWidth="74.4000244140625" text="City" />
+                  <TableColumn fx:id="c4_country" prefWidth="77.5999755859375" text="Country" />
+                  <TableColumn fx:id="c5_reviewText" prefWidth="308.79998779296875" text="Review" />
+                  <TableColumn fx:id="c6_rating" prefWidth="61.60003662109375" text="Rating" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <Button fx:id="btnExit" layoutX="1021.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnExitClick" prefHeight="49.0" prefWidth="80.0" style="-fx-background-color: transparent;" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
