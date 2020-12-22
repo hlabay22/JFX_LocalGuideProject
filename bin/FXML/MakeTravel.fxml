@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="725.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MakeTravelController">
+   <children>
+      <ImageView fx:id="imgBackground" fitHeight="776.0" fitWidth="1132.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/nyc.jpg" />
+         </image>
+      </ImageView>
+      <Pane fx:id="paneLogin" layoutX="11.0" layoutY="13.0" opacity="0.88" prefHeight="722.0" prefWidth="1113.0" style="-fx-background-color: #001a33;">
+         <children>
+            <Label fx:id="lblTitle" alignment="TOP_CENTER" layoutX="380.0" layoutY="93.0" prefHeight="41.0" prefWidth="307.0" text="Travel" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+               <font>
+                  <Font name="Gisha Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblLogo" layoutX="52.0" layoutY="26.0" prefHeight="88.0" prefWidth="152.0" text="Guide4U" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans MT Ext Condensed Bold" size="72.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTravelTitle" layoutX="85.0" layoutY="376.0" prefHeight="40.0" prefWidth="145.0" text="Places" textFill="#1a8cff">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPLACE1" layoutX="118.0" layoutY="451.0" prefHeight="29.0" prefWidth="173.0" text="place1" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPLACE2" layoutX="118.0" layoutY="541.0" prefHeight="29.0" prefWidth="173.0" text="place2" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPLACE3" layoutX="118.0" layoutY="628.0" prefHeight="29.0" prefWidth="173.0" text="place3" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDateTitle" layoutX="653.0" layoutY="396.0" prefHeight="40.0" prefWidth="145.0" text="Date" textFill="#1a8cff">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDate" alignment="TOP_LEFT" layoutX="656.0" layoutY="436.0" prefHeight="41.0" prefWidth="417.0" text="date" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblfirstplace" layoutX="128.0" layoutY="164.0" prefHeight="29.0" prefWidth="173.0" text="First Place" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnMakeTravel" layoutX="661.0" layoutY="275.0" mnemonicParsing="false" onAction="#btnMakeTravel" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Confirm" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </Button>
+            <Separator fx:id="horizSep" layoutY="345.0" prefHeight="0.0" prefWidth="1114.0" />
+            <Label fx:id="lblNote" layoutX="42.0" layoutY="309.0" prefHeight="29.0" prefWidth="173.0" text="note" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBoxFirstPlace" layoutX="125.0" layoutY="193.0" prefHeight="28.0" prefWidth="180.0" />
+            <Label fx:id="lblsecondplace" layoutX="390.0" layoutY="165.0" prefHeight="29.0" prefWidth="173.0" text="Second Place" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBoxSecondPlace" layoutX="386.0" layoutY="193.0" prefHeight="28.0" prefWidth="180.0" />
+            <Label fx:id="lblthirdplace" layoutX="631.0" layoutY="165.0" prefHeight="29.0" prefWidth="173.0" text="Third Place" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBoxThirdPlace" layoutX="628.0" layoutY="194.0" prefHeight="28.0" prefWidth="180.0" />
+            <Label fx:id="lblTravelStyle11" layoutX="85.0" layoutY="451.0" prefHeight="29.0" prefWidth="19.0" text="1." textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTravelStyle111" layoutX="85.0" layoutY="541.0" prefHeight="29.0" prefWidth="19.0" text="2." textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTravelStyle112" layoutX="85.0" layoutY="628.0" prefHeight="29.0" prefWidth="19.0" text="3." textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="img1" fitHeight="107.0" fitWidth="110.0" layoutX="447.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img3" fitHeight="88.0" fitWidth="110.0" layoutX="325.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img2" fitHeight="107.0" fitWidth="120.0" layoutX="231.0" layoutY="572.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="lblLocalTitle1" layoutX="647.0" layoutY="544.0" prefHeight="40.0" prefWidth="145.0" text="Local Guide" textFill="#1a8cff">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblLocal" alignment="TOP_LEFT" layoutX="650.0" layoutY="584.0" prefHeight="41.0" prefWidth="417.0" text="local" textFill="WHITE">
+               <font>
+                  <Font name="Guttman-Toledo Bold" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="img4" fitHeight="107.0" fitWidth="120.0" layoutX="193.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img5" fitHeight="107.0" fitWidth="110.0" layoutX="466.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <Button fx:id="btnExit" layoutX="1021.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnExitClick" prefHeight="49.0" prefWidth="80.0" style="-fx-background-color: transparent;" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -82,7 +82,7 @@ public class LocalGuideShowReviewsController implements Initializable {
     
     LocalGuide localGuide;
     
-    SystemGuide4u system=Main.system; 
+    SystemGuide4u system; 
     
 	private final ObservableList<Review> reviewData =
             FXCollections.observableArrayList();
@@ -146,7 +146,7 @@ public class LocalGuideShowReviewsController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		system = SystemGuide4u.getInstance();
+		system = Main.system;
 		
 	}
 

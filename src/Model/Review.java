@@ -2,7 +2,7 @@ package Model;
 
 import java.time.LocalDate;
 
-public class Review implements java.io.Serializable{
+public class Review implements java.io.Serializable {
 	
 	// Attributes 
 	
@@ -26,6 +26,10 @@ public class Review implements java.io.Serializable{
 		this.country = country;
 		this.reviewText = reviewText;
 		this.rating = rating;
+	}
+	
+	public Review() {
+		
 	}
 
 
@@ -104,7 +108,7 @@ public class Review implements java.io.Serializable{
 
 	public void setRating(Double rating) {
 		this.rating = rating;
-		this.localGuide.calcRating(rating);
+		this.localGuide.setRating();
 	}
 	
 	

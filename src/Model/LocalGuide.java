@@ -3,13 +3,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
+import application.Main;
+
 public class LocalGuide extends User implements java.io.Serializable {
 	
 	protected Double rating;
 	protected int raters=0;
 	protected ArrayList<LocalDate> unavailableDates=new ArrayList<LocalDate>();
 	
-	SystemGuide4u system = SystemGuide4u.getInstance();
+	SystemGuide4u system = Main.system;
 
 
 

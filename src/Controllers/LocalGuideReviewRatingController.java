@@ -1,12 +1,16 @@
 package Controllers;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import Exceptions.GeneralErrorException;
 import Model.*;
 import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -102,12 +106,121 @@ public class LocalGuideReviewRatingController implements Initializable {
 
     @FXML
     void btnSubmit(ActionEvent event) {
+//    	String city = null;String country = null;String reviewText = null;Double appRating = null;
+//    	LocalDate date = this.datePickDate.getValue();
+//    	if(this.txtCity.getText()!=null) {
+//    		city = this.txtCity.getText();
+//    	}
+//    	
+//    	if(this.comBoxCountry.getValue() != null) {
+//    		country = this.comBoxCountry.getValue();
+//    	}
+//    	
+//    	if(this.txtReveiwText.getText() != null) {
+//    		reviewText = this.txtReveiwText.getText();
+//    	}
+//    	
+//    	if(this.txtRating.getText() != null) {
+//    		Double rating = Double.parseDouble(this.txtRating.getText());
+//    		if(rating > 0 && rating <=10) {
+//    			appRating = rating;
+//    		}
+//    	}
+//    	
+//    	try {
+//    		if(date !=null &&  city != null && country != null && reviewText!= null && appRating != null) {
+//    			Review review = new Review(this.localGuide, date, this.traveller, city, country, reviewText , appRating);
+//    			system.getReviewsList().add(review);
+//    			Alert a = new Alert(AlertType.INFORMATION);
+//    			a.setTitle("Review Sent!");
+//    			a.setHeaderText("Review Sent!");
+//    			a.setContentText("Review was sent! Thank You");
+//    			a.show();
+//    			
+//    			
+//    		}else throw new Exception();
+//    		
+//    	}catch(Exception e) {
+//    		
+////			Alert a = new Alert(AlertType.ERROR);
+////			a.setTitle("Error!");
+////			a.setHeaderText("Error!");
+////			a.setContentText("Error Occoured - Please Try Again");
+////			a.show();
+//    		
+//    	}
+    	
+    	Review review = new Review();
+    	
+    	LocalDate date = this.datePickDate.getValue();
+    	Traveller t = this.traveller;
+    	LocalGuide lg = this.localGuide;
+    	String city = this.txtCity.getText();
+    	String country = this.comBoxCountry.getValue();
+    	String reviewText = this.txtReveiwText.getText();
+    	Double rating = Double.parseDouble(this.txtRating.getText());
+    	
+    	try {
+    		if (date != null) {
+    			review.setDate(date);
+    		}else throw new GeneralErrorException();
+    		
+    		if (t !=null) {
+    			review.setTraveller(t);
+    		}else throw new GeneralErrorException();
+    		
+    		if (lg != null) {
+    			review.setLocalGuide(lg);
+    		}else throw new GeneralErrorException();
+    		
+    		if (city !=null) {
+    			review.setCity(city);
+    		}else throw new GeneralErrorException();
+    		
+    		if (country !=null) {
+    			review.setCountry(country);
+    		}else throw new GeneralErrorException();
+    		
+    		if (reviewText !=null) {
+    			review.setReviewText(reviewText);
+    		}else throw new GeneralErrorException();
+    		
+    		if (rating !=null) {
+    			if(rating > 0 && rating <= 10) {
+    				review.setRating(rating);
+    			}else throw new GeneralErrorException();
+    		}else throw new GeneralErrorException();
+    		
+			system.getReviewsList().add(review);
+			Alert a = new Alert(AlertType.INFORMATION);
+			a.setTitle("Review Sent!");
+			a.setHeaderText("Review Sent!");
+			a.setContentText("Review was sent! Thank You");
+			a.show();
+    		
+    		
+    	}catch (GeneralErrorException e) {
+    		
+		Alert a = new Alert(AlertType.ERROR);
+		a.setTitle("Error!");
+		a.setHeaderText("Error!");
+		a.setContentText("Error Occoured - Please Try Again");
+		a.show();
+		
+    		
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
 
     }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		system = Main.system;
+		system = SystemGuide4u.getInstance();
 		system.initCountryComBox(this.comBoxCountry);
 		this.txtRating.setPromptText(" [0-10] ");
 		
