@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Review implements java.io.Serializable {
+public class Review implements Serializable {
 	
 	// Attributes 
 	
