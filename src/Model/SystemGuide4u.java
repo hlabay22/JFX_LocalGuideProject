@@ -284,6 +284,23 @@ public class SystemGuide4u implements Serializable{
 		
 	}
 	
+	
+	public void showRating(LocalGuide localGuide) {
+//		Double newRating = (this.rating+rating)/++this.raters;
+//		setRating(newRating);
+		int cnt = 0;
+		double sumRating = 0;
+		for (Review r : this.getReviewsList() ) {
+			if(r.getLocalGuide().getEmail().equals(localGuide.getEmail())) {
+				sumRating = sumRating+r.getRating(); 
+				cnt++;
+			}
+		}
+		
+		Double newRating = sumRating/cnt;
+		localGuide.setRating(newRating);
+	}
+	
 	//serialize 
 	
 	public static void writeFile() {

@@ -140,6 +140,7 @@ public class LocalGuideProfileController implements Initializable {
 		this.lblCountry.setText(this.localGuide.getCountry());
 		setLangData();
 		setTravelStyleData();
+		this.localGuide.setRating();
 		this.lblAbout.setText(this.localGuide.getAboutMe());
 		this.lblRating.setText(this.localGuide.getRatingAsString());
 		

@@ -8,6 +8,8 @@ public class LocalGuide extends User {
 	protected Double rating;
 	protected int raters=0;
 	protected ArrayList<LocalDate> unavailableDates=new ArrayList<LocalDate>();
+	
+	SystemGuide4u system = SystemGuide4u.getInstance();
 
 
 
@@ -21,6 +23,7 @@ public class LocalGuide extends User {
 	}
 	
 	public Double getRating() {
+		this.setRating();
 		return rating;
 	}
 	
@@ -35,8 +38,18 @@ public class LocalGuide extends User {
 		this.rating = rating;
 	}
 	
-	public void calcRating(Double rating) {
-		Double newRating = (this.rating+rating)/++this.raters;
+	public void setRating() {
+
+		int cnt = 0;
+		double sumRating = 0;
+		for (Review r : system.getReviewsList() ) {
+			if(r.getLocalGuide().getEmail().equals(this.email)) {
+				sumRating = sumRating+r.getRating(); 
+				cnt++;
+			}
+		}
+		
+		Double newRating = sumRating/cnt;
 		setRating(newRating);
 	}
 	
