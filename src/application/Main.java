@@ -173,7 +173,7 @@ public class Main extends Application {
 		try {
 			system.populateLocalGuideExample();
 			system.populateTravellerExample();
-			system.populateReviewsExample();
+			//system.populateReviewsExample();
 			Parent root = FXMLLoader.load(Main.class.getResource("/FXML/Login.fxml"));
 			Scene scene = new Scene(root,1130,725);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -191,7 +191,7 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws ParseException {
-		//importDataFromTxtFile();
+//		importDataFromTxtFile();
 		deserialize();
 		System.out.println("good");
 		system.printAllData();

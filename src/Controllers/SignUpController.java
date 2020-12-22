@@ -229,11 +229,11 @@ public class SignUpController {
 		    		String lang1=comBoxLang1.getValue().toString();
 		    		if(comBoxLang2.getValue()!=null) 
 		    		{
-		    			String lang2=comBoxLang1.getValue().toString();
+		    			String lang2=comBoxLang2.getValue().toString();
 		    			language=new Language(lang1, lang2);
 		    			if(comBoxLang3.getValue()!=null) 
 		    			{
-		    				String lang3=comBoxLang1.getValue().toString();
+		    				String lang3=comBoxLang3.getValue().toString();
 		    				language=new Language(lang1,lang2, lang3);
 		    			}	
                     }
@@ -241,11 +241,11 @@ public class SignUpController {
 		    		String travel1=comBoxTravelStyle1.getValue().toString();
 		    		if(comBoxTravelStyle2.getValue()!=null) 
 		    		{ 
-		    			String travel2=comBoxTravelStyle1.getValue().toString();
+		    			String travel2=comBoxTravelStyle2.getValue().toString();
 		    			travelStyle= new TravelStyle(travel1, travel2);
 		    			if(comBoxTravelStyle3.getValue()!=null) 
 		    			{
-		    				String travel3=comBoxTravelStyle1.getValue().toString();
+		    				String travel3=comBoxTravelStyle3.getValue().toString();
 		    					travelStyle= new TravelStyle(travel1, travel2, travel3);
 }
 

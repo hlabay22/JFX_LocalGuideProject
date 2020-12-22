@@ -210,17 +210,16 @@ public class LocalGuideReviewRatingController implements Initializable {
     		
     	}
     	
+    	Main.serialize("guide4u.ser");
+    	Main.deserialize();
     	
-    	
-    	
-    	
-    	
+
 
     }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		system = SystemGuide4u.getInstance();
+		system = Main.system;
 		system.initCountryComBox(this.comBoxCountry);
 		this.txtRating.setPromptText(" [0-10] ");
 		

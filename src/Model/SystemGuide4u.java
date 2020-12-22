@@ -146,7 +146,6 @@ public class SystemGuide4u implements java.io.Serializable{
 	
 	public void populateLocalGuideExample() {
 		LocalGuide lg1 = new LocalGuide("xxx@gmail.com", "asd123", "Shim", "Metz", LocalDate.of(1992,2,5), Gender.Male, "Haifa", "Israel", 503309824 , new Language("Hebrew"), new TravelStyle("Hiking"), "I Love Food", true);
-		lg1.setRating(7.8);
 		this.localGuidesList.put(lg1.getEmail(), lg1);
 		System.out.println("Populated LocalGuides");
 		
