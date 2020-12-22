@@ -1,6 +1,6 @@
 package Model;
 
-public class Language {
+public class Language implements java.io.Serializable {
 	
 	// Attributes 
 	

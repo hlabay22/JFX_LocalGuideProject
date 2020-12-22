@@ -2,7 +2,7 @@ package Model;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Place {
+public class Place implements java.io.Serializable{
 	protected String name;
 	protected String city;
 	protected String country;		

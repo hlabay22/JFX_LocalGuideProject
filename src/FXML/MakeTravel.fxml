@@ -65,7 +65,7 @@
                   <Font name="Guttman-Toledo Bold" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="btnMakeTravel" layoutX="655.0" layoutY="285.0" mnemonicParsing="false" onAction="#btnMakeTravel" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Make Travel" textFill="WHITE" wrapText="true">
+            <Button fx:id="btnMakeTravel" layoutX="661.0" layoutY="275.0" mnemonicParsing="false" onAction="#btnMakeTravel" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Confirm" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -107,9 +107,9 @@
                   <Font name="Guttman-Toledo Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fx:id="img1" fitHeight="107.0" fitWidth="110.0" layoutX="301.0" layoutY="406.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="img3" fitHeight="88.0" fitWidth="110.0" layoutX="291.0" layoutY="599.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="img2" fitHeight="88.0" fitWidth="110.0" layoutX="301.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img1" fitHeight="107.0" fitWidth="110.0" layoutX="447.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img3" fitHeight="88.0" fitWidth="110.0" layoutX="325.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img2" fitHeight="107.0" fitWidth="120.0" layoutX="231.0" layoutY="572.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="lblLocalTitle1" layoutX="647.0" layoutY="544.0" prefHeight="40.0" prefWidth="145.0" text="Local Guide" textFill="#1a8cff">
                <font>
                   <Font name="Guttman-Toledo Bold" size="24.0" />
@@ -120,6 +120,8 @@
                   <Font name="Guttman-Toledo Bold" size="18.0" />
                </font>
             </Label>
+            <ImageView fx:id="img4" fitHeight="107.0" fitWidth="120.0" layoutX="193.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img5" fitHeight="107.0" fitWidth="110.0" layoutX="466.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
       <Button fx:id="btnExit" layoutX="1021.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnExitClick" prefHeight="49.0" prefWidth="80.0" style="-fx-background-color: transparent;" text="X" textFill="WHITE">

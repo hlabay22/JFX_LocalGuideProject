@@ -32,11 +32,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
-public class SystemGuide4u implements Serializable{
+public class SystemGuide4u implements java.io.Serializable{
 	protected HashMap<String, LocalGuide > localGuidesList;
 	protected HashMap<String, Traveller > travellersList;
 	protected ArrayList<Review> reviewsList;
+	protected ArrayList<Travel> travelLIST;
 
+
+	
 
 	protected static SystemGuide4u instance = new SystemGuide4u();
 
@@ -46,6 +49,7 @@ public class SystemGuide4u implements Serializable{
 		this.localGuidesList = new HashMap<String, LocalGuide>();
 		this.travellersList = new HashMap<String, Traveller>();
 		this.reviewsList = new ArrayList<Review>();
+		this.travelLIST=new ArrayList<Travel>();
 	}
 	public HashMap<String, LocalGuide> getLocalGuidesList() {
 		return localGuidesList;
@@ -72,13 +76,21 @@ public class SystemGuide4u implements Serializable{
 	public void setReviewsList(ArrayList<Review> reviewsList) {
 		this.reviewsList = reviewsList;
 	}
-	
+	public ArrayList<Travel> getTravelLIST() {
+		return travelLIST;
+	}
+	public void setTravelLIST(ArrayList<Travel> travelLIST) {
+		this.travelLIST = travelLIST;
+	}
     ///add
 	public void addGuide(LocalGuide guide) {
 		this.localGuidesList.put(guide.getEmail(), guide);
 	}
 	public void addTraveller(Traveller traveller) {
 		this.travellersList.put(traveller.getEmail(), traveller);
+	}
+	public void addTravel(Travel travel) {
+		this.travelLIST.add(travel);
 	}
 	//////rgx
 	public boolean checkID(TextField id) {

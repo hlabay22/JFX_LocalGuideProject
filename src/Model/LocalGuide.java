@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class LocalGuide extends User {
+public class LocalGuide extends User implements java.io.Serializable {
 	
 	protected Double rating;
 	protected int raters=0;

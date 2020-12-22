@@ -32,7 +32,7 @@
                   <Font name="Guttman-Toledo Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="btnContact" layoutX="903.0" layoutY="603.0" mnemonicParsing="false" onAction="#btnContactClick" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Contact" textFill="WHITE" wrapText="true">
+            <Button fx:id="btnContact" layoutX="250.0" layoutY="526.0" mnemonicParsing="false" onAction="#btnContactClick" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Contact" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -120,7 +120,7 @@
                   <Font name="Guttman-Toledo Bold" size="30.0" />
                </font>
             </Label>
-            <Button fx:id="btnMoreOffers" layoutX="734.0" layoutY="603.0" mnemonicParsing="false" onAction="#btnMoreOffersClick" prefHeight="49.0" prefWidth="138.0" style="-fx-background-color: grey;" text="More Offers" textFill="WHITE" wrapText="true">
+            <Button fx:id="btnMoreOffers" layoutX="570.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnMoreOffersClick" prefHeight="49.0" prefWidth="138.0" style="-fx-background-color: grey;" text="More Offers" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -160,12 +160,28 @@
                </font>
             </Label>
             <ComboBox fx:id="comBoxCountry" layoutX="459.0" layoutY="225.0" prefHeight="28.0" prefWidth="180.0" />
+            <Button fx:id="btnMakeTravel" layoutX="789.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnMakeTravel" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #41e4ab;" text="Make Travel" textFill="#090909" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </Button>
          </children>
       </Pane>
       <Button fx:id="btnExit" layoutX="1021.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnExitClick" prefHeight="49.0" prefWidth="80.0" style="-fx-background-color: transparent;" text="X" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
+      </Button>
+      <Button fx:id="btnContact1" layoutX="260.0" layoutY="536.0" mnemonicParsing="false" onAction="#btnContactClick" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Contact" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="NONE" />
+         </cursor>
       </Button>
    </children>
 </AnchorPane>

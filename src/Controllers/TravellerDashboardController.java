@@ -295,7 +295,7 @@ public class TravellerDashboardController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		this.system = SystemGuide4u.getInstance();
+	//	this.system = SystemGuide4u.getInstance();
 		initLocalGuideTable();
 		filterdSearchInit();
 		tableClickDetect();
