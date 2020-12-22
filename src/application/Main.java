@@ -124,10 +124,10 @@ public class Main extends Application {
         
     
             out.writeObject(system);
-            
+            System.out.println("Serialized Data is saved");
+
             out.close();
             fileOut.close();
-            System.out.println("Serialized Data is saved");
             
         } catch (IOException e) {
             
@@ -136,14 +136,14 @@ public class Main extends Application {
         }
 
     }
-	public static  void deserialize() {
+	public static void deserialize() {
 		try {
 			FileInputStream fileIn = new FileInputStream("guide4u.ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			system= (SystemGuide4u) in.readObject();
 			in.close();
 			fileIn.close();
-			System.out.println("Loaded!");
+			System.out.println("The Object is deseriazble my friend!");
 		} catch (IOException i) {
 			i.printStackTrace();
 		} catch (ClassNotFoundException c) {
@@ -151,22 +151,22 @@ public class Main extends Application {
 		}
 	}
 	
-	public static SystemGuide4u deserializeSystem() {
-		try {
-			FileInputStream fileIn = new FileInputStream("guide4u.ser");
-			ObjectInputStream in = new ObjectInputStream(fileIn);
-			system= (SystemGuide4u) in.readObject();
-			in.close();
-			fileIn.close();
-			System.out.println("Loaded!");
-			return system;
-		} catch (IOException i) {
-			i.printStackTrace();
-		} catch (ClassNotFoundException c) {
-			c.printStackTrace();
-		}
-		return system;
-	}
+//	public static SystemGuide4u deserializeSystem() {
+//		try {
+//			FileInputStream fileIn = new FileInputStream("guide4u.ser");
+//			ObjectInputStream in = new ObjectInputStream(fileIn);
+//			system= (SystemGuide4u) in.readObject();
+//			in.close();
+//			fileIn.close();
+//			System.out.println("Loaded!");
+//			return system;
+//		} catch (IOException i) {
+//			i.printStackTrace();
+//		} catch (ClassNotFoundException c) {
+//			c.printStackTrace();
+//		}
+//		return system;
+//	}
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -191,13 +191,20 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws ParseException {
-		importDataFromTxtFile();
+		//importDataFromTxtFile();
+		deserialize();
+		System.out.println("good");
 		system.printAllData();
-		SystemGuide4u.readFile();
-		system.printAllData();
-//      	serialize("guide4u.ser");
+		System.out.println("good");
+
+//		SystemGuide4u.readFile();
+//		system.printAllData();
+     	//serialize("guide4u.ser");
+		System.out.println("good");
+
 //        System.out.println("Serialized Data is saved");
 //		deserializeSystem();
+		
 		launch(args);
 	}
 }

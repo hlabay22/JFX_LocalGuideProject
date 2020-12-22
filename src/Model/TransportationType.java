@@ -1,6 +1,6 @@
 package Model;
 
-public enum TransportationType {
+public enum TransportationType implements java.io.Serializable{
 	
 	PublicTransport("Public Transportation"),PrivateVehicle("Private Vehicle");
 	

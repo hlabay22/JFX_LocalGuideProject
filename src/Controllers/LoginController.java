@@ -15,7 +15,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import Exceptions.LoginException;
@@ -64,8 +67,8 @@ public class LoginController implements Initializable {
 	    @FXML
 	    private Button btnExit;
 
-	    SystemGuide4u system= SystemGuide4u.getInstance();
-	  //  SystemGuide4u system=Main.system;
+	   // static SystemGuide4u system;
+	   SystemGuide4u system=Main.system;
 	    @FXML
 	    void btnExitClick(ActionEvent event) {
 	    	
@@ -130,8 +133,7 @@ public class LoginController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
+		
 		
 		
 	}
@@ -231,5 +233,19 @@ public class LoginController implements Initializable {
 		
 		
 	}
+//	public static  void deserialize() {
+//		try {
+//			FileInputStream fileIn = new FileInputStream("guide4u.ser");
+//			ObjectInputStream in = new ObjectInputStream(fileIn);
+//			system= (SystemGuide4u) in.readObject();
+//			in.close();
+//			fileIn.close();
+//			System.out.println("Loaded!");
+//		} catch (IOException i) {
+//			i.printStackTrace();
+//		} catch (ClassNotFoundException c) {
+//			c.printStackTrace();
+//		}
+//	}
 
 }

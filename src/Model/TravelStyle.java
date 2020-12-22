@@ -1,6 +1,6 @@
 package Model;
 
-public class TravelStyle {
+public class TravelStyle implements java.io.Serializable{
 	
 	// Attributes
 	

@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import java.util.Map.Entry;
 
 import Model.*;
+import application.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -133,28 +134,30 @@ public class MatchmakerSearchController implements Initializable{
 
 	LocalGuide localGuide;
 	
-	SystemGuide4u system;
-
+	SystemGuide4u system=Main.system;
+	 @FXML
+	    void btnMakeTravel(ActionEvent event) throws IOException {
+	    	LocalGuide local=this.localGuide;
+	    	LocalDate localDate = this.datePick.getValue();
+            Traveller traveller=this.traveller;
+	    	makeTravel(local,localDate,traveller);
+	    }
     @FXML
     void btnContactClick(ActionEvent event) throws IOException {
-    	LocalGuide local=this.localGuide;
-    	LocalDate localDate = this.datePick.getValue();
 
-    	makeTravel(local,localDate);
-    //	Travel travel=new Travel(travelID, local, traveller, date, id, placesInTravel)
     }
-    public void makeTravel( LocalGuide guide, LocalDate date) throws IOException {
+    public void makeTravel( LocalGuide guide, LocalDate date, Traveller traveller) throws IOException {
     	Stage makeTravel = new Stage();
     	FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/MakeTravel.fxml"));
         AnchorPane travelLayout = (AnchorPane) loader.load();
         // Pass Student Object To StudentController
         MakeTravelController travel = loader.getController();
-        travel.setDetails(guide, date);
+        travel.setDetails(guide, date,traveller);
         
         // Show the scene containing the root layout.
-    	int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
-		int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
+//    	int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
+//		int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
         Scene scene = new Scene(travelLayout);
         scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         makeTravel.setScene(scene);
@@ -193,11 +196,34 @@ public class MatchmakerSearchController implements Initializable{
     	
     	
     	for (Entry<String, LocalGuide> value : this.system.getLocalGuidesList().entrySet()) {
+    		  boolean GuideIsAvliable=true;
 			  LocalGuide tempLocalGuide = value.getValue(); 
 			  
+			  String guideCity=tempLocalGuide.getCity();
+			  String guideLanguage=tempLocalGuide.getLanguage().getLanguage1();
+			  String guideTravelStyle=tempLocalGuide.getTravelStyle().getTravelStyle1();
+			  String guideCountry=tempLocalGuide.getCountry();
+
+			  String travellerCity=city;
+			  String travellerLanguage=this.traveller.getLanguage().getLanguage1();
+			  String travellerTravelStyle=this.traveller.getTravelStyle().getTravelStyle1();
+			  String travellerCountry=country;
+
+			  for(LocalDate unAvaliable: tempLocalGuide.getUnavailableDates()) {
+				  if(localDate.equals(unAvaliable)) {
+					  GuideIsAvliable=false;
+				  }
+			  }
     	// The very first condition is the date , if its available then we can carry on to match other conditions
-    	     if(tempLocalGuide.getCity().equalsIgnoreCase(city)) {
+    	     if(guideCity.equalsIgnoreCase(travellerCity) &&
+    	    	(guideLanguage.equalsIgnoreCase(travellerLanguage) && 
+    	    	(guideTravelStyle.equalsIgnoreCase(travellerTravelStyle)))&&
+    	    	(guideCountry.equalsIgnoreCase(travellerCountry)&&
+    	    	(GuideIsAvliable))) {
     	    	  localGuide=tempLocalGuide;
+    	     }
+    	     else {
+    	    	 //otherOptions
     	     }
 			  
     	
@@ -256,7 +282,7 @@ public class MatchmakerSearchController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		this.system = SystemGuide4u.getInstance();
+		this.system = Main.system;
 		system.initCountryComBox(this.comBoxCountry);
 	}
 

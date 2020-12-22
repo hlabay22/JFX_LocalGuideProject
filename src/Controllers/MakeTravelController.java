@@ -1,9 +1,14 @@
 package Controllers;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import Model.LocalGuide;
 import Model.Place;
+import Model.SystemGuide4u;
+import Model.Travel;
+import Model.Traveller;
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -89,13 +94,22 @@ public class MakeTravelController {
 
     @FXML
     private ImageView img2;
+    @FXML
+    private ImageView img4;
 
+    @FXML
+    private ImageView img5;
     @FXML
     private Label lblLocalTitle1;
 
     @FXML
     private Label lblLocal;
-
+    
+    SystemGuide4u system=Main.system;
+    Traveller traveller;
+    LocalDate date;
+	LocalGuide localGuide;
+	 ArrayList<Place> placesInTravel= new ArrayList<Place>(); 
     @FXML
     private Button btnExit;
     Place place1=new Place("Metzada", "Ein-Bokek", "israel");
@@ -103,7 +117,7 @@ public class MakeTravelController {
     Place place3=new Place("Nachal-Tzelim", "Arad", "Israel");
     Place place4=new Place("Azriely-Mall", "Tel-Aviv", "Israel");
     Place place5=new Place("Hacotel", "Jerusalem", "Israel");
-  
+    
 
     @FXML
     void btnExitClick(ActionEvent event) {
@@ -115,7 +129,23 @@ public class MakeTravelController {
     	lblPLACE1.setText(comboBoxFirstPlace.getValue().toString());
     	lblPLACE2.setText(comboBoxSecondPlace.getValue().toString());
     	lblPLACE3.setText(comboBoxThirdPlace.getValue().toString());
+    	
+    	if(lblPLACE1.getText().equals("Metzada") || lblPLACE2.getText().equals("Metzada") || lblPLACE3.getText().equals("Metzada")) {
+    		placesInTravel.add(place1);}
+    	if(lblPLACE1.getText().equals("Mactesh-Ramon") || lblPLACE2.getText().equals("Mactesh-Ramon") || lblPLACE3.getText().equals("Mactesh-Ramon")) {
+    		placesInTravel.add(place2);}
+    	if(lblPLACE1.getText().equals("Azriely-Mall") || lblPLACE2.getText().equals("Azriely-Mall") || lblPLACE3.getText().equals("Azriely-Mall")) {
+    		placesInTravel.add(place4);}
+    	if(lblPLACE1.getText().equals("Nachal-Tzelim") || lblPLACE2.getText().equals("Nachal-Tzelim") || lblPLACE3.getText().equals("Nachal-Tzelim")) {
+    		placesInTravel.add(place3);}
+    	if(lblPLACE1.getText().equals("Hacotel") || lblPLACE2.getText().equals("Hacotel") || lblPLACE3.getText().equals("Hacotel")) {
+    		placesInTravel.add(place5);}
+    	
+        Travel travel=new Travel(localGuide, traveller, date, placesInTravel);
         
+        system.addTravel(travel);
+        Main.serialize("guide4u");
+        Main.deserialize();
     	showHideResult(true);
     }
     @FXML
@@ -142,9 +172,13 @@ public class MakeTravelController {
 
 
 	}
-    public void setDetails( LocalGuide guide, LocalDate date) {
+    public void setDetails( LocalGuide guide, LocalDate date, Traveller traveller) {
     	lblDate.setText(date.toString());
     	lblLocal.setText(guide.getFirstName()+" "+guide.getLastName());
+    	
+    	this.localGuide=guide;
+    	this.traveller=traveller;
+    	this.date=date;
     }
 }
 

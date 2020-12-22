@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class User {
+public class User implements java.io.Serializable{
 	
 	// Attributes 
 	

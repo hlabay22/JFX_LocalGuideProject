@@ -3,6 +3,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Model.*;
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -90,7 +91,7 @@ public class LocalGuideReviewRatingController implements Initializable {
     
     Traveller traveller;
     
-    SystemGuide4u system;
+    SystemGuide4u system=Main.system;
 
     @FXML
     void btnExitClick(ActionEvent event) {
@@ -106,7 +107,7 @@ public class LocalGuideReviewRatingController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		system = SystemGuide4u.getInstance();
+		system = Main.system;
 		system.initCountryComBox(this.comBoxCountry);
 		this.txtRating.setPromptText(" [0-10] ");
 		

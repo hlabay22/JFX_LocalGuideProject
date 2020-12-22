@@ -2,7 +2,7 @@ package Model;
 
 import java.time.LocalDate;
 
-public class Review {
+public class Review implements java.io.Serializable{
 	
 	// Attributes 
 	

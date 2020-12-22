@@ -195,7 +195,7 @@ public class LocalGuideDashboardController implements Initializable {
  
     LocalGuide localGuide;
 
-    SystemGuide4u system; 
+    SystemGuide4u system=Main.system; 
     
 	private final ObservableList<Review> reviewData =
             FXCollections.observableArrayList();
@@ -329,7 +329,9 @@ public class LocalGuideDashboardController implements Initializable {
 		    system.getGuideByEmail(this.localGuide.getEmail()).setAboutMe(aboutMe);
 		    
 		    setLocalGuide(system.getGuideByEmail(email));
-		    system.writeFile();
+		    //system.writeFile();
+		    Main.serialize("guide4u");
+		    Main.deserialize();
 			
 		}catch(Exception e) {
 			system.popUpLoginError("Error While Saving Changes - Try Again");
@@ -432,7 +434,7 @@ public class LocalGuideDashboardController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		system = SystemGuide4u.getInstance();
+		system =Main.system;
 		
 		
 		

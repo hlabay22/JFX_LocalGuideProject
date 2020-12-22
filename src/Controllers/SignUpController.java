@@ -168,8 +168,8 @@ public class SignUpController {
 
     @FXML
     private Label lblLogo;
-    SystemGuide4u system= SystemGuide4u.getInstance();
-    //SystemGuide4u system=Main.system;
+   // SystemGuide4u system= SystemGuide4u.getInstance();
+    SystemGuide4u system=Main.system;
 
     
     
@@ -369,7 +369,8 @@ public class SignUpController {
 					this.txtCity.clear();
 	    	}
 		}
-    	
+    	Main.serialize("guide4u.ser");
+    	Main.deserialize();
     }
     public void signUpSucssesfull(User user) {
 		try {

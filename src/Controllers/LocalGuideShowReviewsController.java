@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import Model.*;
+import application.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -81,7 +82,7 @@ public class LocalGuideShowReviewsController implements Initializable {
     
     LocalGuide localGuide;
     
-    SystemGuide4u system; 
+    SystemGuide4u system=Main.system; 
     
 	private final ObservableList<Review> reviewData =
             FXCollections.observableArrayList();
