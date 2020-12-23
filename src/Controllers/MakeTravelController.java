@@ -142,7 +142,7 @@ public class MakeTravelController {
     		placesInTravel.add(place5);}
     	
         Travel travel=new Travel(localGuide, traveller, date, placesInTravel);
-        
+      
         system.addTravel(travel);
         Main.serialize("guide4u");
         Main.deserialize();

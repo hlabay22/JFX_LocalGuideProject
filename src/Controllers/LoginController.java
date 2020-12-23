@@ -171,6 +171,7 @@ public void loadAdminPage() {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			AdminController adminController = loader.<AdminController>getController();
 			adminController.initLocalGuideTable();
+			adminController.initTravellerTable();
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Admin Dashboard");
 			stage.show();

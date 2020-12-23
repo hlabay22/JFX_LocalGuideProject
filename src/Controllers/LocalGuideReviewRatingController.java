@@ -192,6 +192,8 @@ public class LocalGuideReviewRatingController implements Initializable {
     		}else throw new GeneralErrorException();
     		
 			system.getReviewsList().add(review);
+			Main.serialize("guide4u.ser");
+	    	Main.deserialize();
 			Alert a = new Alert(AlertType.INFORMATION);
 			a.setTitle("Review Sent!");
 			a.setHeaderText("Review Sent!");
@@ -210,8 +212,7 @@ public class LocalGuideReviewRatingController implements Initializable {
     		
     	}
     	
-    	Main.serialize("guide4u.ser");
-    	Main.deserialize();
+    	
     	
 
 

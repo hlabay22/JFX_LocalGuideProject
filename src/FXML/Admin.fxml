@@ -35,9 +35,35 @@
       </Group>
       <TabPane fx:id="tabPanelTraveller" layoutY="185.0" prefHeight="1004.0" prefWidth="2000.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="tabHome" text="Home">
+          <Tab fx:id="tabHome" text="Travellers">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="TableTravellers" layoutX="14.0" layoutY="60.0" prefHeight="483.0" prefWidth="1685.0">
+                          <columns>
+                            <TableColumn fx:id="d1_firstName" prefWidth="121.59999656677246" text="First Name" />
+                            <TableColumn fx:id="d2_lastName" prefWidth="100.80001831054688" text="Last Name" />
+                              <TableColumn fx:id="d3_dateOfBirth" prefWidth="149.60003662109375" text="Date Of Birth" />
+                              <TableColumn fx:id="d4_gender" prefWidth="123.20001220703125" text="Gender" />
+                              <TableColumn fx:id="d5_city" prefWidth="134.39999389648438" text="City" />
+                              <TableColumn fx:id="d6_country" prefWidth="144.0" text="Country" />
+                              <TableColumn fx:id="d7_language" prefWidth="215.20001220703125" text="Language" />
+                              <TableColumn fx:id="d8_travelStyle" prefWidth="183.199951171875" text="Travel Style" />
+                              <TableColumn fx:id="d10_email" prefWidth="171.2000732421875" text="Email" />
+                              <TableColumn fx:id="d11_phoneNumber" prefWidth="276.800048828125" text="Phone Number" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="addTraveller" layoutX="49.0" layoutY="20.0" mnemonicParsing="false" onAction="#addTraveller" style="-fx-background-color: green;" text="Add New Traveller" textFill="#f2f2f2">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="removeTraveller" layoutX="269.0" layoutY="20.0" mnemonicParsing="false" onAction="#removeTraveller" style="-fx-background-color: red;" text="Remove Selected" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
+                     </children></AnchorPane>
             </content>
           </Tab>
           <Tab fx:id="tabFindAGuide" text="Local Guides">
@@ -62,12 +88,20 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Button fx:id="btnRemove" layoutX="108.0" layoutY="844.0" mnemonicParsing="false" onAction="#btnRemove" text="remove" />
-                        <Button fx:id="btnAdd" layoutX="56.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnAdd" text="Add" />
+                        <Button fx:id="btnAdd" layoutX="23.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnAdd" prefHeight="31.0" prefWidth="185.0" style="-fx-background-color: green;" text="Add New Local Guide" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnRemove" layoutX="327.0" layoutY="15.0" mnemonicParsing="false" onAction="#btnRemove" style="-fx-background-color: red;" text="Remove Selected" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="tabAbout" text="Travellers">
+            <Tab fx:id="tabAbout" text="Finished travels">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>

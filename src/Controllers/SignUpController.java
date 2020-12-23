@@ -170,7 +170,7 @@ public class SignUpController {
     private Label lblLogo;
    // SystemGuide4u system= SystemGuide4u.getInstance();
     SystemGuide4u system=Main.system;
-
+    boolean flag=false;
     
     
     
@@ -199,8 +199,12 @@ public class SignUpController {
     }
     @FXML
     void btnExitClick(ActionEvent event) {
-    	
-    	system.reloadLoginPage();
+    	if(!flag) {
+        	system.reloadLoginPage();
+    	}
+    	else {
+    		
+    	}
 
     }
     
@@ -318,25 +322,33 @@ public class SignUpController {
 				if(comBoxUserType.getValue().equals("Local Guide")) {
 					 system.addGuide(localGuide);
 					 System.out.println("local add");
-		        	 signUpSucssesfull(localGuide);
+					 Main.serialize("guide4u.ser");
+				     Main.deserialize();
+				     adminOrLoginPage(flag,localGuide );
+		        	 
 
 				}
 				if(comBoxUserType.getValue().equals("Traveller")) {
 			       system.addTraveller(traveller);
 					 System.out.println("trav add");
-		        	 signUpSucssesfull(traveller);
+					 Main.serialize("guide4u.ser");
+				     Main.deserialize();
+				     adminOrLoginPage(flag,localGuide );
+
 
 				}
 				if(comBoxUserType.getValue().equals("Traveller and Local Guide")) {
 					system.addGuide(localGuide);system.addTraveller(traveller);
 					 System.out.println("both add");
-		        	 signUpSucssesfull(traveller);
+					 Main.serialize("guide4u.ser");
+				     Main.deserialize();
+				     adminOrLoginPage(flag,localGuide );
 
 
 				}
 				
         		system.printAllData();
-        		system.reloadLoginPage();
+//        		system.reloadLoginPage();
 		    	}
 		    	//else throw new comboBoxNotSelected();
     	else {throw new LoginException();}
@@ -369,8 +381,32 @@ public class SignUpController {
 					this.txtCity.clear();
 	    	}
 		}
-    	Main.serialize("guide4u.ser");
-    	Main.deserialize();
+    	
+    }
+    public void adminOrLoginPage(boolean flag, User user) {
+    	if(flag) {
+    		try {
+    			Stage stage=new Stage();
+    			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Admin.fxml"));
+    			Parent root = loader.load();
+    			int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
+    			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
+    			Scene scene = new Scene(root,screenWidth,screenHeight);
+    			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+    			AdminController adminController = loader.<AdminController>getController();
+    			adminController.initLocalGuideTable();
+    			stage.setScene(scene);
+    			stage.setTitle("Guide4U - Admin Dashboard");
+    			stage.show();
+    			this.btnSignIn.getScene().getWindow().hide();
+    			
+    		} catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
+    	else {
+    		signUpSucssesfull(user);
+    	}
     }
     public void signUpSucssesfull(User user) {
 		try {
@@ -445,6 +481,8 @@ public class SignUpController {
 		
 		
 	}
-
+	public void setFlag(boolean flag) {
+		this.flag=flag;
+	}
 }
 

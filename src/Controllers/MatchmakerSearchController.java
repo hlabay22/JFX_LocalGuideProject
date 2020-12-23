@@ -127,6 +127,8 @@ public class MatchmakerSearchController implements Initializable{
     private Button btnExit;
     
     @FXML
+    private Button btnMakeTravel;
+    @FXML
     private Separator horizSep;
     
     Traveller traveller;
@@ -163,7 +165,7 @@ public class MatchmakerSearchController implements Initializable{
         makeTravel.setScene(scene);
         makeTravel.setTitle("Finish Login");
         makeTravel.show();
-        btnContact.getScene().getWindow().hide();
+        btnMakeTravel.getScene().getWindow().hide();
         
          
     }
@@ -214,7 +216,7 @@ public class MatchmakerSearchController implements Initializable{
 					  GuideIsAvliable=false;
 				  }
 			  }
-    	// The very first condition is the date , if its available then we can carry on to match other conditions
+			  
     	     if(guideCity.equalsIgnoreCase(travellerCity) &&
     	    	(guideLanguage.equalsIgnoreCase(travellerLanguage) && 
     	    	(guideTravelStyle.equalsIgnoreCase(travellerTravelStyle)))&&
@@ -276,7 +278,7 @@ public class MatchmakerSearchController implements Initializable{
 		this.lblOfTen.setVisible(value);
 		this.btnMoreOffers.setVisible(value);
 		this.btnContact.setVisible(value);
-		
+		this.btnMakeTravel.setVisible(value);
 	}
 
 	@Override

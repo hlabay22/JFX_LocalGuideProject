@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import Model.Gender;
 import Model.LocalGuide;
 import Model.SystemGuide4u;
+import Model.Traveller;
 import application.Main;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -27,6 +28,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -88,6 +90,40 @@ public class AdminController implements Initializable {
 
     @FXML
     private TableColumn<LocalGuide, Integer> c11_phone;
+    @FXML
+    private TableView<Traveller> TableTravellers;
+    @FXML
+    private TableColumn<Traveller, String> d1_firstName;
+
+    @FXML
+    private TableColumn<Traveller, String> d2_lastName;
+
+    @FXML
+    private TableColumn<Traveller, Date> d3_dateOfBirth;
+
+    @FXML
+    private TableColumn<Traveller, Gender> d4_gender;
+
+    @FXML
+    private TableColumn<Traveller, String> d5_city;
+
+    @FXML
+    private TableColumn<Traveller, String> d6_country;
+
+    @FXML
+    private TableColumn<Traveller, String> d7_language;
+
+    @FXML
+    private TableColumn<Traveller, String> d8_travelStyle;
+
+
+
+    @FXML
+    private TableColumn<Traveller, String> d10_email;
+
+    @FXML
+    private TableColumn<Traveller, Integer> d11_phoneNumber;
+
 
     @FXML
     private Button btnRemove;
@@ -101,12 +137,18 @@ public class AdminController implements Initializable {
     
     private final ObservableList<LocalGuide> localGuideData =
             FXCollections.observableArrayList();
+    private final ObservableList<Traveller> travellerData =
+            FXCollections.observableArrayList();
     SystemGuide4u system=Main.system;
     
 	public ObservableList<LocalGuide> getLocalGuideData() {
 			
 			return localGuideData;
 		}
+	public ObservableList<Traveller> getTravellerData() {
+		
+		return travellerData;
+	}
 		
 	FilteredList<LocalGuide> filterdData;
 		
@@ -135,11 +177,33 @@ public class AdminController implements Initializable {
 			  }
 			  
 		}
+	public void initTravellerTable() {
 		
+		this.TableTravellers.setItems(travellerData);
+		this.tableLocalGuide.setStyle("-fx-text-inner-color: black;");
+		this.d1_firstName.setCellValueFactory(new PropertyValueFactory<Traveller, String>("firstName"));
+		this.d2_lastName.setCellValueFactory(new PropertyValueFactory<Traveller, String>("lastName"));
+		this.d3_dateOfBirth.setCellValueFactory(new PropertyValueFactory<Traveller, Date>("dateOfBirthForTable"));
+		this.d4_gender.setCellValueFactory(new PropertyValueFactory<Traveller, Gender>("gender"));
+		this.d5_city.setCellValueFactory(new PropertyValueFactory<Traveller, String>("city"));
+		this.d6_country.setCellValueFactory(new PropertyValueFactory<Traveller, String>("country"));
+		this.d7_language.setCellValueFactory(new PropertyValueFactory<Traveller, String>("languageForTable"));
+		this.d8_travelStyle.setCellValueFactory(new PropertyValueFactory<Traveller, String>("travelStyleForTable"));
+		this.d10_email.setCellValueFactory(new PropertyValueFactory<Traveller, String>("email"));
+		this.d11_phoneNumber.setCellValueFactory(new PropertyValueFactory<Traveller, Integer>("phoneNumber"));
+
+		
+		  for (Entry<String, Traveller> value : this.system.getTravellersList().entrySet()) {
+			  Traveller traveller = value.getValue(); 
+			  travellerData.add(traveller);
+ 
+		  }
+		  
+	}
     @FXML
     void btnAdd(ActionEvent event) {
     	loadSignUpPage();
-    	//btnAdd.getScene().getWindow().hide();
+    	btnAdd.getScene().getWindow().hide();
 
     }
 
@@ -155,7 +219,29 @@ public class AdminController implements Initializable {
 	    	getLocalGuideData().remove(localGuide);
 	    	system.removeLocalGuide(localGuide);
 	    	//system.popUpRemoveSucces();
-	    	
+	    	Main.serialize("guide4u.ser");
+		    Main.deserialize();
+    	} catch (Exception e) {
+    		e.getMessage();
+    		//system.popUpRemoveError();
+    	}
+
+    }
+    @FXML
+    void addTraveller(ActionEvent event) {
+    	loadSignUpPage();
+    	btnAdd.getScene().getWindow().hide();
+    }
+
+    @FXML
+    void removeTraveller(ActionEvent event) {
+    	try {
+	    	Traveller traveller = this.TableTravellers.getSelectionModel().getSelectedItem();
+	    	getTravellerData().remove(traveller);
+	    	system.removeTraveller(traveller);
+	    	//system.popUpRemoveSucces();
+	    	Main.serialize("guide4u.ser");
+		    Main.deserialize();
     	} catch (Exception e) {
     		e.getMessage();
     		//system.popUpRemoveError();
@@ -169,26 +255,46 @@ public class AdminController implements Initializable {
 	//	this.system = SystemGuide4u.getInstance();
 		system=Main.system;
 		//initLocalGuideTable();
-		//btnRemove.disableProperty().bind(Bindings.isEmpty(tableLocalGuide.getSelectionModel().getSelectedItems()));
+		btnRemove.disableProperty().bind(Bindings.isEmpty(tableLocalGuide.getSelectionModel().getSelectedItems()));
+		//removeTraveller.disableProperty().bind(Bindings.isEmpty(tableLocalGuide.getSelectionModel().getSelectedItems()));
 
     }
 	
 public void loadSignUpPage() {
 		
+//		try {
+//			Stage stage=new Stage();
+//			Parent root = FXMLLoader.load(Main.class.getResource("/FXML/SignUp.fxml"));
+//			Scene scene = new Scene(root,1130,725);
+//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+//			stage.setScene(scene);
+//			stage.setTitle("Guide4U - Sign Up");
+//			stage.initStyle(StageStyle.UNDECORATED);
+//			stage.show();
+//			stage.setResizable(false);
+//			
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 		try {
 			Stage stage=new Stage();
-			Parent root = FXMLLoader.load(Main.class.getResource("/FXML/SignUp.fxml"));
-			Scene scene = new Scene(root,1130,725);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/SignUp.fxml"));
+			Parent root = loader.load();
+			int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
+			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
+			Scene scene = new Scene(root,screenWidth,screenHeight);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			SignUpController signUpController = loader.<SignUpController>getController();
+			//SignUpController.initLocalGuideTable();
+			signUpController.setFlag(true);
 			stage.setScene(scene);
-			stage.setTitle("Guide4U - Sign Up");
-			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setTitle("Guide4U -Guide4U - Sign Up");
 			stage.show();
-			stage.setResizable(false);
+			this.btnAdd.getScene().getWindow().hide();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
-}
+}}
 
