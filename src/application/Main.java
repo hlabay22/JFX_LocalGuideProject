@@ -191,7 +191,9 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws ParseException {
-//		importDataFromTxtFile();
+		//importDataFromTxtFile();
+     	//serialize("guide4u.ser");
+
 		deserialize();
 		System.out.println("good");
 		system.printAllData();
@@ -199,8 +201,8 @@ public class Main extends Application {
 
 //		SystemGuide4u.readFile();
 //		system.printAllData();
-     	//serialize("guide4u.ser");
 		System.out.println("good");
+		
 
 //        System.out.println("Serialized Data is saved");
 //		deserializeSystem();

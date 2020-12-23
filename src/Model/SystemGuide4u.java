@@ -92,6 +92,13 @@ public class SystemGuide4u implements java.io.Serializable{
 	public void addTravel(Travel travel) {
 		this.travelLIST.add(travel);
 	}
+	//remove
+	public void removeLocalGuide(LocalGuide guide) {
+		this.localGuidesList.remove(guide.getEmail());
+	}
+	public void removeTraveller(Traveller traveller) {
+		this.travellersList.remove(traveller.getEmail());
+	}
 	//////rgx
 	public boolean checkID(TextField id) {
 		String regEx = "^[0-9]{9}$";

@@ -78,7 +78,10 @@ public class LoginController implements Initializable {
 	    
 	    @FXML
 	    void btnSignInClick(ActionEvent event) {
-	    	
+	    	if(txtEmail.getText().equals("admin") && (txtPassword.getText().equals("admin"))) {
+	    		loadAdminPage();
+	    	}
+	    		else {
 	    	  String email=txtEmail.getText();
 		        if(!(system.checkValidateEmail(email) || (system.checkPassword(txtPassword)))){
 		    		popUpLoginError();
@@ -115,7 +118,7 @@ public class LoginController implements Initializable {
 	    		}
 
 		    }
-
+	    		}
 	    }
 	    
 
@@ -148,6 +151,23 @@ public class LoginController implements Initializable {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Sign Up");
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.show();
+			stage.setResizable(false);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+public void loadAdminPage() {
+		
+		try {
+			stage=new Stage();
+			Parent root = FXMLLoader.load(Main.class.getResource("/FXML/Admin.fxml"));
+			Scene scene = new Scene(root,1130,725);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.setTitle("Admin");
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
 			stage.setResizable(false);
