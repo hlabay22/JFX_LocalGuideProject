@@ -163,14 +163,18 @@ public void loadAdminPage() {
 		
 		try {
 			stage=new Stage();
-			Parent root = FXMLLoader.load(Main.class.getResource("/FXML/Admin.fxml"));
-			Scene scene = new Scene(root,1130,725);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Admin.fxml"));
+			Parent root = loader.load();
+			int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
+			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
+			Scene scene = new Scene(root,screenWidth,screenHeight);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			AdminController adminController = loader.<AdminController>getController();
+			adminController.initLocalGuideTable();
 			stage.setScene(scene);
-			stage.setTitle("Admin");
-			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setTitle("Guide4U - Admin Dashboard");
 			stage.show();
-			stage.setResizable(false);
+			this.btnSignIn.getScene().getWindow().hide();
 			
 		} catch(Exception e) {
 			e.printStackTrace();

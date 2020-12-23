@@ -16,6 +16,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,7 +30,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class AdminController {
+public class AdminController implements Initializable {
 
     @FXML
     private Group headerGroup;
@@ -96,16 +97,21 @@ public class AdminController {
 
     @FXML
     private Tab tabAbout;
+    
+    
     private final ObservableList<LocalGuide> localGuideData =
             FXCollections.observableArrayList();
     SystemGuide4u system=Main.system;
+    
 	public ObservableList<LocalGuide> getLocalGuideData() {
 			
 			return localGuideData;
 		}
 		
-		FilteredList<LocalGuide> filterdData;
-		public void initLocalGuideTable() {
+	FilteredList<LocalGuide> filterdData;
+		
+		
+	public void initLocalGuideTable() {
 			
 			this.tableLocalGuide.setItems(localGuideData);
 			this.tableLocalGuide.setStyle("-fx-text-inner-color: black;");
@@ -133,7 +139,7 @@ public class AdminController {
     @FXML
     void btnAdd(ActionEvent event) {
     	loadSignUpPage();
-    	btnAdd.getScene().getWindow().hide();
+    	//btnAdd.getScene().getWindow().hide();
 
     }
 
@@ -162,10 +168,11 @@ public class AdminController {
 		// TODO Auto-generated method stub
 	//	this.system = SystemGuide4u.getInstance();
 		system=Main.system;
-		initLocalGuideTable();
-		btnRemove.disableProperty().bind(Bindings.isEmpty(tableLocalGuide.getSelectionModel().getSelectedItems()));
+		//initLocalGuideTable();
+		//btnRemove.disableProperty().bind(Bindings.isEmpty(tableLocalGuide.getSelectionModel().getSelectedItems()));
 
     }
+	
 public void loadSignUpPage() {
 		
 		try {
