@@ -15,6 +15,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+import Controllers.AdminController;
 import Controllers.PopUpLoginErrorController;
 import application.Main;
 import Model.*;
@@ -28,6 +29,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -354,7 +356,25 @@ public class SystemGuide4u implements java.io.Serializable{
 		}
 	}
     
-    
+    public void loadAdminPage() {
+    	try {
+			Stage stage=new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Admin.fxml"));
+			Parent root = loader.load();
+			int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
+			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
+			Scene scene = new Scene(root,screenWidth,screenHeight);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			AdminController adminController = loader.<AdminController>getController();
+			adminController.initLocalGuideTable();
+			stage.setScene(scene);
+			stage.setTitle("Guide4U - Admin Dashboard");
+			stage.show();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
 
     
  

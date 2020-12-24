@@ -26,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Screen;
@@ -126,14 +127,20 @@ public class AdminController implements Initializable {
 
 
     @FXML
-    private Button btnRemove;
+    private Button btnAddLocalGuide;
 
     @FXML
-    private Button btnAdd;
+    private Button btnRemoveLocalGuide;
+
 
     @FXML
     private Tab tabAbout;
     
+    @FXML
+    private Button btnAddTraveller;
+
+    @FXML
+    private Button btnRemoveTraveller;
     
     private final ObservableList<LocalGuide> localGuideData =
             FXCollections.observableArrayList();
@@ -200,20 +207,9 @@ public class AdminController implements Initializable {
 		  }
 		  
 	}
+  
     @FXML
-    void btnAdd(ActionEvent event) {
-    	loadSignUpPage();
-    	btnAdd.getScene().getWindow().hide();
-
-    }
-
-    @FXML
-    void btnLogOutClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnRemove(ActionEvent event) {
+    void btnRemoveLocalGuide(ActionEvent event) {
     	try {
 	    	LocalGuide localGuide = this.tableLocalGuide.getSelectionModel().getSelectedItem();
 	    	getLocalGuideData().remove(localGuide);
@@ -225,16 +221,10 @@ public class AdminController implements Initializable {
     		e.getMessage();
     		//system.popUpRemoveError();
     	}
-
-    }
-    @FXML
-    void addTraveller(ActionEvent event) {
-    	loadSignUpPage();
-    	btnAdd.getScene().getWindow().hide();
     }
 
     @FXML
-    void removeTraveller(ActionEvent event) {
+    void btnRemoveTraveller(ActionEvent event) {
     	try {
 	    	Traveller traveller = this.TableTravellers.getSelectionModel().getSelectedItem();
 	    	getTravellerData().remove(traveller);
@@ -246,37 +236,44 @@ public class AdminController implements Initializable {
     		e.getMessage();
     		//system.popUpRemoveError();
     	}
+    }
+    @FXML
+    void btnAddLocalGuide(ActionEvent event) {
+    	loadSignUpPage();
+    	//btnAddLocalGuide.getScene().getWindow().hide();
+    }
+
+    @FXML
+    void btnAddTraveller(ActionEvent event) {
+    	loadSignUpPage();
+    	//btnAddTraveller.getScene().getWindow().hide();
+    }
+    
+    @FXML
+    void btnLogOutClick(ActionEvent event) {
 
     }
+
+    
+    
 
     
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 	//	this.system = SystemGuide4u.getInstance();
 		system=Main.system;
+		tableClickDetect();
+		btnRemoveTraveller.disableProperty().bind(Bindings.isEmpty(TableTravellers.getSelectionModel().getSelectedItems()));
+		btnRemoveLocalGuide.disableProperty().bind(Bindings.isEmpty(tableLocalGuide.getSelectionModel().getSelectedItems()));
+
 		//initLocalGuideTable();
-		btnRemove.disableProperty().bind(Bindings.isEmpty(tableLocalGuide.getSelectionModel().getSelectedItems()));
 		//removeTraveller.disableProperty().bind(Bindings.isEmpty(tableLocalGuide.getSelectionModel().getSelectedItems()));
 
     }
 	
 public void loadSignUpPage() {
 		
-//		try {
-//			Stage stage=new Stage();
-//			Parent root = FXMLLoader.load(Main.class.getResource("/FXML/SignUp.fxml"));
-//			Scene scene = new Scene(root,1130,725);
-//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-//			stage.setScene(scene);
-//			stage.setTitle("Guide4U - Sign Up");
-//			stage.initStyle(StageStyle.UNDECORATED);
-//			stage.show();
-//			stage.setResizable(false);
-//			
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+
 		try {
 			Stage stage=new Stage();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/SignUp.fxml"));
@@ -291,10 +288,60 @@ public void loadSignUpPage() {
 			stage.setScene(scene);
 			stage.setTitle("Guide4U -Guide4U - Sign Up");
 			stage.show();
-			this.btnAdd.getScene().getWindow().hide();
 			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-}}
+}
+	public void tableClickDetect() {
+		this.tableLocalGuide.setRowFactory( tv -> {
+		    TableRow<LocalGuide> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		        	LocalGuide localGuide = row.getItem();
+		        	loadLocalGuideInfoPage(localGuide);
+	
+		        }
+		    });
+		    return row ;
+		});
+//		this.TableTravellers.setRowFactory( tv -> {
+//		    TableRow<Traveller> row = new TableRow<>();
+//		    row.setOnMouseClicked(event -> {
+//		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+//		        	Traveller traveller = row.getItem();
+//		        	loadTravellerInfoPage(traveller);
+//	
+//		        }
+//		    });
+//		    return row ;
+//		});
+	}
+public void loadLocalGuideInfoPage(LocalGuide localGuide) {
+	
+	try {
+
+		Stage stage=new Stage();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LocalGuideProfile.fxml"));
+		Parent root = loader.load();
+		Scene scene = new Scene(root);
+		LocalGuideProfileController lgProfileController = loader.<LocalGuideProfileController>getController();
+		lgProfileController.setLocalGuide(localGuide);
+		lgProfileController.setProfileData();
+		lgProfileController.hidebtnReviewRate();
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		stage.setScene(scene);
+		stage.setTitle("Guide4U - Local Guide Profile");
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.show();
+		
+		
+	} catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+	
+}
+}
 

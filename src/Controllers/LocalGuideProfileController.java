@@ -80,9 +80,8 @@ public class LocalGuideProfileController implements Initializable {
     
     @FXML
     private ImageView imgProfileImage;
-
-    @FXML
-    private Button btnReviewRate;
+    
+  
 
     @FXML
     private Button btnExit;
@@ -93,8 +92,9 @@ public class LocalGuideProfileController implements Initializable {
     LocalGuide localGuide;
     
     Traveller traveller;
-
-
+     
+    @FXML
+    private Button btnReviewRate;
 
 
 
@@ -250,11 +250,13 @@ public class LocalGuideProfileController implements Initializable {
 		this.traveller = traveller;
 	}
     
-    
+    public void hidebtnReviewRate() {
+		this.btnReviewRate.setVisible(false);
+
+    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		
 	}
 

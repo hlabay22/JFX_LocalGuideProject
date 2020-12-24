@@ -53,12 +53,12 @@
                               <TableColumn fx:id="d11_phoneNumber" prefWidth="276.800048828125" text="Phone Number" />
                           </columns>
                         </TableView>
-                        <Button fx:id="addTraveller" layoutX="49.0" layoutY="20.0" mnemonicParsing="false" onAction="#addTraveller" style="-fx-background-color: green;" text="Add New Traveller" textFill="#f2f2f2">
+                        <Button fx:id="btnAddTraveller" layoutX="49.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnAddTraveller" style="-fx-background-color: green;" text="Add New Traveller" textFill="#f2f2f2">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Button fx:id="removeTraveller" layoutX="269.0" layoutY="20.0" mnemonicParsing="false" onAction="#removeTraveller" style="-fx-background-color: red;" text="Remove Selected" textFill="WHITE">
+                        <Button fx:id="btnRemoveTraveller" layoutX="269.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnRemoveTraveller" style="-fx-background-color: red;" text="Remove Selected" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -88,12 +88,12 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Button fx:id="btnAdd" layoutX="23.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnAdd" prefHeight="31.0" prefWidth="185.0" style="-fx-background-color: green;" text="Add New Local Guide" textFill="WHITE">
+                        <Button fx:id="btnAddLocalGuide" layoutX="23.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnAddLocalGuide" prefHeight="31.0" prefWidth="185.0" style="-fx-background-color: green;" text="Add New Local Guide" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnRemove" layoutX="327.0" layoutY="15.0" mnemonicParsing="false" onAction="#btnRemove" style="-fx-background-color: red;" text="Remove Selected" textFill="WHITE">
+                        <Button fx:id="btnRemoveLocalGuide" layoutX="327.0" layoutY="15.0" mnemonicParsing="false" onAction="#btnRemoveLocalGuide" style="-fx-background-color: red;" text="Remove Selected" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
