@@ -9,6 +9,7 @@ import Model.Gender;
 import Model.LocalGuide;
 import Model.SystemGuide4u;
 import Model.Traveller;
+import Model.User;
 import application.Main;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -306,17 +307,17 @@ public void loadSignUpPage() {
 		    });
 		    return row ;
 		});
-//		this.TableTravellers.setRowFactory( tv -> {
-//		    TableRow<Traveller> row = new TableRow<>();
-//		    row.setOnMouseClicked(event -> {
-//		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-//		        	Traveller traveller = row.getItem();
-//		        	loadTravellerInfoPage(traveller);
-//	
-//		        }
-//		    });
-//		    return row ;
-//		});
+		this.TableTravellers.setRowFactory( tv -> {
+		    TableRow<Traveller> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		        	Traveller traveller = row.getItem();
+		        	loadTravellerInfoPage(traveller);
+	
+		        }
+		    });
+		    return row ;
+		});
 	}
 public void loadLocalGuideInfoPage(LocalGuide localGuide) {
 	
@@ -340,8 +341,32 @@ public void loadLocalGuideInfoPage(LocalGuide localGuide) {
 	} catch(Exception e) {
 		e.printStackTrace();
 	}
-	
+}
+	public void loadTravellerInfoPage(Traveller traveller) {
+		
+		try {
+
+			Stage stage=new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LocalGuideProfile.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			LocalGuideProfileController lgProfileController = loader.<LocalGuideProfileController>getController();
+			lgProfileController.setTravellerAsLocalguide(traveller);
+			lgProfileController.setProfileData();
+			lgProfileController.hidebtnReviewRate();
+			lgProfileController.setTravellerAsLocalguide(traveller);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.setTitle("Guide4U - traveller Profile");
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.show();
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	
 }
+
 }
 

@@ -375,7 +375,11 @@ public class SystemGuide4u implements java.io.Serializable{
 			e.printStackTrace();
 		}
     }
-
+    public LocalGuide transferTravellerToGuide(Traveller t) {
+    	LocalGuide localGuide= new LocalGuide(t.getEmail(), t.getPassword(), t.getFirstName(), t.getLastName(), t.getDateOfBirth(), t.getGender(), t.getCity(), t.getCountry(), t.getPhoneNumber(), t.getLanguage(), t.getTravelStyle(), t.getAboutMe(),t.emailNotifacations);
+    	return localGuide;
+    }
+    
     
  
     

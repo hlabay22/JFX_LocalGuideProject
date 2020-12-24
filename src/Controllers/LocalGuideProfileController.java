@@ -3,6 +3,7 @@ package Controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 import Model.*;
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -96,7 +97,7 @@ public class LocalGuideProfileController implements Initializable {
     @FXML
     private Button btnReviewRate;
 
-
+    SystemGuide4u system=Main.system;
 
 	@FXML
     void btnContactClick(ActionEvent event) {
@@ -133,7 +134,13 @@ public class LocalGuideProfileController implements Initializable {
 	public void setLocalGuide(LocalGuide localGuide) {
 		this.localGuide = localGuide;
 	}
-	
+	public void setTravellerAsLocalguide (Traveller traveller) {
+		this.localGuide= system.transferTravellerToGuide(traveller);
+		btnReviewRate.setVisible(false);;
+		btnContact.setVisible(false);
+		btnShowReviews.setVisible(false);
+		lblTitle.setText("Traveller Profile");
+	}
 	public void setProfileData() {
 		this.lblFullName.setText(this.localGuide.getFirstName()+" "+this.localGuide.getLastName());
 		this.lblCity.setText(this.localGuide.getCity());
