@@ -32,20 +32,12 @@
                   <Font name="Guttman-Toledo Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="btnContact" layoutX="250.0" layoutY="526.0" mnemonicParsing="false" onAction="#btnContactClick" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Contact" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="NONE" />
-               </cursor>
-            </Button>
             <Label fx:id="lblCity" layoutX="46.0" layoutY="573.0" prefHeight="40.0" prefWidth="269.0" text="City" textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lblCountry" layoutX="46.0" layoutY="621.0" prefHeight="40.0" prefWidth="269.0" text="Country" textFill="WHITE">
+            <Label fx:id="lblCountry" layoutX="46.0" layoutY="622.0" prefHeight="40.0" prefWidth="269.0" text="Country" textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="24.0" />
                </font>
@@ -105,29 +97,21 @@
                   <Font name="Guttman-Toledo Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lblAbout" alignment="TOP_LEFT" layoutX="658.0" layoutY="383.0" prefHeight="167.0" prefWidth="420.0" text="about the guide" textFill="WHITE">
+            <Label fx:id="lblAbout" alignment="TOP_LEFT" layoutX="658.0" layoutY="383.0" prefHeight="188.0" prefWidth="420.0" text="about the guide" textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblRating" layoutX="386.0" layoutY="579.0" prefHeight="49.0" prefWidth="62.0" text="X.X" textFill="WHITE">
+            <Label fx:id="lblRating" layoutX="868.0" layoutY="339.0" prefHeight="49.0" prefWidth="62.0" text="X.X" textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="30.0" />
                </font>
             </Label>
-            <Label fx:id="lblOfTen" layoutX="449.0" layoutY="579.0" prefHeight="49.0" prefWidth="72.0" text="/ 10" textFill="#1a8cff">
+            <Label fx:id="lblOfTen" layoutX="931.0" layoutY="339.0" prefHeight="49.0" prefWidth="72.0" text="/ 10" textFill="#1a8cff">
                <font>
                   <Font name="Guttman-Toledo Bold" size="30.0" />
                </font>
             </Label>
-            <Button fx:id="btnMoreOffers" layoutX="570.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnMoreOffersClick" prefHeight="49.0" prefWidth="138.0" style="-fx-background-color: grey;" text="More Offers" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="NONE" />
-               </cursor>
-            </Button>
             <Label fx:id="lblCitySearch" layoutX="128.0" layoutY="164.0" prefHeight="29.0" prefWidth="173.0" text="City" textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="18.0" />
@@ -154,13 +138,13 @@
                </cursor>
             </Button>
             <Separator fx:id="horizSep" layoutY="345.0" prefHeight="0.0" prefWidth="1114.0" />
-            <Label fx:id="lblNote" layoutX="42.0" layoutY="309.0" prefHeight="29.0" prefWidth="173.0" text="note" textFill="WHITE">
+            <Label fx:id="lblNote" layoutX="46.0" layoutY="670.0" prefHeight="29.0" prefWidth="813.0" text="note" textFill="WHITE">
                <font>
                   <Font name="Guttman-Toledo Bold" size="18.0" />
                </font>
             </Label>
             <ComboBox fx:id="comBoxCountry" layoutX="459.0" layoutY="225.0" prefHeight="28.0" prefWidth="180.0" />
-            <Button fx:id="btnMakeTravel" layoutX="789.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnMakeTravel" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #41e4ab;" text="Make Travel" textFill="#090909" wrapText="true">
+            <Button fx:id="btnMakeTravel" layoutX="694.0" layoutY="606.0" mnemonicParsing="false" onAction="#btnMakeTravel" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #41e4ab;" text="Places &amp; Travels" textFill="#090909" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -168,20 +152,17 @@
                   <Cursor fx:constant="NONE" />
                </cursor>
             </Button>
+            <Button fx:id="btnCon" layoutX="862.0" layoutY="606.0" mnemonicParsing="false" onAction="#btnConClick" prefHeight="50.0" prefWidth="124.0" style="-fx-background-color: #1a8cff;" text="Contact" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Button fx:id="btnExit" layoutX="1021.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnExitClick" prefHeight="49.0" prefWidth="80.0" style="-fx-background-color: transparent;" text="X" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
-      </Button>
-      <Button fx:id="btnContact1" layoutX="260.0" layoutY="536.0" mnemonicParsing="false" onAction="#btnContactClick" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Contact" textFill="WHITE" wrapText="true">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="NONE" />
-         </cursor>
       </Button>
    </children>
 </AnchorPane>

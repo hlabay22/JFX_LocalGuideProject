@@ -45,8 +45,7 @@ public class MatchmakerSearchController implements Initializable{
     @FXML
     private Label lblFullName;
 
-    @FXML
-    private Button btnContact;
+   
 
     @FXML
     private Label lblCity;
@@ -97,9 +96,6 @@ public class MatchmakerSearchController implements Initializable{
     private Label lblOfTen;
 
     @FXML
-    private Button btnMoreOffers;
-
-    @FXML
     private Label lblCitySearch;
 
     @FXML
@@ -127,6 +123,9 @@ public class MatchmakerSearchController implements Initializable{
     private Button btnExit;
     
     @FXML
+    private Button btnCon;
+    
+    @FXML
     private Button btnMakeTravel;
     @FXML
     private Separator horizSep;
@@ -137,6 +136,8 @@ public class MatchmakerSearchController implements Initializable{
 	LocalGuide localGuide;
 	
 	SystemGuide4u system=Main.system;
+	
+	
 	 @FXML
 	    void btnMakeTravel(ActionEvent event) throws IOException {
 	    	LocalGuide local=this.localGuide;
@@ -144,10 +145,7 @@ public class MatchmakerSearchController implements Initializable{
             Traveller traveller=this.traveller;
 	    	makeTravel(local,localDate,traveller);
 	    }
-    @FXML
-    void btnContactClick(ActionEvent event) throws IOException {
 
-    }
     public void makeTravel( LocalGuide guide, LocalDate date, Traveller traveller) throws IOException {
     	Stage makeTravel = new Stage();
     	FXMLLoader loader = new FXMLLoader();
@@ -176,17 +174,19 @@ public class MatchmakerSearchController implements Initializable{
     	btnExit.getScene().getWindow().hide();
 
     }
-
+    
     @FXML
-    void btnMoreOffersClick(ActionEvent event) {
+    void btnConClick(ActionEvent event) {
 
     }
+
 
     @FXML
     void btnSearchClick(ActionEvent event) {
     	
-    	showHideResult(true);
     	matchmakerSearchAlgorithem();
+    	
+    	
 
     }
     
@@ -217,24 +217,178 @@ public class MatchmakerSearchController implements Initializable{
 				  }
 			  }
 			  
-    	     if(guideCity.equalsIgnoreCase(travellerCity) &&
-    	    	(guideLanguage.equalsIgnoreCase(travellerLanguage) && 
-    	    	(guideTravelStyle.equalsIgnoreCase(travellerTravelStyle)))&&
-    	    	(guideCountry.equalsIgnoreCase(travellerCountry)&&
-    	    	(GuideIsAvliable))) {
-    	    	  localGuide=tempLocalGuide;
-    	     }
-    	     else {
-    	    	 //otherOptions
-    	     }
+			  // MUST HAVE CONDITIONS ARE : match on city, country and date availiblaty.
 			  
+			  // Option 1 - Perfect Match based On language,travel style,and age difference. [Perfect]
+			  
+    	     if(guideCity.equalsIgnoreCase(travellerCity) &&
+    	    	(guideLanguage.equalsIgnoreCase(travellerLanguage)) && 
+    	    	(guideTravelStyle.equalsIgnoreCase(travellerTravelStyle))&&
+    	    	(guideCountry.equalsIgnoreCase(travellerCountry))&&
+    	    	(GuideIsAvliable)&&
+    	    	(((tempLocalGuide.getDateOfBirth().getYear()) - (this.traveller.getDateOfBirth().getYear())) <= 15)) {
+    	    	  this.localGuide=tempLocalGuide;
+    	    	  this.lblNote.setText("** Perfect Match!!");
+    	    	  setMatchedLocalGuideDetails();
+    	    	  showHideResult(true);
+    	    	  break;
+    	     }
+    	     
+			  // Option 1.1 - Perfect Match based On language,travel style,and age difference. WITH NO DATE AVAILIBILTY  [Almost Perfect]
+			  
+    	     if(guideCity.equalsIgnoreCase(travellerCity) &&
+    	    	(guideLanguage.equalsIgnoreCase(travellerLanguage)) && 
+    	    	(guideTravelStyle.equalsIgnoreCase(travellerTravelStyle))&&
+    	    	(guideCountry.equalsIgnoreCase(travellerCountry))&&
+    	    	(!GuideIsAvliable)&&
+    	    	(((tempLocalGuide.getDateOfBirth().getYear()) - (this.traveller.getDateOfBirth().getYear())) <= 15)) {
+    	    	  this.localGuide=tempLocalGuide;
+    	    	  this.lblNote.setText("** Almost Perfect Match!! - Guide Not Availible in this Date! Contact for info about other Dates");
+    	    	  setMatchedLocalGuideDetails();
+    	    	  showHideResult(true);
+    	    	  break;
+    	     }
+    	     
+    	     
+    	     
+    	     
+    	     
+    	     
+    	     // Option 2 - Great Match based On language, travel style. [Great]
+    	     
+    	     else if(guideCity.equalsIgnoreCase(travellerCity) &&
+    	    	(guideCountry.equalsIgnoreCase(travellerCountry)) && 
+    	    	(GuideIsAvliable) && 
+    	    	(guideLanguage.equalsIgnoreCase(travellerLanguage))&&
+    	    	(guideTravelStyle.equalsIgnoreCase(travellerTravelStyle))) {
+	   	    	  this.localGuide=tempLocalGuide;
+	   	    	  this.lblNote.setText("** Great Match!!");
+	   	    	  setMatchedLocalGuideDetails();
+	   	    	  showHideResult(true);
+	   	    	  break;
+	    	    	 
+    	     }
+    	     
+    	     // Option 2.1 - Great Match based On language, travel style. WITH NO DATE AVAILIBILTY  [Almost Great]
+    	     
+    	     else if(guideCity.equalsIgnoreCase(travellerCity) &&
+    	    	(guideCountry.equalsIgnoreCase(travellerCountry)) && 
+    	    	(!GuideIsAvliable) && 
+    	    	(guideLanguage.equalsIgnoreCase(travellerLanguage))&&
+    	    	(guideTravelStyle.equalsIgnoreCase(travellerTravelStyle))) {
+	   	    	  this.localGuide=tempLocalGuide;
+	   	    	  this.lblNote.setText("** Almost Great Match!! - Guide Not Availible in this Date! Contact for info about other Dates");
+	   	    	  setMatchedLocalGuideDetails();
+	   	    	  showHideResult(true);
+	   	    	  break;
+	    	    	 
+    	     }
+    	     
+    	     // Option 3 - Good Match based on language. [Very Good] 
+    	     
+    	     else if(guideCity.equalsIgnoreCase(travellerCity) &&
+    	    	(guideCountry.equalsIgnoreCase(travellerCountry)) && 
+    	    	(GuideIsAvliable) && 
+    	    	(guideLanguage.equalsIgnoreCase(travellerLanguage))) {
+	   	    	  this.localGuide=tempLocalGuide;
+	   	    	  this.lblNote.setText("** Very Good Match!!");
+	   	    	  setMatchedLocalGuideDetails();
+	   	    	  showHideResult(true);
+	   	    	  break;
+    	    	 
+    	     }
+    	     
+    	     // Option 3.1 - Good Match based on language. WITH NO DATE AVAILIBILTY [Almost Very Good] 
+    	     
+    	     else if(guideCity.equalsIgnoreCase(travellerCity) &&
+    	    	(guideCountry.equalsIgnoreCase(travellerCountry)) && 
+    	    	(!GuideIsAvliable) && 
+    	    	(guideLanguage.equalsIgnoreCase(travellerLanguage))) {
+	   	    	  this.localGuide=tempLocalGuide;
+	   	    	  this.lblNote.setText("** Almost Very Good Match!! - Guide Not Availible in this Date! Contact for info about other Dates");
+	   	    	  setMatchedLocalGuideDetails();
+	   	    	  showHideResult(true);
+	   	    	  break;
+    	    	 
+    	     }
+    	     
+    	     // Option 4 - Good Match base on travelStyle [Good]
+    	     
+    	     else if(guideCity.equalsIgnoreCase(travellerCity) &&
+    	    	(guideCountry.equalsIgnoreCase(travellerCountry)) && 
+    	    	(GuideIsAvliable) && 
+    	    	(guideTravelStyle.equalsIgnoreCase(travellerTravelStyle))) {
+    	    	 
+	   	    	  this.localGuide=tempLocalGuide;
+	   	    	  this.lblNote.setText("** Good Match!!");
+	   	    	  setMatchedLocalGuideDetails();
+	   	    	  showHideResult(true);
+	   	    	  break;
+    	    	 
+    	     }
+    	     
+    	     // Option 4.1 - Good Match base on travelStyle [Almost Good]
+    	     
+    	     else if(guideCity.equalsIgnoreCase(travellerCity) &&
+    	    	(guideCountry.equalsIgnoreCase(travellerCountry)) && 
+    	    	(!GuideIsAvliable) && 
+    	    	(guideTravelStyle.equalsIgnoreCase(travellerTravelStyle))) {
+    	    	 
+	   	    	  this.localGuide=tempLocalGuide;
+	   	    	  this.lblNote.setText("** Almost Good Match!! - Guide Not Availible in this Date! Contact for info about other Dates");
+	   	    	  setMatchedLocalGuideDetails();
+	   	    	  showHideResult(true);
+	   	    	  break;
+    	    	 
+    	     }
+    	     
+    	     // Option 5 - Plain Match base on MUST HAVE CONDITIONS only
+    	     
+    	     
+    	     else if(guideCity.equalsIgnoreCase(travellerCity) &&
+    	    	(guideCountry.equalsIgnoreCase(travellerCountry)) && 
+    	    	(GuideIsAvliable)) {
+	   	    	  this.localGuide=tempLocalGuide;
+	   	    	  this.lblNote.setText("** Plain Match!!");
+	   	    	  setMatchedLocalGuideDetails();
+	   	    	  showHideResult(true);
+	   	    	  break;
+    	    	 
+    	    	 
+    	    	 
+    	     }
+    	     
+    	     // Option 5.1 - Plain Match base on MUST HAVE CONDITIONS without DATE AVAILIBILTY
+    	     
+    	     
+    	     else if(guideCity.equalsIgnoreCase(travellerCity) &&
+    	    	(guideCountry.equalsIgnoreCase(travellerCountry)) && 
+    	    	(!GuideIsAvliable)) {
+	   	    	  this.localGuide=tempLocalGuide;
+	   	    	  this.lblNote.setText("** Almost Plain Match!! - Guide Not Availible in this Date! Contact for info about other Dates");
+	   	    	  setMatchedLocalGuideDetails();
+	   	    	  showHideResult(true);
+	   	    	  break;
+    	    	 
+    	    	 
+    	    	 
+    	     }
+    	     
+
+    	     
+    	     // Option 6 - NO MATCH 
+    	     
+    	     
+    	     else {
+    	    	 lblNote.setText("** Sorry, No Match With Any Local Guide With These Details Was Found!");
+    	    	 lblNote.setVisible(true);
+    	     }
+    	     
     	
     	
     	}
     	
-    	
 
-    	
     	
     }
     
@@ -276,9 +430,59 @@ public class MatchmakerSearchController implements Initializable{
 		this.lblAbout.setVisible(value);
 		this.lblRating.setVisible(value);
 		this.lblOfTen.setVisible(value);
-		this.btnMoreOffers.setVisible(value);
-		this.btnContact.setVisible(value);
+		this.btnCon.setVisible(value);
 		this.btnMakeTravel.setVisible(value);
+	}
+	
+	public void setMatchedLocalGuideDetails() {
+		this.lblFullName.setText(this.localGuide.getFirstName()+" "+this.localGuide.getLastName());
+		this.lblCity.setText(this.localGuide.getCity());
+		this.lblCountry.setText(this.localGuide.getCountry());
+		setLangData();
+		setTravelStyleData();
+		this.localGuide.setRating();
+		this.lblAbout.setText(this.localGuide.getAboutMe());
+		this.lblRating.setText(this.localGuide.getRating().toString());
+	}
+
+	public void setLangData() {
+		if ((this.localGuide.getLanguage().getLanguage2()==null) && (this.localGuide.getLanguage().getLanguage3()==null)) {
+			this.lblLang1.setText(this.localGuide.getLanguage().getLanguage1());
+			this.lblLang2.setText("");
+			this.lblLang3.setText("");
+		}
+	
+	else if (this.localGuide.getLanguage().getLanguage3()==null) {
+			this.lblLang1.setText(this.localGuide.getLanguage().getLanguage1());
+			this.lblLang2.setText(this.localGuide.getLanguage().getLanguage2());
+			this.lblLang3.setText("");
+		
+		}
+	else {
+			this.lblLang1.setText(this.localGuide.getLanguage().getLanguage1());
+			this.lblLang2.setText(this.localGuide.getLanguage().getLanguage2());
+			this.lblLang3.setText(this.localGuide.getLanguage().getLanguage3());
+		}
+	}
+	
+	public void setTravelStyleData() {
+		if ((this.localGuide.getTravelStyle().getTravelStyle2()==null) && (this.localGuide.getTravelStyle().getTravelStyle3()==null)) {
+			this.lblTravelStyle1.setText(this.localGuide.getTravelStyle().getTravelStyle1());
+			this.lblTravelStyle2.setText("");
+			this.lblTravelStyle3.setText("");
+		}
+	
+	else if (this.localGuide.getTravelStyle().getTravelStyle3()==null) {
+			this.lblTravelStyle1.setText(this.localGuide.getTravelStyle().getTravelStyle1());
+			this.lblTravelStyle2.setText(this.localGuide.getTravelStyle().getTravelStyle2());
+			this.lblTravelStyle3.setText("");
+		
+		}
+	else {
+			this.lblTravelStyle1.setText(this.localGuide.getTravelStyle().getTravelStyle1());
+			this.lblTravelStyle2.setText(this.localGuide.getTravelStyle().getTravelStyle2());
+			this.lblTravelStyle3.setText(this.localGuide.getTravelStyle().getTravelStyle3());
+		}
 	}
 
 	@Override

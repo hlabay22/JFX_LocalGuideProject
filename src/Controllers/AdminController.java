@@ -279,14 +279,15 @@ public void loadSignUpPage() {
 			Stage stage=new Stage();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/SignUp.fxml"));
 			Parent root = loader.load();
-			int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
-			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
-			Scene scene = new Scene(root,screenWidth,screenHeight);
+//			int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
+//			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			SignUpController signUpController = loader.<SignUpController>getController();
 			//SignUpController.initLocalGuideTable();
 			signUpController.setFlag(true);
 			stage.setScene(scene);
+			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setTitle("Guide4U -Guide4U - Sign Up");
 			stage.show();
 			
