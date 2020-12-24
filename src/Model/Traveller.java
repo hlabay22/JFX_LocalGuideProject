@@ -23,10 +23,10 @@ public String getLanguageForTable() {
 		}
 		
 		else if (this.getLanguage().getLanguage3()==null) {
-			return this.getLanguage().getLanguage1()+","+this.getLanguage().getLanguage2(); 
+			return this.getLanguage().getLanguage1()+", "+this.getLanguage().getLanguage2(); 
 		}
 		else {
-			return this.getLanguage().getLanguage1()+","+this.getLanguage().getLanguage2()+","+this.getLanguage().getLanguage3();
+			return this.getLanguage().getLanguage1()+", "+this.getLanguage().getLanguage2()+", "+this.getLanguage().getLanguage3();
 		}
 
 	}
