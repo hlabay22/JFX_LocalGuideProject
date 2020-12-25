@@ -202,8 +202,16 @@ public class Main extends Application {
 //		SystemGuide4u.readFile();
 //		system.printAllData();
 		System.out.println("good");
-		
-
+		System.out.println("\n"+"sort local guide by first name: ");
+		system.sortGuideByFirstName();
+		System.out.println("\n"+"sort local guide by rate: ");
+		system.sortGuideByRate();
+		System.out.println("\n"+"sort local guide by country: ");
+		system.sortGuideByCountry();
+		System.out.println("\n"+"sort traveller by first name: ");
+		system.sortTravellerByFirstName();
+		System.out.println("\n"+"sort traveller by country ");
+		system.sortTravellerByCountry();
 //        System.out.println("Serialized Data is saved");
 //		deserializeSystem();
 		

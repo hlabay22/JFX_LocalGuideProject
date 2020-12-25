@@ -15,12 +15,16 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+import com.sun.javafx.collections.MappingChange.Map;
+
 import Controllers.AdminController;
 import Controllers.PopUpLoginErrorController;
 import application.Main;
 import Model.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -226,6 +230,69 @@ public class SystemGuide4u implements java.io.Serializable{
 //         
 //    }
     
+    //////sort
+    public void sortGuideByRate() {
+    	///new comperable hash  
+
+         HashMap<String, Double> localGuideRate=new HashMap<String, Double>();
+         for(String mail:this.localGuidesList.keySet()) {
+        	 localGuideRate.put(mail, this.localGuidesList.get(mail).getRating());
+         }
+         
+         localGuideRate.entrySet()
+    	.stream()
+    	.sorted(HashMap.Entry.<String, Double>comparingByValue())
+    	.forEach(System.out::println);
+
+    }
+    public void sortGuideByFirstName() {
+    	///new comperable hash  
+    	 HashMap<String, String> localGuideNames=new HashMap<String, String>();
+         for(String mail:this.localGuidesList.keySet()) {
+        	 localGuideNames.put(mail, this.localGuidesList.get(mail).getFirstName());
+         }
+         
+         localGuideNames.entrySet()
+     	.stream()
+     	.sorted(HashMap.Entry.<String, String>comparingByValue())
+     	.forEach(System.out::println);
+   }
+    public void sortGuideByCountry() {
+    	///new comperable hash  
+    	 HashMap<String, String> localGuideCountry=new HashMap<String, String>();
+         for(String mail:this.localGuidesList.keySet()) {
+        	 localGuideCountry.put(mail, this.localGuidesList.get(mail).getCountry());
+         }
+         
+         localGuideCountry.entrySet()
+     	.stream()
+     	.sorted(HashMap.Entry.<String, String>comparingByValue())
+     	.forEach(System.out::println);
+   }
+    public void sortTravellerByFirstName() {
+    	///new comperable hash  
+   	 HashMap<String, String> TravellerNames=new HashMap<String, String>();
+        for(String mail:this.travellersList.keySet()) {
+        	TravellerNames.put(mail, this.travellersList.get(mail).getFirstName());
+        }
+        
+        TravellerNames.entrySet()
+    	.stream()
+    	.sorted(HashMap.Entry.<String, String>comparingByValue())
+    	.forEach(System.out::println);
+  }
+    public void sortTravellerByCountry() {
+    	///new comperable hash  
+      	 HashMap<String, String> TravellerCountry=new HashMap<String, String>();
+           for(String mail:this.travellersList.keySet()) {
+        	   TravellerCountry.put(mail, this.travellersList.get(mail).getCountry());
+           }
+           
+          TravellerCountry.entrySet()
+       	.stream()
+       	.sorted(HashMap.Entry.<String, String>comparingByValue())
+       	.forEach(System.out::println);
+     }
     public <T> void initLanguageComBox(ComboBox <String> comBox) {
     	
         SortedSet<String> allLanguages = new TreeSet<String>();
