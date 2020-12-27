@@ -147,23 +147,19 @@ public class MatchmakerSearchController implements Initializable{
 	    }
 
     public void makeTravel( LocalGuide guide, LocalDate date, Traveller traveller) throws IOException {
-    	Stage makeTravel = new Stage();
-    	FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/FXML/MakeTravel.fxml"));
-        AnchorPane travelLayout = (AnchorPane) loader.load();
-        // Pass Student Object To StudentController
-        MakeTravelController travel = loader.getController();
-        travel.setDetails(guide, date,traveller);
-        
-        // Show the scene containing the root layout.
-//    	int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
-//		int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
-        Scene scene = new Scene(travelLayout);
-        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-        makeTravel.setScene(scene);
-        makeTravel.setTitle("Finish Login");
-        makeTravel.show();
-        btnMakeTravel.getScene().getWindow().hide();
+//    	Stage makeTravel = new Stage();
+//    	FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(getClass().getResource("/FXML/MakeTravel.fxml"));
+//        AnchorPane travelLayout = (AnchorPane) loader.load();
+//        // Pass Student Object To StudentController
+//        MakeTravelController travel = loader.getController();
+//        travel.setDetails(guide, date,traveller);
+//        Scene scene = new Scene(travelLayout);
+//        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+//        makeTravel.setScene(scene);
+//        makeTravel.setTitle("Places & Travels");
+//        makeTravel.show();
+//        btnMakeTravel.getScene().getWindow().hide();
         
          
     }
@@ -177,6 +173,7 @@ public class MatchmakerSearchController implements Initializable{
     
     @FXML
     void btnConClick(ActionEvent event) {
+    	system.loadContactLocalGuidePage(this.localGuide);
 
     }
 

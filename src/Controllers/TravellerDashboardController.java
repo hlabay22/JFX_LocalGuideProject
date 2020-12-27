@@ -124,6 +124,10 @@ public class TravellerDashboardController implements Initializable {
 	}
 	
 	FilteredList<LocalGuide> filterdData;
+	
+	public void refreshTable() {
+		tableLocalGuide.refresh();
+	}
 
     @FXML
     void btnLogOutClick(ActionEvent event) {

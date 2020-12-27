@@ -1,4 +1,33 @@
-Local Guide,shimi,metzger,timond44@gmail.com,1234,17-01-1994,male,israel,nof hagalil,0549245622,hebrew,france,english, sport,art,,love the life, yes
-traveller,haron,labay,haron@gmail.com,1234,13-12-1991,male,israel,kafar kama,0546546570, hebrew,arab,,shoping,sport,,im a king,no
-traveller,hadas,metz,hadas@gmail.com,1234,26-09-1993,female,israel,nof hagalil,0507818382,hebrew,,,rest,,,shimon is the best,yes 
-Both,alon,kras,alon@gmail.com,1234,24-05-1990,male,israel,dvora,0532456887,english,russian,,tracking,sport,,i work in refael,yes
+Local Guide,Jacqueline,Blinde,jblinde0@hao123.com,doy297,11-09-1957,Female,France,Limoges,0288315737,Northern Sotho,Thai,Yiddish,Adventure,Sport,Hiking,Hi,yes
+traveller,Terry,Canter,tcanter1@bbc.co.uk,joh918,09-07-1973,Male,France,Eybens,0421094098,Tamil,Macedonian,Norwegian,Local Culture,Hiking,Entertaiment,Hi,no
+Local Guide,Juli,Franzoli,jfranzoli2@archive.org,ruw961,11-03-1973,Female,France,Poitiers,0241838199,Guaraní,Japanese,Malagasy,Local Culture,Adventure,Local Culture,Let's Travel and Rock,no
+Local Guide,Chad,Szymonwicz,cszymonwicz3@symantec.com,foe957,26-01-1992,Male,France,Cluses,0613074636,Croatian,Hindi,Thai,Local Culture,Sport,Local Culture,I Love Travels and meeting people from all around the world,yes
+Local Guide,Domini,Hearnes,dhearnes4@godaddy.com,tps905,11-08-1991,Female,France,Clermont-Ferrand,0611818430,Swedish,Chinese,Hungarian,Adventure,Entertaiment,Shopping,Come and explore my beatiful country,no
+Local Guide,Arnie,de Cullip,adecullip5@biblegateway.com,soj314,17-11-1974,Male,France,Nîmes,0325976695,Czech,Hungarian,Tsonga,Nature,Hiking,Shopping,Come and Travel with me,no
+traveller,Huntley,Cullotey,hcullotey6@china.com.cn,qof632,27-11-1985,Male,Germany,Berlin,0511855676,Maltese,Finnish,Indonesian,Sport,Adventure,Hiking,I Love Travel <3,yes
+traveller,Rodd,Jacquemy,rjacquemy7@histats.com,jhw922,02-01-1975,Male,United States,Fort Worth,0825576532,Kannada,Czech,Hebrew,Sport,Sport,Sport,I Love Travel <3,no
+Local Guide,Udall,Morant,umorant8@phoca.cz,ixx954,03-04-1980,Male,France,Caen,0729224436,Amharic,Arabic,Lao,Adventure,Nature,Nature,Come and explore my beatiful country,no
+Local Guide,Leonid,Fardy,lfardyi@sfgate.com,bea276,12-03-1990,Male,France,Vitry-le-François,0271788566,Lao,Malagasy,Mongolian,Hiking,Art,Adventure,I Love Travel <3,yes
+Local Guide,Gwenneth,Bucham,gbuchamj@apache.org,wzk842,31-03-1983,Female,France,Nîmes,0502974831,Khmer,Thai,Bosnian,Local Culture,Local Culture,Adventure,Hi,no
+Local Guide,Jay,Birdis,jbirdisk@cargocollective.com,ytc484,07-11-1987,Male,United States,New York City,0462408373,Māori,Aymara,West Frisian,Local Culture,Art,Art,Hi,no
+traveller,Theo,Hampstead,thampsteadl@flavors.me,day511,18-05-1995,Female,United States,Oklahoma City,0551808756,Gujarati,Persian,Telugu,Art,Sport,Entertaiment,I Love Travels and meeting people from all around the world,no
+traveller,Marena,Bleier,mbleierm@biblegateway.com,ofi586,05-05-1996,Female,Germany,Hannover,0165412843,Amharic,Croatian,Swahili,Entertaiment,Local Culture,Art,Hi,no
+traveller,Remington,Matteoni,rmatteonin@github.com,iak376,24-03-1995,Male,France,Vedène,0512913388,Portuguese,Polish,Dhivehi,Nature,Shopping,Hiking,I Love Travels and meeting people from all around the world,yes
+Local Guide,Antoni,Cory,acoryo@histats.com,pfm630,15-06-1985,Male,France,Annecy,0161489468,Swati,Guaraní,Belarusian,Local Culture,Hiking,Art,Come and Travel with me,yes
+Local Guide,Staford,Gathwaite,sgathwaitep@thetimes.co.uk,ijk959,10-08-1962,Male,France,Labège,0823434073,Finnish,Zulu,Swahili,Adventure,Entertaiment,Nature,I Love Travels and meeting people from all around the world,yes
+Local Guide,Laurie,Potteridge,lpotteridgeq@rakuten.co.jp,tlb082,05-10-1986,Male,Germany,Bochum,0519830235,Hungarian,Lithuanian,Tok Pisin,Local Culture,Nature,Adventure,I Love Travels and meeting people from all around the world,yes
+Local Guide,Gene,Featonby,gfeatonbyr@huffingtonpost.com,noz400,27-07-1994,Female,United States,Young America,0529529306,Czech,Oriya,Filipino,Nature,Nature,Shopping,Let's Travel and Rock,yes
+Local Guide,Michell,Stoffler,mstofflers@elpais.com,clf062,29-01-1990,Female,United States,Gainesville,0529690843,Spanish,Assamese,Thai,Local Culture,Nature,Adventure,Hard Rock Personality,yes
+Local Guide,Glyn,Chastagnier,gchastagniert@scientificamerican.com,ioe727,02-04-1986,Female,Spain,Hospitalet De Llobregat,0592113420,Ndebele,English,Kannada,Shopping,Adventure,Nature,Let's Travel and Rock,yes
+Local Guide,Jacqui,Jumeau,jjumeauu@stanford.edu,psp945,04-09-1996,Female,United States,Miami Beach,0157830149,Hindi,Catalan,Tamil,Entertaiment,Hiking,Art,Let's Travel and Rock,no
+Local Guide,Gertie,Brinkman,gbrinkmanv@mtv.com,mrf494,18-12-1969,Female,France,Croix,0339644756,Kannada,Danish,Khmer,Nature,Hiking,Sport,I Love Travel <3,yes
+Local Guide,Erina,Innwood,einnwoodw@toplist.cz,ggj874,23-12-1990,Female,United States,San Diego,0193189961,Tsonga,Haitian Creole,Pashto,Shopping,Sport,Nature,Let's Travel and Rock,no
+Local Guide,Ulrich,Bastow,ubastowx@omniture.com,mqy263,12-03-1992,Male,United States,Jackson,0316501778,Georgian,Norwegian,Persian,Nature,Local Culture,Nature,Hard Rock Personality,no
+Local Guide,Roda,Jewitt,rjewitty@sohu.com,ypm877,20-04-1958,Female,United States,Dallas,0143226785,German,English,Georgian,Entertaiment,Sport,Adventure,Hard Rock Personality,no
+Local Guide,Ethelred,Spensly,espenslyz@google.ca,zcb237,29-08-1960,Male,France,Saint-Gratien,0201206208,Tamil,West Frisian,Latvian,Art,Local Culture,Shopping,Hard Rock Personality,yes
+Local Guide,Florance,Josefovic,fjosefovic10@uiuc.edu,bkw086,31-10-1991,Female,France,Aurillac,0301029840,Hungarian,Tetum,Guaraní,Art,Nature,Sport,Come and explore my beatiful country,no
+Local Guide,Osgood,Beddin,obeddin11@phoca.cz,tue452,25-01-1990,Male,France,Mitry-Mory,0767816168,Lao,Hungarian,Filipino,Adventure,Art,Hiking,I Love Travels and meeting people from all around the world,no
+Local Guide,Doroteya,Ploughwright,dploughwright12@jiathis.com,ntb699,15-10-1975,Female,France,Évreux,0482018564,Kurdish,Assamese,Kurdish,Nature,Sport,Entertaiment,Come and Travel with me,yes
+Local Guide,Sascha,Pettinger,spettinger13@alexa.com,gwo285,01-08-1999,Male,France,Rungis,0344793415,Quechua,French,West Frisian,Entertaiment,Entertaiment,Local Culture,I Love Travels and meeting people from all around the world,yes
+Local Guide,Dwayne,Fardo,dfardo14@com.com,odf599,29-08-1980,Male,France,Bagnères-de-Bigorre,0187462612,Azeri,Khmer,Aymara,Shopping,Adventure,Sport,I Love Travels and meeting people from all around the world,no
+Local Guide,Toddie,Olivetta,tolivetta15@ca.gov,jiu933,17-05-1965,Male,France,Corbeil-Essonnes,0291619861,Oriya,Swati,Persian,Shopping,Art,Entertaiment,I Love Travel <3,no

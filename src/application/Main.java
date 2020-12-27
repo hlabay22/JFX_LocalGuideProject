@@ -44,6 +44,8 @@ public class Main extends Application {
             while (in.hasNextLine()) {
             	String line=in.nextLine();
                 String[] lineArray = line.split(",");
+                System.out.println(lineArray.length);
+                System.out.println(lineArray[1]);
                     String firstName = lineArray[1];
                     String lastName = lineArray[2];
                     String email=lineArray[3];
@@ -151,22 +153,7 @@ public class Main extends Application {
 		}
 	}
 	
-//	public static SystemGuide4u deserializeSystem() {
-//		try {
-//			FileInputStream fileIn = new FileInputStream("guide4u.ser");
-//			ObjectInputStream in = new ObjectInputStream(fileIn);
-//			system= (SystemGuide4u) in.readObject();
-//			in.close();
-//			fileIn.close();
-//			System.out.println("Loaded!");
-//			return system;
-//		} catch (IOException i) {
-//			i.printStackTrace();
-//		} catch (ClassNotFoundException c) {
-//			c.printStackTrace();
-//		}
-//		return system;
-//	}
+
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -193,7 +180,6 @@ public class Main extends Application {
 	public static void main(String[] args) throws ParseException {
 		importDataFromTxtFile();
      	serialize("guide4u.ser");
-
 		deserialize();
 		System.out.println("good");
 		system.printAllData();

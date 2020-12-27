@@ -106,49 +106,7 @@ public class LocalGuideReviewRatingController implements Initializable {
 
     @FXML
     void btnSubmit(ActionEvent event) {
-//    	String city = null;String country = null;String reviewText = null;Double appRating = null;
-//    	LocalDate date = this.datePickDate.getValue();
-//    	if(this.txtCity.getText()!=null) {
-//    		city = this.txtCity.getText();
-//    	}
-//    	
-//    	if(this.comBoxCountry.getValue() != null) {
-//    		country = this.comBoxCountry.getValue();
-//    	}
-//    	
-//    	if(this.txtReveiwText.getText() != null) {
-//    		reviewText = this.txtReveiwText.getText();
-//    	}
-//    	
-//    	if(this.txtRating.getText() != null) {
-//    		Double rating = Double.parseDouble(this.txtRating.getText());
-//    		if(rating > 0 && rating <=10) {
-//    			appRating = rating;
-//    		}
-//    	}
-//    	
-//    	try {
-//    		if(date !=null &&  city != null && country != null && reviewText!= null && appRating != null) {
-//    			Review review = new Review(this.localGuide, date, this.traveller, city, country, reviewText , appRating);
-//    			system.getReviewsList().add(review);
-//    			Alert a = new Alert(AlertType.INFORMATION);
-//    			a.setTitle("Review Sent!");
-//    			a.setHeaderText("Review Sent!");
-//    			a.setContentText("Review was sent! Thank You");
-//    			a.show();
-//    			
-//    			
-//    		}else throw new Exception();
-//    		
-//    	}catch(Exception e) {
-//    		
-////			Alert a = new Alert(AlertType.ERROR);
-////			a.setTitle("Error!");
-////			a.setHeaderText("Error!");
-////			a.setContentText("Error Occoured - Please Try Again");
-////			a.show();
-//    		
-//    	}
+
     	
     	Review review = new Review();
     	
@@ -158,9 +116,18 @@ public class LocalGuideReviewRatingController implements Initializable {
     	String city = this.txtCity.getText();
     	String country = this.comBoxCountry.getValue();
     	String reviewText = this.txtReveiwText.getText();
-    	Double rating = Double.parseDouble(this.txtRating.getText());
+    	Double rating;
+    	
+
     	
     	try {
+    		
+        	if(this.txtRating.getText()!=null) {
+       		 	rating = Double.parseDouble(this.txtRating.getText());
+        	}else throw new GeneralErrorException();
+        	
+        	//---// 
+       	
     		if (date != null) {
     			review.setDate(date);
     		}else throw new GeneralErrorException();

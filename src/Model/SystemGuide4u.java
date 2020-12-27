@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 import com.sun.javafx.collections.MappingChange.Map;
 
 import Controllers.AdminController;
+import Controllers.ContactLocalGuideController;
 import Controllers.PopUpLoginErrorController;
 import application.Main;
 import Model.*;
@@ -310,14 +311,14 @@ public class SystemGuide4u implements java.io.Serializable{
     
     public  void initTravelStyleComBox(ComboBox <String> comBox){
     	
-    	comBox.getItems().setAll("Art","Sport","Shoping","Adventure", "Entertaiment", "Local Culture", "Nature");
+    	comBox.getItems().setAll("Art","Sport","Shoping","Adventure", "Entertaiment", "Local Culture", "Nature","Hiking");
     	
     }
     
     
     public void initTransportTypeComBox(ComboBox <String> comBox) {
     	
-    	comBox.getItems().setAll("Privat Vehicle","Public Transportation");
+    	comBox.getItems().setAll("Private Vehicle","Public Transportation");
     
     }
     
@@ -442,6 +443,30 @@ public class SystemGuide4u implements java.io.Serializable{
 			e.printStackTrace();
 		}
     }
+    
+    
+    public void loadContactLocalGuidePage(LocalGuide localGuide) {
+    	
+    	try {
+			Stage stage=new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ContactLocalGuide.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+			ContactLocalGuideController contactController = loader.<ContactLocalGuideController>getController();
+			contactController.setLocalGuide(localGuide);
+			contactController.setData();
+			stage.setScene(scene);
+			stage.setTitle("Guide4U - Contact Local Guide");
+			stage.show();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    	
+    }
+    
+    
     public LocalGuide transferTravellerToGuide(Traveller t) {
     	LocalGuide localGuide= new LocalGuide(t.getEmail(), t.getPassword(), t.getFirstName(), t.getLastName(), t.getDateOfBirth(), t.getGender(), t.getCity(), t.getCountry(), t.getPhoneNumber(), t.getLanguage(), t.getTravelStyle(), t.getAboutMe(),t.emailNotifacations);
     	return localGuide;
