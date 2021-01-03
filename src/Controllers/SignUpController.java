@@ -17,7 +17,7 @@ import Model.TravelStyle;
 import Model.Traveller;
 import Model.User;
 import application.Main;
-import application.SQLTest;
+import application.SqlTest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -172,7 +172,7 @@ public class SignUpController {
 
     SystemGuide4u system=Main.system;
     
-    static SQLTest sql = new SQLTest();
+    static SqlTest sql = new SqlTest();
     
     boolean IsAdminSession=false;
     
