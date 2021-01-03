@@ -22,6 +22,7 @@ public class SignUpSucsessController {
     @FXML
     void btnOKclick(ActionEvent event) {
     	system.reloadLoginPage();
+    	btnOK.getScene().getWindow().hide();
 
     }
     

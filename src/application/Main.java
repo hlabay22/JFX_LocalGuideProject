@@ -35,7 +35,7 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	
 	public static SystemGuide4u system= SystemGuide4u.getInstance();
-    static SqlTest sql;
+    static SQLTest sql;
 	private static void importDataFromTxtFile() throws ParseException {
         try {
             

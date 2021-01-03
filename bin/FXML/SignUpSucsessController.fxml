@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="282.0" prefWidth="465.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SignUpSucsessController">
    <children>
-      <Label fx:id="lblError" layoutX="99.0" layoutY="56.0" prefHeight="98.0" prefWidth="268.0" text="Welcome,&#10; you are secssesfully sign up">
+      <Label fx:id="lblError" layoutX="99.0" layoutY="56.0" prefHeight="98.0" prefWidth="304.0" text="Welcome,&#10; Sign Up Completed Successfuly!">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

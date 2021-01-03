@@ -17,6 +17,7 @@ import Model.TravelStyle;
 import Model.Traveller;
 import Model.User;
 import application.Main;
+import application.SQLTest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -168,8 +169,11 @@ public class SignUpController {
 
     @FXML
     private Label lblLogo;
-   // SystemGuide4u system= SystemGuide4u.getInstance();
+
     SystemGuide4u system=Main.system;
+    
+    static SQLTest sql = new SQLTest();
+    
     boolean IsAdminSession=false;
     
     
@@ -321,28 +325,35 @@ public class SignUpController {
 						 emailNotes);
 		    	
 				if(comBoxUserType.getValue().equals("Local Guide")) {
-					 system.addGuide(localGuide);
+					 //system.addGuide(localGuide);
+					 sql.addLocalGuideToSQL(localGuide);
 					 System.out.println("local add");
-					 Main.serialize("guide4u.ser");
-				     Main.deserialize();
+					 sql.initLocalGuide();
+//					 Main.serialize("guide4u.ser");
+//				     Main.deserialize();
 				     adminOrLoginPage(IsAdminSession,localGuide );
 		        	 
 
 				}
+				
 				if(comBoxUserType.getValue().equals("Traveller")) {
-			       system.addTraveller(traveller);
+			         //system.addTraveller(traveller);
+					 sql.addTravellerToSQL(traveller);
 					 System.out.println("trav add");
-					 Main.serialize("guide4u.ser");
-				     Main.deserialize();
-				     adminOrLoginPage(IsAdminSession,localGuide );
+					 sql.initTravellers();
+//					 Main.serialize("guide4u.ser");
+//				     Main.deserialize();
+				     adminOrLoginPage(IsAdminSession,traveller);
 
 
 				}
 				if(comBoxUserType.getValue().equals("Traveller and Local Guide")) {
-					system.addGuide(localGuide);system.addTraveller(traveller);
+					//system.addGuide(localGuide);system.addTraveller(traveller);
+					 sql.addLocalGuideToSQL(localGuide); sql.addTravellerToSQL(traveller);
 					 System.out.println("both add");
-					 Main.serialize("guide4u.ser");
-				     Main.deserialize();
+					 sql.initLocalGuide(); sql.initTravellers();
+//					 Main.serialize("guide4u.ser");
+//				     Main.deserialize();
 				     adminOrLoginPage(IsAdminSession,localGuide );
 
 
@@ -410,7 +421,7 @@ public class SignUpController {
 	        Scene scene = new Scene(signUpLayout);
 	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        signUpSucssesfull.setScene(scene);
-	        signUpSucssesfull.setTitle("Finish Login");
+	        signUpSucssesfull.setTitle("Sign Up Success");
 	        signUpSucssesfull.show();
 	        btnSignIn.getScene().getWindow().hide();
 	        

@@ -16,7 +16,7 @@ public class User implements java.io.Serializable{
 	protected Gender gender;
 	protected String city;
 	protected String country;
-	protected Integer phoneNumber;
+	protected int phoneNumber;
 	protected Language language;
 	protected TravelStyle travelStyle;
 	protected String aboutMe;
