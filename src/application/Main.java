@@ -35,7 +35,7 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	
 	public static SystemGuide4u system= SystemGuide4u.getInstance();
-
+    static SqlTest sql;
 	private static void importDataFromTxtFile() throws ParseException {
         try {
             
@@ -178,15 +178,19 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws ParseException {
-		importDataFromTxtFile();
-     	serialize("guide4u.ser");
-		deserialize();
-		System.out.println("good");
+//		importDataFromTxtFile();
+//     	serialize("guide4u.ser");
+//		deserialize();
+		sql.conectTo();
+		sql.initLocalGuide();
+		System.out.println("local guides init finished");
+		sql.initTravellers();
+		System.out.println("travellers init finished");
+		sql.showLocalGuides();
 		system.printAllData();
-		System.out.println("good");
 
-//		SystemGuide4u.readFile();
-//		system.printAllData();
+
+		
 		System.out.println("good");
 		System.out.println("\n"+"sort local guide by first name: ");
 		system.sortGuideByFirstName();

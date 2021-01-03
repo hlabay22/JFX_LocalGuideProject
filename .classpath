@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="C:/various_files/javafx-sdk-15.0.1/lib/javafx.swing.jar"/>
 	<classpathentry kind="lib" path="C:/various_files/javafx-sdk-15.0.1/lib/javafx.web.jar"/>
 	<classpathentry kind="lib" path="C:/various_files/javafx-sdk-15.0.1/lib/javafx-swt.jar"/>
+	<classpathentry kind="lib" path="C:/various_files/sqljdbc42.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

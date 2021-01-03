@@ -97,6 +97,8 @@ public class LocalGuide extends User implements java.io.Serializable {
 		this.unavailableDates = unavailableDates;
 	}
 	
+
+	
 	
 	
 

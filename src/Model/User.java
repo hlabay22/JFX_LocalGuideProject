@@ -167,6 +167,18 @@ public class User implements java.io.Serializable{
 		this.emailNotifacations = emailNotifacations;
 	}
 	
+	public String getGenderForSQL() {
+		return this.gender.toString();
+	}
+	public String getIsEmailNotifacationsForSql() {
+		if(this.isEmailNotifacations()) {
+			return "yes";
+		}
+			else {
+				return "no";
+			}
+		}
+	
 	
 	
 	
