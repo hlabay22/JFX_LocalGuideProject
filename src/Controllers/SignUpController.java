@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.awt.Color;
 
 import Exceptions.LoginException;
@@ -214,6 +215,7 @@ public class SignUpController {
     }
     
 
+
     @FXML
     void btnSignInClick(ActionEvent event) throws comboBoxNotSelected {
     	try {
@@ -224,6 +226,8 @@ public class SignUpController {
     	&& (system.checkPhone(txtPhone.getText())) && (system.checkFirstName(txtCity.getText()))){
     		
     		////combo boxes
+    	
+    			DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 		    	LocalDate localDate = comBoxDOB.getValue();
 		    	Language language=new Language("");
 		    	TravelStyle travelStyle=new TravelStyle("");
@@ -327,7 +331,7 @@ public class SignUpController {
 				if(comBoxUserType.getValue().equals("Local Guide")) {
 					 //system.addGuide(localGuide);
 					 sql.addLocalGuideToSQL(localGuide);
-					 System.out.println("local add");
+//					 System.out.println("local add");
 					 sql.initLocalGuide();
 //					 Main.serialize("guide4u.ser");
 //				     Main.deserialize();

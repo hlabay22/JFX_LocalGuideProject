@@ -37,6 +37,12 @@ import Model.User;
 //
 //			
 //	}
+		
+		public SqlTest() {
+			conectTo();
+		}
+		
+		
 		////add local guides into hash
 		public static void initLocalGuide() {
 			try {  
@@ -233,7 +239,7 @@ import Model.User;
 
 	}
 	
-	public void addTravellerToSQL(Traveller travller) {
+	public void addTravellerToSQL(Traveller traveller) {
 		try {  
 			String SQL = "insert into Travellers (first_name, last_name, email, password, dateOfBirth,"
 					+ " gender, country, city, phoneNumber, language1, language2, language3, travelStyle1,"
@@ -241,23 +247,26 @@ import Model.User;
 					+ "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" + 
 					"";  
 			PreparedStatement pst = con.prepareStatement(SQL);  
-			pst.setString(1, travller.getFirstName());
-			pst.setString(2, travller.getLastName());
-			pst.setString(3, travller.getEmail());
-			pst.setString(4, travller.getPassword());
-			pst.setString(5, travller.getDateOfBirthForTable());
-			pst.setString(6, travller.getGenderForSQL());
-			pst.setString(7, travller.getCountry());
-			pst.setString(8, travller.getCity());
-			pst.setString(9, travller.getPhoneNumber().toString());
-			pst.setString(10, travller.getLanguage().getLanguage1());
-			pst.setString(11, travller.getLanguage().getLanguage2());
-			pst.setString(12, travller.getLanguage().getLanguage3());
-			pst.setString(13, travller.getTravelStyle().getTravelStyle1());
-			pst.setString(14, travller.getTravelStyle().getTravelStyle2());
-			pst.setString(15, travller.getTravelStyle().getTravelStyle3());
-			pst.setString(16, travller.getAboutMe());
-			pst.setString(17, travller.getIsEmailNotifacationsForSql());
+			pst.setString(1, traveller.getFirstName());
+			pst.setString(2, traveller.getLastName());
+			pst.setString(3, traveller.getEmail());
+			pst.setString(4, traveller.getPassword());
+			DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+			String dob = traveller.getDateOfBirth().format(df);
+			pst.setString(5, dob);
+			pst.setString(6, traveller.getGenderForSQL());
+			pst.setString(7, traveller.getCountry());
+			pst.setString(8, traveller.getCity());
+			pst.setString(9, traveller.getPhoneNumber().toString());
+			pst.setString(10, traveller.getLanguage().getLanguage1());
+			pst.setString(11, traveller.getLanguage().getLanguage2());
+			pst.setString(12, traveller.getLanguage().getLanguage3());
+			pst.setString(13, traveller.getTravelStyle().getTravelStyle1());
+			pst.setString(14, traveller.getTravelStyle().getTravelStyle2());
+			pst.setString(15, traveller.getTravelStyle().getTravelStyle3());
+			pst.setString(16, traveller.getAboutMe());
+			pst.setString(17, traveller.getIsEmailNotifacationsForSql());
+			pst.execute();
 
 			System.out.println("trav added!");  
 		}  
@@ -274,19 +283,24 @@ import Model.User;
 	
 	public void addLocalGuideToSQL(LocalGuide localGuide) {
 		try {  
-			String SQL = "insert into Travellers (first_name, last_name, email, password, dateOfBirth,"
+			String SQL = "insert into LocalGuides (first_name, last_name, email, password, dateOfBirth,"
 					+ " gender, country, city, phoneNumber, language1, language2, language3, travelStyle1,"
 					+ " travelStyle2, travelStyle3, about, mail) "
 					+ "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" + 
 					"";  
+			//conectTo();
+			
 			PreparedStatement pst = con.prepareStatement(SQL);  
 			pst.setString(1, localGuide.getFirstName());
 			pst.setString(2, localGuide.getLastName());
 			pst.setString(3, localGuide.getEmail());
 			pst.setString(4, localGuide.getPassword());
-			pst.setString(5, localGuide.getDateOfBirthForTable());
+			DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+			String dob = localGuide.getDateOfBirth().format(df);
+			pst.setString(5, dob);
 			pst.setString(6, localGuide.getGenderForSQL());
 			pst.setString(7, localGuide.getCountry());
+			System.out.println(localGuide.getCountry());
 			pst.setString(8, localGuide.getCity());
 			pst.setString(9, localGuide.getPhoneNumber().toString());
 			pst.setString(10, localGuide.getLanguage().getLanguage1());
@@ -297,7 +311,7 @@ import Model.User;
 			pst.setString(15, localGuide.getTravelStyle().getTravelStyle3());
 			pst.setString(16, localGuide.getAboutMe());
 			pst.setString(17, localGuide.getIsEmailNotifacationsForSql());
-
+			pst.execute();
 			System.out.println("local guide added!");  
 		}  
 		catch (SQLException e) {
@@ -310,6 +324,54 @@ import Model.User;
 			System.out.println();
 		} 
 	}
+	
+	public void removeLocalGuideFromSQL(LocalGuide localGuide) {
+		
+		try {
+			String userEmail = localGuide.getEmail();
+			String SQL = "DELETE FROM LocalGuides WHERE email = ?";  
+			PreparedStatement pst = con.prepareStatement(SQL);
+			pst.setString(1, userEmail);
+			pst.executeUpdate();
+			
+		}  
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		finally {  
+			if (rs != null) try { rs.close(); } catch(Exception e) {}  
+			if (stmt != null) try { stmt.close(); } catch(Exception e) {}
+			System.out.println();
+		} 
+	}
+	
+	public void removeTravellerFromSQL(Traveller traveller) {
+		
+		try {
+			String userEmail = traveller.getEmail();
+			String SQL = "DELETE FROM Travellers WHERE email = ?";  
+			PreparedStatement pst = con.prepareStatement(SQL);
+			pst.setString(1, userEmail);
+			pst.executeUpdate();
+			
+		}  
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		finally {  
+			if (rs != null) try { rs.close(); } catch(Exception e) {}  
+			if (stmt != null) try { stmt.close(); } catch(Exception e) {}
+			System.out.println();
+		} 
+	}
+		
+	
+	
+	
+	
+	
 	private static void printMenu() {
 	System.out.println("Choose from this options");
 	System.out.println("press 1 if you want to use query 1");

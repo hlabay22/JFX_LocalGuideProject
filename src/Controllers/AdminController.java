@@ -11,6 +11,7 @@ import Model.SystemGuide4u;
 import Model.Traveller;
 import Model.User;
 import application.Main;
+import application.SqlTest;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -159,6 +160,8 @@ public class AdminController implements Initializable {
 	}
 		
 	FilteredList<LocalGuide> filterdData;
+	
+	static SqlTest sql = new SqlTest();
 		
 		
 	public void initLocalGuideTable() {
@@ -213,11 +216,13 @@ public class AdminController implements Initializable {
     void btnRemoveLocalGuide(ActionEvent event) {
     	try {
 	    	LocalGuide localGuide = this.tableLocalGuide.getSelectionModel().getSelectedItem();
+	    	sql.removeLocalGuideFromSQL(localGuide);
+	    	sql.initLocalGuide();
 	    	getLocalGuideData().remove(localGuide);
 	    	system.removeLocalGuide(localGuide);
-	    	//system.popUpRemoveSucces();
-	    	Main.serialize("guide4u.ser");
-		    Main.deserialize();
+	    	System.out.println("REMOVED!!!!!!!!!!!!!!!");
+//	    	Main.serialize("guide4u.ser");
+//		    Main.deserialize();
     	} catch (Exception e) {
     		e.getMessage();
     		//system.popUpRemoveError();
@@ -228,11 +233,12 @@ public class AdminController implements Initializable {
     void btnRemoveTraveller(ActionEvent event) {
     	try {
 	    	Traveller traveller = this.TableTravellers.getSelectionModel().getSelectedItem();
+	    	sql.removeTravellerFromSQL(traveller);
+	    	sql.initTravellers();
 	    	getTravellerData().remove(traveller);
 	    	system.removeTraveller(traveller);
-	    	//system.popUpRemoveSucces();
-	    	Main.serialize("guide4u.ser");
-		    Main.deserialize();
+//	    	Main.serialize("guide4u.ser");
+//		    Main.deserialize();
     	} catch (Exception e) {
     		e.getMessage();
     		//system.popUpRemoveError();
@@ -252,12 +258,13 @@ public class AdminController implements Initializable {
     
     @FXML
     void btnLogOutClick(ActionEvent event) {
+    	
+    	btnLogOut.getScene().getWindow().hide();
+    	system.reloadLoginPage();
 
     }
 
     
-    
-
     
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
