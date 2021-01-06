@@ -10,6 +10,8 @@ public class LocalGuide extends User implements java.io.Serializable {
 	protected Double rating;
 	protected int raters=0;
 	protected ArrayList<LocalDate> unavailableDates=new ArrayList<LocalDate>();
+	protected ArrayList<Place> localGuidePlaces=new ArrayList<Place>();
+	protected ArrayList<TravelOption> localGuideTravels=new ArrayList<TravelOption>();
 	
 	SystemGuide4u system = Main.system;
 
@@ -25,7 +27,7 @@ public class LocalGuide extends User implements java.io.Serializable {
 	}
 	
 	public Double getRating() {
-		this.setRating();
+//		this.setRating();
 		return rating;
 	}
 	
@@ -36,23 +38,27 @@ public class LocalGuide extends User implements java.io.Serializable {
 			return rating.toString(this.rating);
 	}
 
+//	public void setRating(Double rating) {
+//		this.rating = rating;
+//	}
+	
+//	public void setRating() {
+//
+//		int cnt = 0;
+//		double sumRating = 0;
+//		for (Review r : system.getReviewsList() ) {
+//			if(r.getLocalGuide().getEmail().equals(this.email)) {
+//				sumRating = sumRating+r.getRating(); 
+//				cnt++;
+//			}
+//		}
+//		
+//		Double newRating = sumRating/cnt;
+//		setRating(newRating);
+//	}
+	
 	public void setRating(Double rating) {
 		this.rating = rating;
-	}
-	
-	public void setRating() {
-
-		int cnt = 0;
-		double sumRating = 0;
-		for (Review r : system.getReviewsList() ) {
-			if(r.getLocalGuide().getEmail().equals(this.email)) {
-				sumRating = sumRating+r.getRating(); 
-				cnt++;
-			}
-		}
-		
-		Double newRating = sumRating/cnt;
-		setRating(newRating);
 	}
 	
 	public String getLanguageForTable() {
@@ -92,6 +98,16 @@ public class LocalGuide extends User implements java.io.Serializable {
 	public ArrayList<LocalDate> getUnavailableDates() {
 		return unavailableDates;
 	}
+	
+
+	public ArrayList<Place> getLocalGuidePlaces() {
+		return localGuidePlaces;
+	}
+
+	public ArrayList<TravelOption> getLocalGuideTravels() {
+		return localGuideTravels;
+	}
+
 
 	public void setUnavailableDates(ArrayList<LocalDate> unavailableDates) {
 		this.unavailableDates = unavailableDates;

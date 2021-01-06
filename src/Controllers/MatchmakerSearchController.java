@@ -133,7 +133,7 @@ public class MatchmakerSearchController implements Initializable{
     Traveller traveller;
     
 
-	LocalGuide localGuide;
+    LocalGuide localGuide;
 	
 	SystemGuide4u system=Main.system;
 	
@@ -437,7 +437,7 @@ public class MatchmakerSearchController implements Initializable{
 		this.lblCountry.setText(this.localGuide.getCountry());
 		setLangData();
 		setTravelStyleData();
-		this.localGuide.setRating();
+		this.lblRating.setText(this.localGuide.getRatingAsString());
 		this.lblAbout.setText(this.localGuide.getAboutMe());
 		this.lblRating.setText(this.localGuide.getRating().toString());
 	}

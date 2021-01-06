@@ -40,8 +40,8 @@ public class ContactLocalGuideController implements Initializable {
 		return localGuide;
 	}
 
-	public void setLocalGuide(LocalGuide localGuide) {
-		this.localGuide = localGuide;
+	public void setLocalGuide(LocalGuide localGuide2) {
+		this.localGuide = localGuide2;
 	}
 
 	@FXML

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="620.0" style="-fx-background-color: #001a33;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LocalGuideAddNewPlaceController">
+   <children>
+      <Label fx:id="lblLogo" layoutX="263.0" layoutY="16.0" prefHeight="88.0" prefWidth="152.0" text="Guide4U" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT Ext Condensed Bold" size="72.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnExit" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnExitClick" prefHeight="41.0" prefWidth="72.0" style="-fx-background-color: transparent;" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblPlaceName" layoutX="47.0" layoutY="156.0" prefHeight="29.0" prefWidth="173.0" text="Place Name :" textFill="WHITE">
+         <font>
+            <Font name="Guttman-Toledo Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblCity" layoutX="47.0" layoutY="198.0" prefHeight="29.0" prefWidth="173.0" text="City :" textFill="WHITE">
+         <font>
+            <Font name="Guttman-Toledo Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTitle" layoutX="47.0" layoutY="104.0" prefHeight="40.0" prefWidth="210.0" text="Add New Place" textFill="#1a8cff">
+         <font>
+            <Font name="Guttman-Toledo Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblCountry" layoutX="47.0" layoutY="245.0" prefHeight="30.0" prefWidth="82.0" text="Country :" textFill="WHITE">
+         <font>
+            <Font name="Guttman-Toledo Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtCountry" layoutX="177.0" layoutY="245.0" prefHeight="30.0" prefWidth="230.0" text="this.localGuide.getCountry()" textFill="WHITE">
+         <font>
+            <Font name="Guttman-Toledo Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPlaceName" layoutX="177.0" layoutY="158.0" prefHeight="26.0" prefWidth="292.0" />
+      <TextField fx:id="txtCity" layoutX="177.0" layoutY="199.0" prefHeight="26.0" prefWidth="292.0" />
+      <Label fx:id="lblInfo" layoutX="47.0" layoutY="295.0" prefHeight="30.0" prefWidth="112.0" text="Description :" textFill="WHITE">
+         <font>
+            <Font name="Guttman-Toledo Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="txtInfo" layoutX="177.0" layoutY="295.0" prefHeight="142.0" prefWidth="292.0" />
+      <Button fx:id="btnAddNewPlace" layoutX="234.0" layoutY="469.0" mnemonicParsing="false" onAction="#btnAddNewPlaceClick" prefHeight="40.0" prefWidth="152.0" style="-fx-background-color: #1a8cff;" text="Add New Place" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="NONE" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

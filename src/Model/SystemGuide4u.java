@@ -40,9 +40,9 @@ import javafx.stage.StageStyle;
 
 
 public class SystemGuide4u implements java.io.Serializable{
-	protected HashMap<String, LocalGuide > localGuidesList;
-	protected HashMap<String, Traveller > travellersList;
-	protected ArrayList<Review> reviewsList;
+	protected HashMap<String, LocalGuide> localGuidesList;
+	protected HashMap<String, Traveller> travellersList;
+	protected HashMap<String,Review> reviewsList;
 	protected ArrayList<Travel> travelLIST;
 
 
@@ -55,7 +55,7 @@ public class SystemGuide4u implements java.io.Serializable{
 		super();
 		this.localGuidesList = new HashMap<String, LocalGuide>();
 		this.travellersList = new HashMap<String, Traveller>();
-		this.reviewsList = new ArrayList<Review>();
+		this.reviewsList = new HashMap<String, Review>();
 		this.travelLIST=new ArrayList<Travel>();
 	}
 	public HashMap<String, LocalGuide> getLocalGuidesList() {
@@ -77,10 +77,10 @@ public class SystemGuide4u implements java.io.Serializable{
 		SystemGuide4u.instance = instance;
 	}
 	
-	public ArrayList<Review> getReviewsList() {
+	public HashMap<String, Review> getReviewsList() {
 		return reviewsList;
 	}
-	public void setReviewsList(ArrayList<Review> reviewsList) {
+	public void setReviewsList(HashMap<String, Review> reviewsList) {
 		this.reviewsList = reviewsList;
 	}
 	public ArrayList<Travel> getTravelLIST() {
@@ -98,6 +98,10 @@ public class SystemGuide4u implements java.io.Serializable{
 	}
 	public void addTravel(Travel travel) {
 		this.travelLIST.add(travel);
+	}
+	
+	public void addReview(Review review) {
+		this.reviewsList.put(review.getLocalGuideEmail(), review);
 	}
 	//remove
 	public void removeLocalGuide(LocalGuide guide) {
@@ -175,8 +179,8 @@ public class SystemGuide4u implements java.io.Serializable{
 	public void populateReviewsExample() {
 		Traveller t1 = new Traveller("har@gmail.com", "asd123", "Haron", "Labay", LocalDate.of(1992,2,5), Gender.Male, "Haifa", "Israel", 503309824 , new Language("Hebrew"), new TravelStyle("Hiking"), "I Love Food", true);
 		LocalGuide lg1 = new LocalGuide("xxx@gmail.com", "asd123", "Shim", "Metz", LocalDate.of(1992,2,5), Gender.Male, "Haifa", "Israel", 503309824 , new Language("Hebrew"), new TravelStyle("Hiking"), "I Love Food", true);
-		Review r1 = new Review(lg1, LocalDate.now(), t1, "Haifa", "Israel", "Great Guide, A little bit too French and Red head", 7.8);
-		this.reviewsList.add(r1);
+		Review r1 = new Review(lg1.getEmail(), LocalDate.now(), t1.getEmail(), "Haifa", "Israel", "Great Guide, A little bit too French and Red head", 7.8);
+		this.reviewsList.put(r1.getLocalGuideEmail(),r1);
 		
 	}
 	
@@ -203,7 +207,7 @@ public class SystemGuide4u implements java.io.Serializable{
     public <T> void initCountryComBox(ComboBox<String> comBox) {
     	
     	ObservableList<String> countries = FXCollections.observableArrayList();
-    	 String[] locales1 = Locale.getISOCountries();
+    	String[] locales1 = Locale.getISOCountries();
          for (String countrylist : locales1) {
              Locale obj = new Locale("", countrylist);
              String[] city = { obj.getDisplayCountry() };
@@ -373,21 +377,21 @@ public class SystemGuide4u implements java.io.Serializable{
 	}
 	
 	
-	public void showRating(LocalGuide localGuide) {
-//		Double newRating = (this.rating+rating)/++this.raters;
-//		setRating(newRating);
-		int cnt = 0;
-		double sumRating = 0;
-		for (Review r : this.getReviewsList() ) {
-			if(r.getLocalGuide().getEmail().equals(localGuide.getEmail())) {
-				sumRating = sumRating+r.getRating(); 
-				cnt++;
-			}
-		}
-		
-		Double newRating = sumRating/cnt;
-		localGuide.setRating(newRating);
-	}
+//	public void showRating(LocalGuide localGuide) {
+////		Double newRating = (this.rating+rating)/++this.raters;
+////		setRating(newRating);
+//		int cnt = 0;
+//		double sumRating = 0;
+//		for (Review r : this.getReviewsList() ) {
+//			if(r.getLocalGuide().getEmail().equals(localGuide.getEmail())) {
+//				sumRating = sumRating+r.getRating(); 
+//				cnt++;
+//			}
+//		}
+//		
+//		Double newRating = sumRating/cnt;
+//		localGuide.setRating(newRating);
+//	}
 	
 	//serialize 
 	

@@ -3,6 +3,7 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -12,6 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="800.0" prefWidth="500.0" style="-fx-background-color: #001a33;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TravellerDashboardController">
    <children>
@@ -84,7 +86,65 @@
           </Tab>
             <Tab fx:id="tabAbout" text="About">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="54.0" layoutY="22.0" text="About Us" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="59.0" />
+                           </font>
+                        </Label>
+                        <Text fill="WHITE" layoutX="54.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guide4U was founded in 2020 by Haron Labay and Shimon Metzger to provide an alternative travelling experience!" wrappingWidth="1876.5368766784668">
+                           <font>
+                              <Font name="System Bold" size="34.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="54.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The main idea is to find a perfect match between non-professional local travel guides and travellers who are seeking a different way of travelling ,Not by the book travelling!Every one who loves his living area and has the skill and will to be a local guide - Can Do It!" wrappingWidth="1876.5368766784668">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="364.0" fitWidth="327.0" layoutX="154.0" layoutY="355.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../img/haronLabay.jpeg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="369.0" fitWidth="319.0" layoutX="1047.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/shimonMetzger.jpeg" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="514.0" layoutY="358.0" prefHeight="58.0" prefWidth="378.0" text="Haron Labay" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="42.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="1398.0" layoutY="358.0" prefHeight="58.0" prefWidth="378.0" text="Shimon Metzger" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="42.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="1398.0" layoutY="435.0" prefHeight="58.0" prefWidth="483.0" text="Co Founder &amp; Tech Lead" textFill="WHITE">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="514.0" layoutY="435.0" prefHeight="58.0" prefWidth="483.0" text="Co Founder &amp; CEO" textFill="WHITE">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <Text fill="WHITE" layoutX="514.0" layoutY="543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;I hate organized trips, and I'm sometimes too lazy to do a reasearch on my own, I think the median of these two suites a lot of travellers like myself!&quot;" wrappingWidth="401.3368949890137">
+                           <font>
+                              <Font name="System Italic" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="1398.0" layoutY="542.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;When I was little, Back in Chambéry,France my father had this idea to be a guide for tourist groups coming to town. He Never had the time or the resources to make it happen.&quot;" wrappingWidth="401.3368949890137">
+                           <font>
+                              <Font name="System Italic" size="21.0" />
+                           </font>
+                        </Text>
+                        <Separator layoutX="6.0" layoutY="316.0" prefHeight="4.0" prefWidth="2000.0" />
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>

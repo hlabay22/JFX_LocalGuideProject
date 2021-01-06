@@ -5,7 +5,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Place implements java.io.Serializable{
 	protected String name;
 	protected String city;
-	protected String country;		
+	protected String country;
+	protected String info;
 	protected static final AtomicInteger cnt = new AtomicInteger(9999);
 	protected final Integer placeID;
 
@@ -15,4 +16,59 @@ public class Place implements java.io.Serializable{
 		this.city = city;
 		this.country = country;
 	}
+	
+	
+	// Getters 
+
+	public String getName() {
+		return name;
+	}
+	
+	public String getCity() {
+		return city;
+	}
+	
+	public String getCountry() {
+		return country;
+	}
+	
+	public String getInfo() {
+		return info;
+	}
+	
+	public Integer getPlaceID() {
+		return placeID;
+	}
+	
+	// Setters 
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	
+	
+
+
+
+
+	
+	
 }

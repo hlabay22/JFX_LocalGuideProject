@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -174,6 +175,8 @@ public void loadAdminPage() {
 			adminController.initTravellerTable();
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Admin Dashboard");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 			stage.show();
 			this.btnSignIn.getScene().getWindow().hide();
 			
@@ -198,6 +201,8 @@ public void loadAdminPage() {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Traveller Dashboard");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 			stage.show();
 			this.btnSignIn.getScene().getWindow().hide();
 			
@@ -221,11 +226,14 @@ public void loadAdminPage() {
 			Scene scene = new Scene(root,screenWidth,screenHeight);
 			LocalGuideDashboardController LGDashController = loader.<LocalGuideDashboardController>getController();
 			LGDashController.setLocalGuide(localGuide);	
-			LGDashController.initData();
 			LGDashController.initReviewTableData();
+			LGDashController.initData();
+
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Local Guide Dashboard");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 			stage.show();
 			this.btnSignIn.getScene().getWindow().hide();
 			
@@ -245,7 +253,9 @@ public void loadAdminPage() {
             Scene scene = new Scene(rootLayout);
 	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        popUpLoginErr.setScene(scene);
-	        popUpLoginErr.setTitle("Xademy - Login Error");
+	        popUpLoginErr.setTitle("Guide4U - Login Error");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 	        popUpLoginErr.setResizable(false);
 	        popUpLoginErr.show();
 	        

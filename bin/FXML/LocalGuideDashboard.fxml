@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -15,6 +16,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="1084.0" prefWidth="2002.0" style="-fx-background-color: #001a33;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LocalGuideDashboardController">
    <children>
@@ -197,13 +199,77 @@
                         </Label>
                         <DatePicker fx:id="datePickAvailbilty" layoutX="935.0" layoutY="599.0" prefHeight="46.0" prefWidth="266.0" />
                         <Button fx:id="btnUpdateAvailibilty" layoutX="935.0" layoutY="707.0" mnemonicParsing="false" onAction="#btnUpdateAvailibiltyClick" prefHeight="26.0" prefWidth="103.0" text="Update" />
-                        <Label fx:id="lblNoteAvailibilty" layoutX="1145.0" layoutY="532.0" text="**Chosen Date will be Unavailble date for your services!" textFill="WHITE" />
+                        <Label fx:id="lblNoteAvailibilty" layoutX="935.0" layoutY="547.0" text="**Chosen Date will be Unavailble date for your services!" textFill="WHITE" />
+                        <Button fx:id="btnGoToMyPlacesAndTravels" layoutX="1414.0" layoutY="603.0" mnemonicParsing="false" onAction="#btnGoToMyPlacesAndTravelsClick" prefHeight="38.0" prefWidth="266.0" text="Go To My Places&amp;Travels" />
+                        <Label fx:id="lblPlacesAndTravels" layoutX="1414.0" layoutY="517.0" prefHeight="30.0" prefWidth="263.0" text="My Places &amp; Travel Options" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
             </content>
           </Tab>
             <Tab fx:id="tabAbout" text="About">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="42.0" layoutY="19.0" text="About Us" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="59.0" />
+                           </font>
+                        </Label>
+                        <Text fill="WHITE" layoutX="42.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guide4U was founded in 2020 by Haron Labay and Shimon Metzger to provide an alternative travelling experience!" wrappingWidth="1876.5368766784668">
+                           <font>
+                              <Font name="System Bold" size="34.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="42.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The main idea is to find a perfect match between non-professional local travel guides and travellers who are seeking a different way of travelling ,Not by the book travelling!Every one who loves his living area and has the skill and will to be a local guide - Can Do It!" wrappingWidth="1876.5368766784668">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="364.0" fitWidth="327.0" layoutX="162.0" layoutY="364.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../img/haronLabay.jpeg" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="526.0" layoutY="364.0" prefHeight="58.0" prefWidth="378.0" text="Haron Labay" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="42.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="1379.0" layoutY="364.0" prefHeight="58.0" prefWidth="378.0" text="Shimon Metzger" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="42.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="1379.0" layoutY="445.0" prefHeight="58.0" prefWidth="483.0" text="Co Founder &amp; Tech Lead" textFill="WHITE">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="526.0" layoutY="445.0" prefHeight="58.0" prefWidth="483.0" text="Co Founder &amp; CEO" textFill="WHITE">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <Text fill="WHITE" layoutX="526.0" layoutY="559.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;I hate organized trips, and I'm sometimes too lazy to do a reasearch on my own, I think the median of these two suites a lot of travellers like myself!&quot;" wrappingWidth="401.3368949890137">
+                           <font>
+                              <Font name="System Italic" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="1379.0" layoutY="559.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;When I was little, Back in Chambéry,France my father had this idea to be a guide for tourist groups coming to town. He Never had the time or the resources to make it happen.&quot;" wrappingWidth="401.3368949890137">
+                           <font>
+                              <Font name="System Italic" size="21.0" />
+                           </font>
+                        </Text>
+                        <Separator layoutX="1.0" layoutY="296.0" prefHeight="4.0" prefWidth="2000.0" />
+                        <ImageView fitHeight="369.0" fitWidth="319.0" layoutX="1040.0" layoutY="364.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/shimonMetzger.jpeg" />
+                           </image>
+                        </ImageView>
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>

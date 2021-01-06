@@ -159,7 +159,7 @@ public class AdminController implements Initializable {
 		return travellerData;
 	}
 		
-	FilteredList<LocalGuide> filterdData;
+	FilteredList<String> filterdData;
 	
 	static SqlTest sql = new SqlTest();
 		
@@ -181,7 +181,7 @@ public class AdminController implements Initializable {
 			this.c11_phone.setCellValueFactory(new PropertyValueFactory<LocalGuide, Integer>("phoneNumber"));
 
 			
-			  for (Entry<String, LocalGuide> value : this.system.getLocalGuidesList().entrySet()) {
+			  for (Entry<String , LocalGuide> value : this.system.getLocalGuidesList().entrySet()) {
 				  LocalGuide localGuide = value.getValue(); 
 				  localGuideData.add(localGuide);
 	 

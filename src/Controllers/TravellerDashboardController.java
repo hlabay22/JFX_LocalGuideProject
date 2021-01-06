@@ -164,7 +164,8 @@ public class TravellerDashboardController implements Initializable {
 
     }
     
-    
+    // μδξωικκκκκκκκκκκκκκκκκκκ ξτδδδ!!!!!!!!!! 
+	
 	public void initLocalGuideTable() {
 		
 		this.tableLocalGuide.setItems(localGuideData);

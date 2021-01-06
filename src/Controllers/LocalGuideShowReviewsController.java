@@ -2,6 +2,7 @@ package Controllers;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.Map.Entry;
 
 import Model.*;
 import application.Main;
@@ -122,8 +123,6 @@ public class LocalGuideShowReviewsController implements Initializable {
     
 	public void initReviewTableData() {
 		
-		
-		
 		this.tableReview.setItems(reviewData);
 		this.c1_Date.setCellValueFactory(new PropertyValueFactory<Review, LocalDate>("date"));
 		this.c2_travellerName.setCellValueFactory(new PropertyValueFactory<Review, String>("travellerName"));
@@ -131,16 +130,27 @@ public class LocalGuideShowReviewsController implements Initializable {
 		this.c4_country.setCellValueFactory(new PropertyValueFactory<Review, String>("country"));
 		this.c5_reviewText.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewText"));
 		this.c6_rating.setCellValueFactory(new PropertyValueFactory<Review, Double>("rating"));
-		
-		  for (Review rev : system.getReviewsList()) {
-			  if(rev.getLocalGuide().getEmail().equals(this.localGuide.getEmail())) {
+		Double sumForRating = 0.0; 
+		int cntForRating = 0;
+		for (Entry<String, Review> value : this.system.getReviewsList().entrySet()) {
+			  Review rev = value.getValue();
+			  if(rev.getLocalGuideEmail().equals(this.localGuide.getEmail())) {
 				  reviewData.add(rev);
+				  if(rev.getRating()!=null) {
+					  sumForRating = sumForRating + rev.getRating();
+					  cntForRating++;
+				  }
+				  
+				  
 			  }else {
 				  System.out.println("No Match!");
 			  }
 			  
  
 		  }
+		  
+		  Double rating= sumForRating/cntForRating;
+		  system.getGuideByEmail(this.localGuide.getEmail()).setRating(rating);
 			
 	}
 

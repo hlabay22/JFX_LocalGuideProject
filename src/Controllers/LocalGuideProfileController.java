@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -90,6 +91,9 @@ public class LocalGuideProfileController implements Initializable {
     @FXML
     private Button btnShowReviews;
     
+    @FXML
+    private Button btnPlacesAndTravels;
+    
     LocalGuide localGuide;
     
     Traveller traveller;
@@ -127,7 +131,17 @@ public class LocalGuideProfileController implements Initializable {
 
     }
     
-    public LocalGuide getLocalGuide() {
+    @FXML
+    void btnPlacesAndTravelsClick(ActionEvent event) {
+    	
+    	loadPlacesAndTravels(this.localGuide);
+
+    }
+    
+    
+
+
+	public LocalGuide getLocalGuide() {
 		return localGuide;
 	}
 
@@ -147,7 +161,7 @@ public class LocalGuideProfileController implements Initializable {
 		this.lblCountry.setText(this.localGuide.getCountry());
 		setLangData();
 		setTravelStyleData();
-		this.localGuide.setRating();
+		this.lblRating.setText(this.localGuide.getRatingAsString());
 		this.lblAbout.setText(this.localGuide.getAboutMe());
 		this.lblRating.setText(this.localGuide.getRatingAsString());
 		
@@ -195,6 +209,38 @@ public class LocalGuideProfileController implements Initializable {
 	}
 	
 	
+    public void loadPlacesAndTravels(LocalGuide localGuide) {
+		try {
+
+			Stage stage=new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LocalGuidePlacesAndTravels.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			LocalGuidePlacesAndTravelsController placesAndTravelsController = loader.<LocalGuidePlacesAndTravelsController>getController();
+			placesAndTravelsController.setLocalGuide(localGuide);
+			placesAndTravelsController.initTablesData();
+			placesAndTravelsController.setProfileData();
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.setTitle("Guide4U - Local Guide Places & Travel Options");
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.show();
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void loadLocalGuideShowReviews(LocalGuide localGuide) {
 		
 		try {
@@ -210,6 +256,8 @@ public class LocalGuideProfileController implements Initializable {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Local Guide Reviews");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
 			

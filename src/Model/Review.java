@@ -7,22 +7,22 @@ public class Review implements Serializable {
 	
 	// Attributes 
 	
-	LocalGuide localGuide;
-	LocalDate date;
-	Traveller traveller;
-	String city;
-	String country;
-	String reviewText;
-	Double rating;
+	protected String localGuideEmail;
+	protected LocalDate date;
+	protected String travellerEmail;
+	protected String city;
+	protected String country;
+	protected String reviewText;
+	protected Double rating;
 	
 	// C'tor 
 	
-	public Review(LocalGuide localGuide, LocalDate date, Traveller traveller, String city, String country,
+	public Review(String localGuideEmail, LocalDate date, String travellerEmail, String city, String country,
 			String reviewText, Double rating) {
 		super();
-		this.localGuide = localGuide;
+		this.localGuideEmail = localGuideEmail;
 		this.date = date;
-		this.traveller = traveller;
+		this.travellerEmail = travellerEmail;
 		this.city = city;
 		this.country = country;
 		this.reviewText = reviewText;
@@ -37,16 +37,16 @@ public class Review implements Serializable {
 	// Getters 
 	
 	
-	public LocalGuide getLocalGuide() {
-		return localGuide;
+	public String getLocalGuideEmail() {
+		return localGuideEmail;
 	}
 
 	public LocalDate getDate() {
 		return date;
 	}
 
-	public Traveller getTraveller() {
-		return traveller;
+	public String getTravellerEmail() {
+		return travellerEmail;
 	}
 
 	public String getCity() {
@@ -65,9 +65,7 @@ public class Review implements Serializable {
 		return rating;
 	}
 	
-	public String getTravellerName() {
-		return this.traveller.getFirstName()+" "+this.traveller.getLastName();
-	}
+
 	
 	
 
@@ -77,8 +75,8 @@ public class Review implements Serializable {
 	
 	// Setters 
 	
-	public void setLocalGuide(LocalGuide localGuide) {
-		this.localGuide = localGuide;
+	public void setLocalGuideEmail(String localGuideEmail) {
+		this.localGuideEmail = localGuideEmail;
 	}
 
 
@@ -87,8 +85,8 @@ public class Review implements Serializable {
 	}
 
 
-	public void setTraveller(Traveller traveller) {
-		this.traveller = traveller;
+	public void setTravellerEmail(String travellerEmail) {
+		this.travellerEmail = travellerEmail;
 	}
 
 
@@ -109,7 +107,7 @@ public class Review implements Serializable {
 
 	public void setRating(Double rating) {
 		this.rating = rating;
-		this.localGuide.setRating();
+
 	}
 	
 	

@@ -28,7 +28,7 @@
                   <Font name="Guttman-Toledo Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="btnContact" layoutX="863.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnContactClick" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Contact" textFill="WHITE" wrapText="true">
+            <Button fx:id="btnContact" layoutX="899.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnContactClick" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #1a8cff;" text="Contact" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -116,7 +116,7 @@
                   <Font name="Guttman-Toledo Bold" size="30.0" />
                </font>
             </Label>
-            <Button fx:id="btnReviewRate" layoutX="696.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnReviewRateClick" prefHeight="49.0" prefWidth="138.0" style="-fx-background-color: grey;" text="Review &amp; Rate" textFill="WHITE" wrapText="true">
+            <Button fx:id="btnReviewRate" layoutX="592.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnReviewRateClick" prefHeight="49.0" prefWidth="138.0" style="-fx-background-color: grey;" text="Review &amp; Rate" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -124,7 +124,15 @@
                   <Cursor fx:constant="NONE" />
                </cursor>
             </Button>
-            <Button fx:id="btnShowReviews" layoutX="534.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnShowReviews" prefHeight="49.0" prefWidth="138.0" style="-fx-background-color: grey;" text="Show Reviews" textFill="WHITE" wrapText="true">
+            <Button fx:id="btnShowReviews" layoutX="437.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnShowReviews" prefHeight="49.0" prefWidth="138.0" style="-fx-background-color: grey;" text="Show Reviews" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnPlacesAndTravels" layoutX="745.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnPlacesAndTravelsClick" prefHeight="49.0" prefWidth="138.0" style="-fx-background-color: grey;" text="Places&amp;Travels" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

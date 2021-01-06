@@ -35,7 +35,7 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	
 	public static SystemGuide4u system= SystemGuide4u.getInstance();
-    static SqlTest sql;
+    static SqlTest sql = new SqlTest();
 	private static void importDataFromTxtFile() throws ParseException {
         try {
             
@@ -43,24 +43,23 @@ public class Main extends Application {
             Scanner in = new Scanner(reader);
             while (in.hasNextLine()) {
             	String line=in.nextLine();
-                String[] lineArray = line.split(",");
+            	String[] lineArray = line.split(",");
                 System.out.println(lineArray.length);
                 System.out.println(lineArray[1]);
-                    String firstName = lineArray[1];
-                    String lastName = lineArray[2];
-                    String email=lineArray[3];
-                    String password=lineArray[4];
-                    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                    LocalDate date = LocalDate.parse(lineArray[5],df);
-                    Gender gender= Gender.Female;
-                    if( lineArray[6].equalsIgnoreCase("Male")) {
-                    	gender= Gender.Male;
-                    }
-                    String country=lineArray[7];
-                    String city=lineArray[8];
-                    Integer phone=Integer.parseInt(lineArray[9]);
-                    
-                    Language language=new Language(lineArray[10]);
+                String firstName = lineArray[1];
+                String lastName = lineArray[2];
+                String email=lineArray[3];
+                String password=lineArray[4];
+                DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                LocalDate date = LocalDate.parse(lineArray[5],df);
+                Gender gender= Gender.Female;
+                if( lineArray[6].equalsIgnoreCase("Male")) {
+                    gender= Gender.Male;
+                }
+                String country=lineArray[7];
+                String city=lineArray[8];
+                Integer phone=Integer.parseInt(lineArray[9]);  
+                Language language=new Language(lineArray[10]);
                     if(lineArray[11]!=null) {
                     	language=new Language(lineArray[10], lineArray[11]);
                     	if(lineArray[12]!=null) {
@@ -178,9 +177,8 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws ParseException {
-//		importDataFromTxtFile();
-//     	serialize("guide4u.ser");
-//		deserialize();
+
+
 		sql.conectTo();
 		sql.initLocalGuide();
 		System.out.println("local guides init finished");
@@ -188,22 +186,10 @@ public class Main extends Application {
 		System.out.println("travellers init finished");
 		sql.showLocalGuides();
 		system.printAllData();
+//		sql.initReviews();
 
 
 		
-		System.out.println("good");
-		System.out.println("\n"+"sort local guide by first name: ");
-		system.sortGuideByFirstName();
-		System.out.println("\n"+"sort local guide by rate: ");
-		system.sortGuideByRate();
-		System.out.println("\n"+"sort local guide by country: ");
-		system.sortGuideByCountry();
-		System.out.println("\n"+"sort traveller by first name: ");
-		system.sortTravellerByFirstName();
-		System.out.println("\n"+"sort traveller by country ");
-		system.sortTravellerByCountry();
-//        System.out.println("Serialized Data is saved");
-//		deserializeSystem();
 		
 		launch(args);
 	}

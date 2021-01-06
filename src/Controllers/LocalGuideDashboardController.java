@@ -11,10 +11,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -24,6 +28,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class LocalGuideDashboardController implements Initializable {
 
@@ -192,6 +198,12 @@ public class LocalGuideDashboardController implements Initializable {
 
     @FXML
     private Label valueRating;
+    
+    @FXML
+    private Button btnGoToMyPlacesAndTravels;
+
+    @FXML
+    private Label lblPlacesAndTravels;
  
     LocalGuide localGuide;
 
@@ -263,6 +275,35 @@ public class LocalGuideDashboardController implements Initializable {
     	}
 
     }
+    
+    @FXML
+    void btnGoToMyPlacesAndTravelsClick(ActionEvent event) {
+    	loadPlacesAndTravels(this.localGuide);
+    }
+    
+    public void loadPlacesAndTravels(LocalGuide localGuide2) {
+		try {
+
+			Stage stage=new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LocalGuidePlacesAndTravels.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			LocalGuidePlacesAndTravelsController placesAndTravelsController = loader.<LocalGuidePlacesAndTravelsController>getController();
+			placesAndTravelsController.setLocalGuide(localGuide);
+			placesAndTravelsController.initTablesData();
+			placesAndTravelsController.setProfileData();
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.setTitle("Guide4U - Local Guide Places & Travel Options");
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.show();
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 	
@@ -329,9 +370,7 @@ public class LocalGuideDashboardController implements Initializable {
 		    system.getGuideByEmail(this.localGuide.getEmail()).setAboutMe(aboutMe);
 		    
 		    setLocalGuide(system.getGuideByEmail(email));
-		    //system.writeFile();
-		    Main.serialize("guide4u");
-		    Main.deserialize();
+
 			
 		}catch(Exception e) {
 			system.popUpLoginError("Error While Saving Changes - Try Again");
@@ -419,22 +458,44 @@ public class LocalGuideDashboardController implements Initializable {
 		this.c4_country.setCellValueFactory(new PropertyValueFactory<Review, String>("country"));
 		this.c5_reviewText.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewText"));
 		this.c6_rating.setCellValueFactory(new PropertyValueFactory<Review, Double>("rating"));
-		
-		  for (Review rev : system.getReviewsList()) {
-			  if(rev.getLocalGuide().getEmail().equals(this.localGuide.getEmail())) {
+		Double sumForRating = 0.0; 
+		int cntForRating = 0;
+		System.out.println(system.getReviewsList().size());
+		System.out.println(this.localGuide.getEmail());
+		for (Entry<String, Review> value : this.system.getReviewsList().entrySet()) {
+			  Review rev = value.getValue();
+
+			  if(rev.getLocalGuideEmail().equals(this.localGuide.getEmail())) {
 				  reviewData.add(rev);
+				  if(rev.getRating()!=null) {
+					  sumForRating = sumForRating + rev.getRating();
+					  cntForRating++;
+				  }
+				  
+				  
 			  }else {
 				  System.out.println("No Match!");
 			  }
 			  
  
 		  }
+		  
+		  Double rating= sumForRating/cntForRating;
+		  system.getGuideByEmail(this.localGuide.getEmail()).setRating(rating);
 			
 	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		system =Main.system;
+		// Disable Picking Past Dates On The availability datePicker.
+		this.datePickAvailbilty.setDayCellFactory(picker -> new DateCell() {
+	        public void updateItem(LocalDate date, boolean empty) {
+	            super.updateItem(date, empty);
+	            LocalDate today = LocalDate.now();
+	            setDisable(empty || date.compareTo(today) < 0 );
+	        }
+	    });
 		
 		
 		

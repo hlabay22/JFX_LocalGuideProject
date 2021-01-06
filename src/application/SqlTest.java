@@ -12,6 +12,7 @@ import java.util.Scanner;
 import Model.Gender;
 import Model.Language;
 import Model.LocalGuide;
+import Model.Review;
 import Model.SystemGuide4u;
 import Model.TravelStyle;
 import Model.Traveller;
@@ -177,6 +178,52 @@ import Model.User;
 			} 
 
 		}
+		
+		
+		
+		public static void initReviews() {
+			try { 
+
+				System.out.println("****************");
+				String SQL = "SELECT * FROM Reviews ";  
+				stmt = con.createStatement();  
+				rs = stmt.executeQuery(SQL);  
+				while (rs.next()) { 
+				
+					
+	                    String localGuide_email = rs.getString(1);
+	                    LocalGuide lg = system.getGuideByEmail(localGuide_email);
+	                    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+	                    LocalDate date = LocalDate.parse(rs.getString(2),df);
+	                    String traveller_email= rs.getString(3);
+	                    Traveller t = system.getTravellerByMail(traveller_email);
+	                    String city= rs.getString(4);
+	                    String country= rs.getString(5);
+	                    String reviewText= rs.getString(6);
+	                    Double rating =Double.parseDouble(rs.getString(7));
+	                    System.out.println(rating);
+	                    
+	                    Review newReview = new Review(lg.getEmail(), date, t.getEmail(), city, country, reviewText, rating);
+	                    system.addReview(newReview);
+
+				}  
+			}  
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			finally {  
+				if (rs != null) try { rs.close(); } catch(Exception e) {}  
+				if (stmt != null) try { stmt.close(); } catch(Exception e) {}
+				System.out.println();
+			} 
+
+		}
+		
+		
+		
+		
+		
 		public void addToHash(User user) {
 			if(user instanceof Traveller) {
 				
@@ -355,6 +402,38 @@ import Model.User;
 			pst.setString(1, userEmail);
 			pst.executeUpdate();
 			
+		}  
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		finally {  
+			if (rs != null) try { rs.close(); } catch(Exception e) {}  
+			if (stmt != null) try { stmt.close(); } catch(Exception e) {}
+			System.out.println();
+		} 
+	}
+	
+	
+	public void addReviewToSQL(Review review) {
+		try {  
+			String SQL = "insert into Reviews (localGuide_email, date, traveller_email, city, country,"
+					+ " reviewText, rating) "
+					+ "values (?,?,?,?,?,?,?)" + 
+					"";  
+			PreparedStatement pst = con.prepareStatement(SQL);  
+			pst.setString(1, review.getLocalGuideEmail());
+			DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+			String date = review.getDate().format(df);
+			pst.setString(2, date);
+			pst.setString(3, review.getTravellerEmail());
+			pst.setString(4, review.getCity());
+			pst.setString(5, review.getCountry());
+			pst.setString(6, review.getReviewText());
+			pst.setString(7, review.getRating().toString());
+			pst.execute();
+
+			System.out.println("review added!");  
 		}  
 		catch (SQLException e) {
 			e.printStackTrace();

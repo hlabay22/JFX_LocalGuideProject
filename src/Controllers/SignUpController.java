@@ -27,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -183,23 +184,25 @@ public class SignUpController {
     @FXML
     public void initialize() {
     	comBoxUserType.getItems().setAll("Local Guide", "Traveller", "Traveller and Local Guide");
-//    	comBoxTravelStyle1.getItems().setAll("Art","Sport","Shoping","Adventure", "Entertaiment", "Local Culture", "Nature");
-//    	comBoxTravelStyle2.getItems().setAll("Art","Sport","Shoping","Adventure", "Entertaiment", "Local Culture", "Nature");
-//    	comBoxTravelStyle3.getItems().setAll("Art","Sport","Shoping","Adventure", "Entertaiment", "Local Culture", "Nature");
     	system.initTravelStyleComBox(this.comBoxTravelStyle1);
     	system.initTravelStyleComBox(this.comBoxTravelStyle2);
     	system.initTravelStyleComBox(this.comBoxTravelStyle3);
         comBoxLang1.setPromptText("Required");
         comBoxLang2.setPromptText("Optional");
         comBoxLang3.setPromptText("Optional");
-//        comBoxTransportType.getItems().setAll("Privat Vehicle","Public Transportation");
-//    	comBoxGender.getItems().setAll("Male","Female");
         system.initGenderComBox(this.comBoxGender);
         system.initTransportTypeComBox(this.comBoxTransportType);
     	system.initCountryComBox(this.comBoxCountry);
     	system.initLanguageComBox(this.comBoxLang1);
     	system.initLanguageComBox(this.comBoxLang2);
     	system.initLanguageComBox(this.comBoxLang3);
+		this.comBoxDOB.setDayCellFactory(picker -> new DateCell() {
+	        public void updateItem(LocalDate date, boolean empty) {
+	            super.updateItem(date, empty);
+	            LocalDate today = LocalDate.now();
+	            setDisable(empty || date.compareTo(today) > 0 );
+	        }
+	    });
     	
     }
     @FXML

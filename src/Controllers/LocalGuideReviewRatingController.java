@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import Exceptions.GeneralErrorException;
 import Model.*;
 import application.Main;
+import application.SqlTest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -96,6 +97,8 @@ public class LocalGuideReviewRatingController implements Initializable {
     Traveller traveller;
     
     SystemGuide4u system=Main.system;
+    
+    static SqlTest sql = new SqlTest();
 
     @FXML
     void btnExitClick(ActionEvent event) {
@@ -133,11 +136,11 @@ public class LocalGuideReviewRatingController implements Initializable {
     		}else throw new GeneralErrorException();
     		
     		if (t !=null) {
-    			review.setTraveller(t);
+    			review.setTravellerEmail(t.getEmail());
     		}else throw new GeneralErrorException();
     		
     		if (lg != null) {
-    			review.setLocalGuide(lg);
+    			review.setLocalGuideEmail(lg.getEmail());
     		}else throw new GeneralErrorException();
     		
     		if (city !=null) {
@@ -157,10 +160,12 @@ public class LocalGuideReviewRatingController implements Initializable {
     				review.setRating(rating);
     			}else throw new GeneralErrorException();
     		}else throw new GeneralErrorException();
-    		
-			system.getReviewsList().add(review);
-			Main.serialize("guide4u.ser");
-	    	Main.deserialize();
+    		system.addReview(review);
+    		sql.addReviewToSQL(review);
+    		sql.initReviews();
+//			system.getReviewsList().add(review);
+//			Main.serialize("guide4u.ser");
+//	    	Main.deserialize();
 			Alert a = new Alert(AlertType.INFORMATION);
 			a.setTitle("Review Sent!");
 			a.setHeaderText("Review Sent!");
