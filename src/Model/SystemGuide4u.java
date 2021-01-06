@@ -33,6 +33,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -42,7 +43,7 @@ import javafx.stage.StageStyle;
 public class SystemGuide4u implements java.io.Serializable{
 	protected HashMap<String, LocalGuide> localGuidesList;
 	protected HashMap<String, Traveller> travellersList;
-	protected HashMap<String,Review> reviewsList;
+	protected HashMap<Integer,Review> reviewsList;
 	protected ArrayList<Travel> travelLIST;
 
 
@@ -55,7 +56,7 @@ public class SystemGuide4u implements java.io.Serializable{
 		super();
 		this.localGuidesList = new HashMap<String, LocalGuide>();
 		this.travellersList = new HashMap<String, Traveller>();
-		this.reviewsList = new HashMap<String, Review>();
+		this.reviewsList = new HashMap<Integer, Review>();
 		this.travelLIST=new ArrayList<Travel>();
 	}
 	public HashMap<String, LocalGuide> getLocalGuidesList() {
@@ -77,10 +78,10 @@ public class SystemGuide4u implements java.io.Serializable{
 		SystemGuide4u.instance = instance;
 	}
 	
-	public HashMap<String, Review> getReviewsList() {
+	public HashMap<Integer, Review> getReviewsList() {
 		return reviewsList;
 	}
-	public void setReviewsList(HashMap<String, Review> reviewsList) {
+	public void setReviewsList(HashMap<Integer, Review> reviewsList) {
 		this.reviewsList = reviewsList;
 	}
 	public ArrayList<Travel> getTravelLIST() {
@@ -101,7 +102,8 @@ public class SystemGuide4u implements java.io.Serializable{
 	}
 	
 	public void addReview(Review review) {
-		this.reviewsList.put(review.getLocalGuideEmail(), review);
+		System.out.println(review.getLocalGuideEmail()+ " Was Added!");
+		this.reviewsList.put(review.getReviewID(), review);
 	}
 	//remove
 	public void removeLocalGuide(LocalGuide guide) {
@@ -180,7 +182,7 @@ public class SystemGuide4u implements java.io.Serializable{
 		Traveller t1 = new Traveller("har@gmail.com", "asd123", "Haron", "Labay", LocalDate.of(1992,2,5), Gender.Male, "Haifa", "Israel", 503309824 , new Language("Hebrew"), new TravelStyle("Hiking"), "I Love Food", true);
 		LocalGuide lg1 = new LocalGuide("xxx@gmail.com", "asd123", "Shim", "Metz", LocalDate.of(1992,2,5), Gender.Male, "Haifa", "Israel", 503309824 , new Language("Hebrew"), new TravelStyle("Hiking"), "I Love Food", true);
 		Review r1 = new Review(lg1.getEmail(), LocalDate.now(), t1.getEmail(), "Haifa", "Israel", "Great Guide, A little bit too French and Red head", 7.8);
-		this.reviewsList.put(r1.getLocalGuideEmail(),r1);
+		this.reviewsList.put(r1.getReviewID(),r1);
 		
 	}
 	
@@ -340,6 +342,8 @@ public class SystemGuide4u implements java.io.Serializable{
 			scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Guide4U - Login");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			primaryStage.getIcons().add(icon);
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.show();
 			primaryStage.setResizable(false);
@@ -362,7 +366,9 @@ public class SystemGuide4u implements java.io.Serializable{
             p.setLblError(msg);
 	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        popUpLoginErr.setScene(scene);
-	        popUpLoginErr.setTitle("Xademy - Login Error");
+	        popUpLoginErr.setTitle("Guide4U - Login Error");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			popUpLoginErr.getIcons().add(icon);
 	        popUpLoginErr.setResizable(false);
 	        popUpLoginErr.show();
 	        
@@ -441,6 +447,8 @@ public class SystemGuide4u implements java.io.Serializable{
 			adminController.initLocalGuideTable();
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Admin Dashboard");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 			stage.show();
 			
 		} catch(Exception e) {
@@ -462,6 +470,8 @@ public class SystemGuide4u implements java.io.Serializable{
 			contactController.setData();
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Contact Local Guide");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 			stage.show();
 			
 		} catch(Exception e) {

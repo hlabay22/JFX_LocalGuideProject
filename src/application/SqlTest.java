@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.util.Map.Entry;
+
 import Model.Gender;
 import Model.Language;
 import Model.LocalGuide;
@@ -187,24 +189,22 @@ import Model.User;
 				System.out.println("****************");
 				String SQL = "SELECT * FROM Reviews ";  
 				stmt = con.createStatement();  
-				rs = stmt.executeQuery(SQL);  
+				rs = stmt.executeQuery(SQL);
 				while (rs.next()) { 
-				
-					
+
 	                    String localGuide_email = rs.getString(1);
-	                    LocalGuide lg = system.getGuideByEmail(localGuide_email);
 	                    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 	                    LocalDate date = LocalDate.parse(rs.getString(2),df);
 	                    String traveller_email= rs.getString(3);
-	                    Traveller t = system.getTravellerByMail(traveller_email);
 	                    String city= rs.getString(4);
 	                    String country= rs.getString(5);
 	                    String reviewText= rs.getString(6);
 	                    Double rating =Double.parseDouble(rs.getString(7));
 	                    System.out.println(rating);
-	                    
-	                    Review newReview = new Review(lg.getEmail(), date, t.getEmail(), city, country, reviewText, rating);
+	                    Review newReview = new Review(localGuide_email, date, traveller_email, city, country, reviewText, rating);
 	                    system.addReview(newReview);
+	                    System.out.println(system.getReviewsList().size());
+
 
 				}  
 			}  
@@ -219,6 +219,8 @@ import Model.User;
 			} 
 
 		}
+		
+		
 		
 		
 		
@@ -313,7 +315,7 @@ import Model.User;
 			pst.setString(15, traveller.getTravelStyle().getTravelStyle3());
 			pst.setString(16, traveller.getAboutMe());
 			pst.setString(17, traveller.getIsEmailNotifacationsForSql());
-			pst.execute();
+			pst.executeUpdate();
 
 			System.out.println("trav added!");  
 		}  
@@ -358,7 +360,7 @@ import Model.User;
 			pst.setString(15, localGuide.getTravelStyle().getTravelStyle3());
 			pst.setString(16, localGuide.getAboutMe());
 			pst.setString(17, localGuide.getIsEmailNotifacationsForSql());
-			pst.execute();
+			pst.executeUpdate();
 			System.out.println("local guide added!");  
 		}  
 		catch (SQLException e) {
@@ -431,7 +433,7 @@ import Model.User;
 			pst.setString(5, review.getCountry());
 			pst.setString(6, review.getReviewText());
 			pst.setString(7, review.getRating().toString());
-			pst.execute();
+			pst.executeUpdate();
 
 			System.out.println("review added!");  
 		}  

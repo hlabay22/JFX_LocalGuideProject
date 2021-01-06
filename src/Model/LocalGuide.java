@@ -2,6 +2,8 @@ package Model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import application.Main;
 
@@ -111,6 +113,25 @@ public class LocalGuide extends User implements java.io.Serializable {
 
 	public void setUnavailableDates(ArrayList<LocalDate> unavailableDates) {
 		this.unavailableDates = unavailableDates;
+	}
+	
+	public void computeRating() {
+		
+		double sum=0.0;
+		int cnt=0;
+		
+		for (Entry<Integer, Review> value : this.system.getReviewsList().entrySet()) {
+			  Review rev = value.getValue();
+			  
+			  if(rev.getLocalGuideEmail().equalsIgnoreCase(this.getEmail())) {
+				  sum=sum+rev.getRating();
+				  cnt++;
+			  }
+		}
+		
+		Double rating = sum/cnt;
+		this.setRating(rating);
+		
 	}
 	
 

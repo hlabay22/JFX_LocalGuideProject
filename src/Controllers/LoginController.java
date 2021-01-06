@@ -16,7 +16,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -197,7 +196,7 @@ public void loadAdminPage() {
 			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
 			Scene scene = new Scene(root,screenWidth,screenHeight);
 			TravellerDashboardController TDashController = loader.<TravellerDashboardController>getController();
-			TDashController.setTraveller(traveller);					
+			TDashController.setTraveller(traveller);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Traveller Dashboard");
@@ -228,7 +227,6 @@ public void loadAdminPage() {
 			LGDashController.setLocalGuide(localGuide);	
 			LGDashController.initReviewTableData();
 			LGDashController.initData();
-
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Local Guide Dashboard");
@@ -255,7 +253,7 @@ public void loadAdminPage() {
 	        popUpLoginErr.setScene(scene);
 	        popUpLoginErr.setTitle("Guide4U - Login Error");
 			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
-			stage.getIcons().add(icon);
+			popUpLoginErr.getIcons().add(icon);
 	        popUpLoginErr.setResizable(false);
 	        popUpLoginErr.show();
 	        
@@ -264,23 +262,9 @@ public void loadAdminPage() {
 			
 			e.printStackTrace();
 		}
-		
-		
+			
 		
 	}
-//	public static  void deserialize() {
-//		try {
-//			FileInputStream fileIn = new FileInputStream("guide4u.ser");
-//			ObjectInputStream in = new ObjectInputStream(fileIn);
-//			system= (SystemGuide4u) in.readObject();
-//			in.close();
-//			fileIn.close();
-//			System.out.println("Loaded!");
-//		} catch (IOException i) {
-//			i.printStackTrace();
-//		} catch (ClassNotFoundException c) {
-//			c.printStackTrace();
-//		}
-//	}
+
 
 }

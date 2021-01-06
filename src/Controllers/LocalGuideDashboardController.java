@@ -399,11 +399,7 @@ public class LocalGuideDashboardController implements Initializable {
 	}
 
 	public void initData() {
-		
-		
 
-		
-		
 		this.btnSaveEdit.setVisible(false);
 		
 		this.txtEmail.setText(this.localGuide.getEmail());
@@ -451,18 +447,10 @@ public class LocalGuideDashboardController implements Initializable {
 	
 	public void initReviewTableData() {
 		
-		this.tableReview.setItems(reviewData);
-		this.c1_Date.setCellValueFactory(new PropertyValueFactory<Review, LocalDate>("date"));
-		this.c2_travellerName.setCellValueFactory(new PropertyValueFactory<Review, String>("travellerName"));
-		this.c3_city.setCellValueFactory(new PropertyValueFactory<Review, String>("city"));
-		this.c4_country.setCellValueFactory(new PropertyValueFactory<Review, String>("country"));
-		this.c5_reviewText.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewText"));
-		this.c6_rating.setCellValueFactory(new PropertyValueFactory<Review, Double>("rating"));
 		Double sumForRating = 0.0; 
 		int cntForRating = 0;
 		System.out.println(system.getReviewsList().size());
-		System.out.println(this.localGuide.getEmail());
-		for (Entry<String, Review> value : this.system.getReviewsList().entrySet()) {
+		for (Entry<Integer, Review> value : this.system.getReviewsList().entrySet()) {
 			  Review rev = value.getValue();
 
 			  if(rev.getLocalGuideEmail().equals(this.localGuide.getEmail())) {
@@ -480,8 +468,17 @@ public class LocalGuideDashboardController implements Initializable {
  
 		  }
 		  
-		  Double rating= sumForRating/cntForRating;
-		  system.getGuideByEmail(this.localGuide.getEmail()).setRating(rating);
+		 Double rating= sumForRating/cntForRating;
+		 system.getGuideByEmail(this.localGuide.getEmail()).setRating(rating);
+		
+		this.tableReview.setItems(reviewData);
+		this.c1_Date.setCellValueFactory(new PropertyValueFactory<Review, LocalDate>("date"));
+		this.c2_travellerName.setCellValueFactory(new PropertyValueFactory<Review, String>("traveller"));
+		this.c3_city.setCellValueFactory(new PropertyValueFactory<Review, String>("city"));
+		this.c4_country.setCellValueFactory(new PropertyValueFactory<Review, String>("country"));
+		this.c5_reviewText.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewText"));
+		this.c6_rating.setCellValueFactory(new PropertyValueFactory<Review, Double>("rating"));
+
 			
 	}
 	

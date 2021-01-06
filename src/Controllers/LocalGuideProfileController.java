@@ -1,6 +1,6 @@
 package Controllers;
-
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import Model.*;
 import application.Main;
@@ -161,9 +161,9 @@ public class LocalGuideProfileController implements Initializable {
 		this.lblCountry.setText(this.localGuide.getCountry());
 		setLangData();
 		setTravelStyleData();
-		this.lblRating.setText(this.localGuide.getRatingAsString());
+		this.lblRating.setText(new DecimalFormat("##.##").format(this.localGuide.getRating()));
 		this.lblAbout.setText(this.localGuide.getAboutMe());
-		this.lblRating.setText(this.localGuide.getRatingAsString());
+
 		
 
 	}
@@ -223,6 +223,8 @@ public class LocalGuideProfileController implements Initializable {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Local Guide Places & Travel Options");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
 			
@@ -251,6 +253,7 @@ public class LocalGuideProfileController implements Initializable {
 			Scene scene = new Scene(root);
 			LocalGuideShowReviewsController showRevController = loader.<LocalGuideShowReviewsController>getController();
 			showRevController.setLocalGuide(localGuide);
+			showRevController.setTraveller(traveller);
 			showRevController.initReviewTableData();
 			showRevController.setProfileData();
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -285,6 +288,8 @@ public class LocalGuideProfileController implements Initializable {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Local Guide Reviews");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
 			

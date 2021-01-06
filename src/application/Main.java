@@ -181,12 +181,9 @@ public class Main extends Application {
 
 		sql.conectTo();
 		sql.initLocalGuide();
-		System.out.println("local guides init finished");
 		sql.initTravellers();
-		System.out.println("travellers init finished");
 		sql.showLocalGuides();
-		system.printAllData();
-//		sql.initReviews();
+		sql.initReviews();
 
 
 		

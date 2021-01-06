@@ -3,11 +3,13 @@ package Controllers;
 import java.beans.EventHandler;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import Model.Gender;
 import Model.Language;
 import Model.LocalGuide;
+import Model.Review;
 import Model.SystemGuide4u;
 import Model.TravelStyle;
 import Model.Traveller;
@@ -163,8 +165,17 @@ public class TravellerDashboardController implements Initializable {
 		}
 
     }
+	
+	
+	public void initUpdatedRatings() {
+		
+		HashMap<String,Double> ratings;
+		for (Entry<Integer, Review> value : this.system.getReviewsList().entrySet()) {
+			  Review rev = value.getValue();
+		}
+	}
     
-    // μδξωικκκκκκκκκκκκκκκκκκκ ξτδδδ!!!!!!!!!! 
+    
 	
 	public void initLocalGuideTable() {
 		
@@ -185,6 +196,7 @@ public class TravellerDashboardController implements Initializable {
 		
 		  for (Entry<String, LocalGuide> value : this.system.getLocalGuidesList().entrySet()) {
 			  LocalGuide localGuide = value.getValue(); 
+			  localGuide.computeRating();
 			  localGuideData.add(localGuide);
  
 		  }
