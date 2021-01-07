@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 import Model.Gender;
 import Model.Language;
 import Model.LocalGuide;
+import Model.Place;
 import Model.Review;
 import Model.SystemGuide4u;
 import Model.TravelStyle;
@@ -220,9 +221,66 @@ import Model.User;
 
 		}
 		
+		public static void initPlaces() {
+			try { 
+
+				System.out.println("****************");
+				String SQL = "SELECT * FROM Places ";  
+				stmt = con.createStatement();  
+				rs = stmt.executeQuery(SQL);
+				while (rs.next()) { 
+
+	                    String localGuide_email = rs.getString(1);
+	                    String place_name= rs.getString(2);
+	                    String city= rs.getString(3);
+	                    String country= rs.getString(4);
+	                    String infoText= rs.getString(5);
+	                    Place place = new Place(localGuide_email, place_name, city, country);
+	                    place.setInfo(infoText);
+	                    system.addPlace(place);
+
+				}  
+			}  
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			finally {  
+				if (rs != null) try { rs.close(); } catch(Exception e) {}  
+				if (stmt != null) try { stmt.close(); } catch(Exception e) {}
+				System.out.println();
+			} 
+
+		}
 		
 		
-		
+		public static void initUnavailbleDates() {
+			try { 
+
+				System.out.println("****************");
+				String SQL = "SELECT * FROM LocalGuideUnavailibleDates ";  
+				stmt = con.createStatement();  
+				rs = stmt.executeQuery(SQL);
+				while (rs.next()) { 
+
+	                    String localGuide_email = rs.getString(1);
+	                    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+	                    LocalDate date = LocalDate.parse(rs.getString(2),df);
+	                    system.addLocalGuideUnavailbleDate(localGuide_email, date);
+
+				}  
+			}  
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			finally {  
+				if (rs != null) try { rs.close(); } catch(Exception e) {}  
+				if (stmt != null) try { stmt.close(); } catch(Exception e) {}
+				System.out.println();
+			} 
+
+		}
 		
 		
 		
@@ -417,6 +475,28 @@ import Model.User;
 	}
 	
 	
+	public void removePlaceFromSQL(Place place) {
+		
+		try {
+			String userEmail = place.getName();
+			String SQL = "DELETE FROM Places WHERE place_name = ?";  
+			PreparedStatement pst = con.prepareStatement(SQL);
+			pst.setString(1, userEmail);
+			pst.executeUpdate();
+			
+		}  
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		finally {  
+			if (rs != null) try { rs.close(); } catch(Exception e) {}  
+			if (stmt != null) try { stmt.close(); } catch(Exception e) {}
+			System.out.println();
+		} 
+	}
+	
+	
 	public void addReviewToSQL(Review review) {
 		try {  
 			String SQL = "insert into Reviews (localGuide_email, date, traveller_email, city, country,"
@@ -447,6 +527,59 @@ import Model.User;
 			System.out.println();
 		} 
 	}
+	
+	public void addNewPlaceToSQL(Place place) {
+		try {  
+			String SQL = "insert into Places (localGuide_email, place_name,city, country,infoText) "
+					+ "values (?,?,?,?,?)" + 
+					"";  
+			PreparedStatement pst = con.prepareStatement(SQL);  
+			pst.setString(1, place.getLocalGuideEmail());
+			pst.setString(2, place.getName());
+			pst.setString(3, place.getCity());
+			pst.setString(4, place.getCountry());
+			pst.setString(5, place.getInfo());
+			pst.executeUpdate();
+
+			System.out.println("Place added!");  
+		}  
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		finally {  
+			if (rs != null) try { rs.close(); } catch(Exception e) {}  
+			if (stmt != null) try { stmt.close(); } catch(Exception e) {}
+			System.out.println();
+		} 
+	}
+	
+	public void addLocalGuideUnavailibleDateToSQL(LocalGuide localGuide, LocalDate date) {
+		try {  
+			String SQL = "insert into LocalGuideUnavailibleDates (localGuide_email, date) "
+					+ "values (?,?)" + 
+					"";  
+			
+			PreparedStatement pst = con.prepareStatement(SQL);  
+			pst.setString(1, localGuide.getEmail());
+			DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+			String unavailbleDate = date.format(df);
+			pst.setString(2, unavailbleDate);
+			pst.executeUpdate();
+
+			System.out.println("Local Guide unavailble date added!");  
+		}  
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		finally {  
+			if (rs != null) try { rs.close(); } catch(Exception e) {}  
+			if (stmt != null) try { stmt.close(); } catch(Exception e) {}
+			System.out.println();
+		} 
+	}
+	
 		
 	
 	

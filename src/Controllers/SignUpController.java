@@ -33,6 +33,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -334,7 +335,7 @@ public class SignUpController {
 				if(comBoxUserType.getValue().equals("Local Guide")) {
 					 //system.addGuide(localGuide);
 					 sql.addLocalGuideToSQL(localGuide);
-//					 System.out.println("local add");
+					 System.out.println("local add");
 					 sql.initLocalGuide();
 //					 Main.serialize("guide4u.ser");
 //				     Main.deserialize();
@@ -429,6 +430,8 @@ public class SignUpController {
 	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        signUpSucssesfull.setScene(scene);
 	        signUpSucssesfull.setTitle("Sign Up Success");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			signUpSucssesfull.getIcons().add(icon);
 	        signUpSucssesfull.show();
 	        btnSignIn.getScene().getWindow().hide();
 	        
@@ -450,6 +453,8 @@ public class SignUpController {
 	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        popUpLoginErr.setScene(scene);
 	        popUpLoginErr.setTitle("Error");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			popUpLoginErr.getIcons().add(icon);
 	        popUpLoginErr.setResizable(false);
 	        popUpLoginErr.show();
 	        

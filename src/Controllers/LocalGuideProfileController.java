@@ -134,12 +134,15 @@ public class LocalGuideProfileController implements Initializable {
     @FXML
     void btnPlacesAndTravelsClick(ActionEvent event) {
     	
-    	loadPlacesAndTravels(this.localGuide);
-
+    	if(traveller == null) {
+    		
+    		loadPlacesAndTravels(this.localGuide);
+    	}else {
+    		loadPlacesAndTravelsViaTravellerView(this.localGuide);
+    	}
+    	
     }
     
-    
-
 
 	public LocalGuide getLocalGuide() {
 		return localGuide;
@@ -298,6 +301,31 @@ public class LocalGuideProfileController implements Initializable {
 			e.printStackTrace();
 		}
 		
+		
+	}
+	
+    public void loadPlacesAndTravelsViaTravellerView(LocalGuide localGuide2) {
+		try {
+
+			Stage stage=new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LocalGuidePlacesAndTravels.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			LocalGuidePlacesAndTravelsController placesAndTravelsController = loader.<LocalGuidePlacesAndTravelsController>getController();
+			placesAndTravelsController.setLocalGuide(localGuide);
+			placesAndTravelsController.initTablesData();
+			placesAndTravelsController.setProfileData();
+			placesAndTravelsController.hideButtons();
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.setTitle("Guide4U - Local Guide Places & Travel Options");
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.show();
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

@@ -3,6 +3,7 @@ package Model;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Place implements java.io.Serializable{
+	protected String localGuideEmail;
 	protected String name;
 	protected String city;
 	protected String country;
@@ -10,8 +11,9 @@ public class Place implements java.io.Serializable{
 	protected static final AtomicInteger cnt = new AtomicInteger(9999);
 	protected final Integer placeID;
 
-	public Place(String name, String city, String country) {
+	public Place(String localGuideEmail,String name, String city, String country) {
 		this.placeID = cnt.incrementAndGet();
+		this.localGuideEmail = localGuideEmail;
 		this.name = name;
 		this.city = city;
 		this.country = country;
@@ -40,6 +42,14 @@ public class Place implements java.io.Serializable{
 		return placeID;
 	}
 	
+	public String getLocalGuideEmail() {
+		return localGuideEmail;
+	}
+
+
+
+
+	
 	// Setters 
 
 	public void setName(String name) {
@@ -64,6 +74,9 @@ public class Place implements java.io.Serializable{
 		this.info = info;
 	}
 	
+	public void setLocalGuideEmail(String localGuideEmail) {
+		this.localGuideEmail = localGuideEmail;
+	}
 	
 
 

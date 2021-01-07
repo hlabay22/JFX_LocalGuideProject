@@ -29,6 +29,7 @@ import javafx.stage.StageStyle;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 
@@ -165,6 +166,8 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Guide4U - Login");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			primaryStage.getIcons().add(icon);
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.show();
 			primaryStage.setResizable(false);
@@ -184,6 +187,8 @@ public class Main extends Application {
 		sql.initTravellers();
 		sql.showLocalGuides();
 		sql.initReviews();
+		sql.initUnavailbleDates();
+		sql.initPlaces();
 
 
 		

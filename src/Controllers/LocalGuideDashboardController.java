@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import Model.*;
 import application.Main;
+import application.SqlTest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -209,6 +210,8 @@ public class LocalGuideDashboardController implements Initializable {
 
     SystemGuide4u system=Main.system; 
     
+    static SqlTest sql = new SqlTest();
+    
 	private final ObservableList<Review> reviewData =
             FXCollections.observableArrayList();
     
@@ -258,15 +261,17 @@ public class LocalGuideDashboardController implements Initializable {
     	
 
     }
-    
+    //this.localGuide.getUnavailableDates().contains(date)
     @FXML
     void btnUpdateAvailibiltyClick(ActionEvent event) {
     	
     	LocalDate date = this.datePickAvailbilty.getValue();
     	
     	if(date != null) {
-    		if(!this.localGuide.getUnavailableDates().contains(date)) {
-    			this.localGuide.getUnavailableDates().add(date);
+    		if(!system.getLocalGuidesList().get(this.localGuide.getEmail()).getUnavailableDates().contains(date)) {
+    			sql.addLocalGuideUnavailibleDateToSQL(this.localGuide, date);
+    			sql.initUnavailbleDates();
+//    			this.localGuide.getUnavailableDates().add(date);
     			this.lblNoteAvailibilty.setText("** "+date+" Was Successfully set as Unavailable Date! **");
     			
     		}else {

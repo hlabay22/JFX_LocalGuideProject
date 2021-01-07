@@ -112,11 +112,7 @@ public class MakeTravelController {
 	 ArrayList<Place> placesInTravel= new ArrayList<Place>(); 
     @FXML
     private Button btnExit;
-    Place place1=new Place("Metzada", "Ein-Bokek", "israel");
-    Place place2=new Place("Mactesh-Ramon", "Mitzpe-Ramon", "Israel");
-    Place place3=new Place("Nachal-Tzelim", "Arad", "Israel");
-    Place place4=new Place("Azriely-Mall", "Tel-Aviv", "Israel");
-    Place place5=new Place("Hacotel", "Jerusalem", "Israel");
+
     
 
     @FXML
@@ -130,16 +126,16 @@ public class MakeTravelController {
     	lblPLACE2.setText(comboBoxSecondPlace.getValue().toString());
     	lblPLACE3.setText(comboBoxThirdPlace.getValue().toString());
     	
-    	if(lblPLACE1.getText().equals("Metzada") || lblPLACE2.getText().equals("Metzada") || lblPLACE3.getText().equals("Metzada")) {
-    		placesInTravel.add(place1);}
-    	if(lblPLACE1.getText().equals("Mactesh-Ramon") || lblPLACE2.getText().equals("Mactesh-Ramon") || lblPLACE3.getText().equals("Mactesh-Ramon")) {
-    		placesInTravel.add(place2);}
-    	if(lblPLACE1.getText().equals("Azriely-Mall") || lblPLACE2.getText().equals("Azriely-Mall") || lblPLACE3.getText().equals("Azriely-Mall")) {
-    		placesInTravel.add(place4);}
-    	if(lblPLACE1.getText().equals("Nachal-Tzelim") || lblPLACE2.getText().equals("Nachal-Tzelim") || lblPLACE3.getText().equals("Nachal-Tzelim")) {
-    		placesInTravel.add(place3);}
-    	if(lblPLACE1.getText().equals("Hacotel") || lblPLACE2.getText().equals("Hacotel") || lblPLACE3.getText().equals("Hacotel")) {
-    		placesInTravel.add(place5);}
+//    	if(lblPLACE1.getText().equals("Metzada") || lblPLACE2.getText().equals("Metzada") || lblPLACE3.getText().equals("Metzada")) {
+//    		placesInTravel.add(place1);}
+//    	if(lblPLACE1.getText().equals("Mactesh-Ramon") || lblPLACE2.getText().equals("Mactesh-Ramon") || lblPLACE3.getText().equals("Mactesh-Ramon")) {
+//    		placesInTravel.add(place2);}
+//    	if(lblPLACE1.getText().equals("Azriely-Mall") || lblPLACE2.getText().equals("Azriely-Mall") || lblPLACE3.getText().equals("Azriely-Mall")) {
+//    		placesInTravel.add(place4);}
+//    	if(lblPLACE1.getText().equals("Nachal-Tzelim") || lblPLACE2.getText().equals("Nachal-Tzelim") || lblPLACE3.getText().equals("Nachal-Tzelim")) {
+//    		placesInTravel.add(place3);}
+//    	if(lblPLACE1.getText().equals("Hacotel") || lblPLACE2.getText().equals("Hacotel") || lblPLACE3.getText().equals("Hacotel")) {
+//    		placesInTravel.add(place5);}
     	
         Travel travel=new Travel(localGuide, traveller, date, placesInTravel);
       

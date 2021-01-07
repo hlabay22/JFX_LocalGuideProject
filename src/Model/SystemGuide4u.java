@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import com.sun.javafx.collections.MappingChange.Map;
@@ -44,10 +45,9 @@ public class SystemGuide4u implements java.io.Serializable{
 	protected HashMap<String, LocalGuide> localGuidesList;
 	protected HashMap<String, Traveller> travellersList;
 	protected HashMap<Integer,Review> reviewsList;
+	protected HashMap<Integer,Place> placeList;
+	protected HashMap<Integer,TravelOption> travelOptionsList;
 	protected ArrayList<Travel> travelLIST;
-
-
-	
 
 	protected static SystemGuide4u instance = new SystemGuide4u();
 
@@ -58,7 +58,17 @@ public class SystemGuide4u implements java.io.Serializable{
 		this.travellersList = new HashMap<String, Traveller>();
 		this.reviewsList = new HashMap<Integer, Review>();
 		this.travelLIST=new ArrayList<Travel>();
+		this.placeList = new HashMap<Integer, Place>();
+		this.travelOptionsList = new HashMap<Integer, TravelOption>();
 	}
+	
+	public HashMap<Integer, Place> getPlaceList() {
+		return placeList;
+	}
+	public void setPlaceList(HashMap<Integer, Place> placeList) {
+		this.placeList = placeList;
+	}
+	
 	public HashMap<String, LocalGuide> getLocalGuidesList() {
 		return localGuidesList;
 	}
@@ -105,6 +115,29 @@ public class SystemGuide4u implements java.io.Serializable{
 		System.out.println(review.getLocalGuideEmail()+ " Was Added!");
 		this.reviewsList.put(review.getReviewID(), review);
 	}
+	
+	public void addPlace(Place place) {
+		this.placeList.put(place.getPlaceID(), place);
+	}
+	
+	public void addLocalGuideUnavailbleDate(String localGuideEmail, LocalDate date) {
+//		getLocalGuidesList().get(localGuideEmail).getUnavailableDates().add(date);
+//		getGuideByEmail(localGuideEmail).getUnavailableDates().add(date);
+		
+		for (Entry<String, LocalGuide> value : getLocalGuidesList().entrySet()) {
+			LocalGuide guide = value.getValue();
+			if(guide.getEmail().equals(localGuideEmail)) {
+				if(!getLocalGuidesList().get(localGuideEmail).getUnavailableDates().contains(date)) {
+					getLocalGuidesList().get(localGuideEmail).getUnavailableDates().add(date);
+				}
+				
+			}
+			
+		
+		}
+		
+		System.out.println(date+" was added to "+localGuideEmail+"'s list!");
+	}
 	//remove
 	public void removeLocalGuide(LocalGuide guide) {
 		this.localGuidesList.remove(guide.getEmail());
@@ -146,8 +179,8 @@ public class SystemGuide4u implements java.io.Serializable{
 	   
 	   ///get by email
 	public LocalGuide getGuideByEmail(String mail) {
-		LocalGuide localGuide = this.localGuidesList.get(mail);
-		return localGuide;
+//		LocalGuide localGuide = this.localGuidesList.get(mail);
+		return this.localGuidesList.get(mail);
 	}
 	public Traveller getTravellerByMail(String mail) {
 		Traveller traveller=this.travellersList.get(mail);
