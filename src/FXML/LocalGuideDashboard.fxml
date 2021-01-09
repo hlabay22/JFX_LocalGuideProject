@@ -48,7 +48,59 @@
         <tabs>
           <Tab fx:id="tabHome" text="Home">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lblWelcome_home" layoutX="35.0" layoutY="95.0" text="Hello And Welcome! " textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <Text fill="WHITE" layoutX="45.0" layoutY="666.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guide4U Brings Travellers And Local Guides Together">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="102.0" layoutY="703.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Makes Travelling A Lot Much Experienceful &amp; Interactive">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="701.0" layoutY="666.0" strokeType="OUTSIDE" strokeWidth="0.0" text="World Wide Range Of Travel Prefrences &amp; Styles">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="792.0" layoutY="703.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Everybody Can Find A Perfect Travel Match">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="1322.0" layoutY="666.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Save Money On Expensive Organized Group Trips">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="1386.0" layoutY="703.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customize Your Travel With Your Own Local Guide">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Text>
+                        <ImageView fx:id="imgHome1" fitHeight="400.0" fitWidth="613.0" layoutX="45.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/homeImges/1.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imgHome2" fitHeight="400.0" fitWidth="613.0" layoutX="669.0" layoutY="232.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../img/homeImges/2.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imgHome3" fitHeight="400.0" fitWidth="613.0" layoutX="1310.0" layoutY="232.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../img/homeImges/3.jpg" />
+                           </image>
+                        </ImageView>
+                     </children></AnchorPane>
             </content>
           </Tab>
           <Tab fx:id="tabLocalGuideProfile" text="Local Guide Profile">

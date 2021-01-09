@@ -28,6 +28,10 @@ public class LocalGuide extends User implements java.io.Serializable {
 		
 	}
 	
+	public LocalGuide() {
+		super();
+	}
+	
 	public Double getRating() {
 //		this.setRating();
 		return rating;

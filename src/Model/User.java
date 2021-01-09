@@ -44,7 +44,13 @@ public class User implements java.io.Serializable{
 		this.emailNotifacations = emailNotifacations;
 	}
 	
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	// Getters 
+
+
 
 
 	public String getEmail() {

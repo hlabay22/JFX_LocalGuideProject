@@ -251,7 +251,7 @@ public class LocalGuideDashboardController implements Initializable {
     void btnSaveEdit(ActionEvent event) {
     	
     	
-    	updateChanges();
+    	updateChangesSQL();
     	setDataEditable(false);
     	initViewComboBox();
     	initData();
@@ -309,10 +309,97 @@ public class LocalGuideDashboardController implements Initializable {
 		}
 		
 	}
+    
+    public void updateChangesSQL() {
+    	
+    	LocalGuide edited = new LocalGuide();
+    	edited.setPassword(this.localGuide.getPassword());
+    	System.out.println("XXXXXXXXXXXXXXX");
+    	
+		try {
+			String email=this.txtEmail.getText();
+			if(system.checkValidateEmail(email)) {
+				edited.setEmail(email);
+			}
+			
+			String firstName = this.txtFirstName.getText();
+			if(SystemGuide4u.checkFirstName(firstName)) {
+				edited.setFirstName(firstName);
+				
+				
+			}
+			
+			String lastName = this.txtLastName.getText();
+			if(SystemGuide4u.checkFirstName(lastName)) {
+				edited.setLastName(lastName);
+			}
+			
+
+			Gender gender= Gender.Female;
+			
+		    if(comBoxGender.getValue().equals("Male")) {
+		    	gender=Gender.Male;
+		    	 edited.setGender(gender);
+		    }
+		    edited.setGender(gender);
+			
+		    
+		    String city = this.txtCity.getText();
+		    edited.setCity(city);
+		    
+		    String country = (String) this.comBoxCountry.getValue();
+		    edited.setCountry(country);
+		    
+		    
+		    String lang1 = (String) this.comBoxLang1.getValue();
+		    edited.getLanguage().setLanguage1(lang1);
+		    
+		    String lang2 = (String) this.comBoxLang2.getValue();
+		    edited.getLanguage().setLanguage1(lang2);
+		    
+		    String lang3 = (String) this.comBoxLang3.getValue();
+		    edited.getLanguage().setLanguage1(lang3);
+		    
+		    
+		    String travelStyle1 = (String) this.comBoxTravelStyle1.getValue();
+		    edited.getTravelStyle().setTravelStyle1(travelStyle1);
+		    
+		    String travelStyle2 = (String) this.comBoxTravelStyle2.getValue();
+		    edited.getTravelStyle().setTravelStyle1(travelStyle1);
+		    
+		    String travelStyle3 = (String) this.comBoxTravelStyle3.getValue();
+		    edited.getTravelStyle().setTravelStyle1(travelStyle1);
+		    
+//		    String transportType = this.comBoxTransportType.getValue();
+
+		    
+		    String aboutMe = this.txtAboutMe.getText();
+		    edited.setAboutMe(aboutMe);
+		    System.out.println("GOOOOOOOOT THIS FAAAAAAAAARRRRRRRRRRRRRRRRRRRRRRRRRRR");
+		    
+		    sql.updateLocalGuide(edited);
+		    
+		    sql.initLocalGuide();
+		    setLocalGuide(system.getGuideByEmail(email));
+
+			
+		}catch(Exception e) {
+			system.popUpLoginError("Error While Saving Changes - Try Again");
+	    	setDataEditable(true);
+	    	this.btnEdit.setVisible(false);
+	    	this.btnSaveEdit.setVisible(true);
+			
+		}
+    	
+    	
+    	
+    }
 	
 	
 	
 	public void updateChanges() {
+		
+		
 		
 
 		try {
@@ -430,7 +517,7 @@ public class LocalGuideDashboardController implements Initializable {
 	
 	public void setDataEditable(boolean value) {
 		
-		this.txtEmail.setEditable(value);
+//		this.txtEmail.setEditable(value);
 		this.txtFirstName.setEditable(value);
 		this.txtLastName.setEditable(value);
 		this.comBoxGender.setEditable(value);

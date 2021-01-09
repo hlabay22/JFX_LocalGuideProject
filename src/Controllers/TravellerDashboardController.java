@@ -34,6 +34,9 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -110,6 +113,24 @@ public class TravellerDashboardController implements Initializable {
 
     @FXML
     private Tab tabAbout;
+    
+    @FXML
+    private Label lblLogo_home;
+
+    @FXML
+    private Label lblWelcome_home;
+
+    @FXML
+    private ImageView imgHome1;
+
+    @FXML
+    private ImageView imgHome2;
+
+    @FXML
+    private ImageView imgHome3;
+    
+    @FXML
+    private Button btnFindHome;
   
 	private final ObservableList<LocalGuide> localGuideData =
             FXCollections.observableArrayList();
@@ -130,6 +151,12 @@ public class TravellerDashboardController implements Initializable {
 	public void refreshTable() {
 		tableLocalGuide.refresh();
 	}
+	
+    @FXML
+    void btnFindHomeClick(ActionEvent event) {
+    	this.tabPanelTraveller.getSelectionModel().select(tabFindAGuide);
+
+    }
 
     @FXML
     void btnLogOutClick(ActionEvent event) {
@@ -316,6 +343,13 @@ public class TravellerDashboardController implements Initializable {
 		initLocalGuideTable();
 		filterdSearchInit();
 		tableClickDetect();
+		initHomeTab();
+
+		
+	}
+
+	public void initHomeTab() {
+		
 		
 	}
 }

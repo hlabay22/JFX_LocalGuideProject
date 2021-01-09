@@ -121,14 +121,15 @@ public class SystemGuide4u implements java.io.Serializable{
 	}
 	
 	public void addLocalGuideUnavailbleDate(String localGuideEmail, LocalDate date) {
-//		getLocalGuidesList().get(localGuideEmail).getUnavailableDates().add(date);
-//		getGuideByEmail(localGuideEmail).getUnavailableDates().add(date);
 		
 		for (Entry<String, LocalGuide> value : getLocalGuidesList().entrySet()) {
 			LocalGuide guide = value.getValue();
+			System.out.println(guide.getEmail()+" \\ "+guide.getCountry());
 			if(guide.getEmail().equals(localGuideEmail)) {
 				if(!getLocalGuidesList().get(localGuideEmail).getUnavailableDates().contains(date)) {
+					System.out.println(getLocalGuidesList().get(localGuideEmail).getFirstName()+"****"+getLocalGuidesList().get(localGuideEmail).getCity());
 					getLocalGuidesList().get(localGuideEmail).getUnavailableDates().add(date);
+					System.out.println(date+" was added to "+localGuideEmail+"'s list!");
 				}
 				
 			}
@@ -136,7 +137,7 @@ public class SystemGuide4u implements java.io.Serializable{
 		
 		}
 		
-		System.out.println(date+" was added to "+localGuideEmail+"'s list!");
+		
 	}
 	//remove
 	public void removeLocalGuide(LocalGuide guide) {

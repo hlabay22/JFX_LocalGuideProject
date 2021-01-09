@@ -2,6 +2,7 @@ package Controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -18,18 +19,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class MatchmakerSearchController implements Initializable{
 
@@ -126,7 +131,7 @@ public class MatchmakerSearchController implements Initializable{
     private Button btnCon;
     
     @FXML
-    private Button btnMakeTravel;
+    private Button btnPlacesAndTravels;
     @FXML
     private Separator horizSep;
     
@@ -138,30 +143,14 @@ public class MatchmakerSearchController implements Initializable{
 	SystemGuide4u system=Main.system;
 	
 	
-	 @FXML
-	    void btnMakeTravel(ActionEvent event) throws IOException {
-	    	LocalGuide local=this.localGuide;
-	    	LocalDate localDate = this.datePick.getValue();
-            Traveller traveller=this.traveller;
-	    	makeTravel(local,localDate,traveller);
-	    }
 
-    public void makeTravel( LocalGuide guide, LocalDate date, Traveller traveller) throws IOException {
-//    	Stage makeTravel = new Stage();
-//    	FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(getClass().getResource("/FXML/MakeTravel.fxml"));
-//        AnchorPane travelLayout = (AnchorPane) loader.load();
-//        // Pass Student Object To StudentController
-//        MakeTravelController travel = loader.getController();
-//        travel.setDetails(guide, date,traveller);
-//        Scene scene = new Scene(travelLayout);
-//        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-//        makeTravel.setScene(scene);
-//        makeTravel.setTitle("Places & Travels");
-//        makeTravel.show();
-//        btnMakeTravel.getScene().getWindow().hide();
         
          
+    @FXML
+    void btnPlacesAndTravelsClick(ActionEvent event) {
+    	
+    	loadPlacesAndTravelsViaTravellerView(this.localGuide);
+
     }
 
     @FXML
@@ -187,6 +176,10 @@ public class MatchmakerSearchController implements Initializable{
 
     }
     
+    
+    
+    // Add place@travels btnActionCLick method!!!!!
+    
     public void matchmakerSearchAlgorithem() {
     	
     	String city = this.txtCity.getText();
@@ -195,9 +188,9 @@ public class MatchmakerSearchController implements Initializable{
     	
     	
     	for (Entry<String, LocalGuide> value : this.system.getLocalGuidesList().entrySet()) {
-    		  boolean GuideIsAvliable=true;
+    		  
 			  LocalGuide tempLocalGuide = value.getValue(); 
-			  
+			  boolean GuideIsAvliable=true;
 			  String guideCity=tempLocalGuide.getCity();
 			  String guideLanguage=tempLocalGuide.getLanguage().getLanguage1();
 			  String guideTravelStyle=tempLocalGuide.getTravelStyle().getTravelStyle1();
@@ -211,6 +204,7 @@ public class MatchmakerSearchController implements Initializable{
 			  for(LocalDate unAvaliable: tempLocalGuide.getUnavailableDates()) {
 				  if(localDate.equals(unAvaliable)) {
 					  GuideIsAvliable=false;
+					  break;
 				  }
 			  }
 			  
@@ -428,7 +422,7 @@ public class MatchmakerSearchController implements Initializable{
 		this.lblRating.setVisible(value);
 		this.lblOfTen.setVisible(value);
 		this.btnCon.setVisible(value);
-		this.btnMakeTravel.setVisible(value);
+		this.btnPlacesAndTravels.setVisible(value);
 	}
 	
 	public void setMatchedLocalGuideDetails() {
@@ -439,7 +433,8 @@ public class MatchmakerSearchController implements Initializable{
 		setTravelStyleData();
 		this.lblRating.setText(this.localGuide.getRatingAsString());
 		this.lblAbout.setText(this.localGuide.getAboutMe());
-		this.lblRating.setText(this.localGuide.getRating().toString());
+		//Decimal 2 
+		this.lblRating.setText(new DecimalFormat("##.##").format(this.localGuide.getRating()));
 	}
 
 	public void setLangData() {
@@ -481,12 +476,46 @@ public class MatchmakerSearchController implements Initializable{
 			this.lblTravelStyle3.setText(this.localGuide.getTravelStyle().getTravelStyle3());
 		}
 	}
+	
+	
+    public void loadPlacesAndTravelsViaTravellerView(LocalGuide localGuide2) {
+		try {
+
+			Stage stage=new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LocalGuidePlacesAndTravels.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			LocalGuidePlacesAndTravelsController placesAndTravelsController = loader.<LocalGuidePlacesAndTravelsController>getController();
+			placesAndTravelsController.setLocalGuide(localGuide);
+			placesAndTravelsController.initTablesData();
+			placesAndTravelsController.setProfileData();
+			placesAndTravelsController.hideButtons();
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.setTitle("Guide4U - Local Guide Places & Travel Options");
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.show();
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		this.system = Main.system;
 		system.initCountryComBox(this.comBoxCountry);
+		// Disable Picking Past Dates On The availability datePicker.
+		this.datePick.setDayCellFactory(picker -> new DateCell() {
+	        public void updateItem(LocalDate date, boolean empty) {
+	            super.updateItem(date, empty);
+	            LocalDate today = LocalDate.now();
+	            setDisable(empty || date.compareTo(today) < 0 );
+	        }
+	    });
 	}
 
 }

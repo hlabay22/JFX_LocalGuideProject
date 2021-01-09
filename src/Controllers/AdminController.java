@@ -31,6 +31,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -183,6 +184,7 @@ public class AdminController implements Initializable {
 			
 			  for (Entry<String , LocalGuide> value : this.system.getLocalGuidesList().entrySet()) {
 				  LocalGuide localGuide = value.getValue(); 
+				  localGuide.computeRating();
 				  localGuideData.add(localGuide);
 	 
 			  }
@@ -296,6 +298,8 @@ public void loadSignUpPage() {
 			stage.setScene(scene);
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setTitle("Guide4U -Guide4U - Sign Up");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 			stage.show();
 			
 
@@ -342,6 +346,8 @@ public void loadLocalGuideInfoPage(LocalGuide localGuide) {
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle("Guide4U - Local Guide Profile");
+		Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+		stage.getIcons().add(icon);
 		stage.initStyle(StageStyle.UNDECORATED);
 		stage.show();
 		
@@ -360,12 +366,14 @@ public void loadLocalGuideInfoPage(LocalGuide localGuide) {
 			Scene scene = new Scene(root);
 			LocalGuideProfileController lgProfileController = loader.<LocalGuideProfileController>getController();
 			lgProfileController.setTravellerAsLocalguide(traveller);
-			lgProfileController.setProfileData();
+			lgProfileController.setProfileDataWithForTraveller();
 			lgProfileController.hidebtnReviewRate();
 			lgProfileController.setTravellerAsLocalguide(traveller);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
-			stage.setTitle("Guide4U - traveller Profile");
+			stage.setTitle("Guide4U - Traveller Profile");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
 			

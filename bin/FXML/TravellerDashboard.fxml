@@ -45,7 +45,68 @@
         <tabs>
           <Tab fx:id="tabHome" text="Home">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lblLogo_home" layoutX="924.0" layoutY="14.0" prefHeight="88.0" prefWidth="152.0" text="Guide4U" textFill="WHITE">
+                           <font>
+                              <Font name="Gill Sans MT Ext Condensed Bold" size="72.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblWelcome_home" layoutX="45.0" layoutY="126.0" text="Hello And Welcome! " textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="imgHome1" fitHeight="400.0" fitWidth="613.0" layoutX="45.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/homeImges/1.jpg" />
+                           </image></ImageView>
+                        <ImageView fx:id="imgHome2" fitHeight="400.0" fitWidth="613.0" layoutX="669.0" layoutY="232.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../img/homeImges/2.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imgHome3" fitHeight="400.0" fitWidth="613.0" layoutX="1310.0" layoutY="232.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../img/homeImges/3.jpg" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="45.0" layoutY="666.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guide4U Brings Travellers And Local Guides Together">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="102.0" layoutY="703.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Makes Travelling A Lot Much Experienceful &amp; Interactive">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="701.0" layoutY="666.0" strokeType="OUTSIDE" strokeWidth="0.0" text="World Wide Range Of Travel Prefrences &amp; Styles">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="792.0" layoutY="703.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Everybody Can Find A Perfect Travel Match">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="1322.0" layoutY="666.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Save Money On Expensive Organized Group Trips">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="1386.0" layoutY="703.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customize Your Travel With Your Own Local Guide">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="btnFindHome" layoutX="1376.0" layoutY="134.0" mnemonicParsing="false" onAction="#btnFindHomeClick" prefHeight="38.0" prefWidth="392.0" style="-fx-background-color: #004d99;" text="Find A Local Guide Now!" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children></AnchorPane>
             </content>
           </Tab>
           <Tab fx:id="tabFindAGuide" text="Find A Guide">

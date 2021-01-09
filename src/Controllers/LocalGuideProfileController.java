@@ -348,4 +348,21 @@ public class LocalGuideProfileController implements Initializable {
 		
 	}
 
+	public void setProfileDataWithForTraveller() {
+		
+		
+			this.lblFullName.setText(this.localGuide.getFirstName()+" "+this.localGuide.getLastName());
+			this.lblCity.setText(this.localGuide.getCity());
+			this.lblCountry.setText(this.localGuide.getCountry());
+			setLangData();
+			setTravelStyleData();
+			this.lblAbout.setText(this.localGuide.getAboutMe());
+			this.lblRating.setVisible(false);
+			this.lblOfTen.setVisible(false);
+			this.btnPlacesAndTravels.setVisible(false);
+
+
+		
+	}
+
 }

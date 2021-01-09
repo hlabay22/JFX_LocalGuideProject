@@ -905,6 +905,53 @@ import Model.User;
 		}
 
 
+		public void updateLocalGuide(LocalGuide localGuide) {
+			
+			try {  
+				String SQL = "UPDATE LocalGuides "
+						+"SET first_name = ?, last_name = ?, email = ?, dateOfBirth = ?,"
+						+ " gender = ?, country = ?, city = ?, phoneNumber = ?, language1 = ?, language2 = ?, language3 = ?, travelStyle1 = ?,"
+						+ " travelStyle2 = ?, travelStyle3 = ?, about = ?, mail = ?) "
+						+ "WHERE email = ?";  
+				
+				
+				PreparedStatement pst = con.prepareStatement(SQL);  
+				pst.setString(1, localGuide.getFirstName());
+				pst.setString(2, localGuide.getLastName());
+				pst.setString(3, localGuide.getEmail());
+				DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+				String dob = localGuide.getDateOfBirth().format(df);
+				pst.setString(4, dob);
+				pst.setString(5, localGuide.getGenderForSQL());
+				pst.setString(6, localGuide.getCountry());
+				pst.setString(7, localGuide.getCity());
+				pst.setString(8, localGuide.getPhoneNumber().toString());
+				pst.setString(9, localGuide.getLanguage().getLanguage1());
+				pst.setString(10, localGuide.getLanguage().getLanguage2());
+				pst.setString(11, localGuide.getLanguage().getLanguage3());
+				pst.setString(12, localGuide.getTravelStyle().getTravelStyle1());
+				pst.setString(13, localGuide.getTravelStyle().getTravelStyle2());
+				pst.setString(14, localGuide.getTravelStyle().getTravelStyle3());
+				pst.setString(15, localGuide.getAboutMe());
+				pst.setString(16, localGuide.getIsEmailNotifacationsForSql());
+				pst.setString(17, localGuide.getEmail());
+				pst.executeUpdate();
+				System.out.println("local guide Updated!!");  
+			}  
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			finally {  
+				if (rs != null) try { rs.close(); } catch(Exception e) {}  
+				if (stmt != null) try { stmt.close(); } catch(Exception e) {}
+				System.out.println();
+			} 
+			
+			
+		}
+
+
 		
 
 	}
