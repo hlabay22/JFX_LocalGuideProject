@@ -42,6 +42,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/*
+ * Sign Up Screen Contorller  - can get access via Admin Dashboard for Adding Users option.
+ */
 public class SignUpController {
 
     @FXML
@@ -180,7 +183,7 @@ public class SignUpController {
     boolean IsAdminSession=false;
     
     
-    
+    // Initialize data methods 
     
     @FXML
     public void initialize() {
@@ -197,6 +200,7 @@ public class SignUpController {
     	system.initLanguageComBox(this.comBoxLang1);
     	system.initLanguageComBox(this.comBoxLang2);
     	system.initLanguageComBox(this.comBoxLang3);
+    	// Disable picking future dates on the availability datePicker.
 		this.comBoxDOB.setDayCellFactory(picker -> new DateCell() {
 	        public void updateItem(LocalDate date, boolean empty) {
 	            super.updateItem(date, empty);
@@ -206,6 +210,8 @@ public class SignUpController {
 	    });
     	
     }
+    
+    // Buttons ActionEvent methods 
     @FXML
     void btnExitClick(ActionEvent event) {
     	if(IsAdminSession) {
@@ -218,30 +224,32 @@ public class SignUpController {
 
     }
     
-
-
     @FXML
     void btnSignInClick(ActionEvent event) throws comboBoxNotSelected {
     	try {
+    	// first - running input check methods	
     	if((system.checkPassword(txtPassword)) 
     	&& (system.checkValidateEmail(txtEmail.getText()))
     	&& (system.checkFirstName(txtFirstName.getText())) 
     	&& (system.checkFirstName(txtLastName.getText()))
     	&& (system.checkPhone(txtPhone.getText())) && (system.checkFirstName(txtCity.getText()))){
     		
-    		////combo boxes
+    		
     	
     			DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 		    	LocalDate localDate = comBoxDOB.getValue();
 		    	Language language=new Language("");
 		    	TravelStyle travelStyle=new TravelStyle("");
+		    	
 			    Gender gender= Gender.Female;
+			    
 			    if(comBoxGender.getValue().equals("Male"))
 			    	gender=Gender.Male;
 		    	boolean emailNotes=false;
+		    	
 		    	if(checkBoxEmailNots.equals(true))
 		    		emailNotes=true;
-		    	//String date2 = comBoxDOB.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		    	
 		    	try {
 		    		String lang1=comBoxLang1.getValue().toString();
 		    		if(comBoxLang2.getValue()!=null) 
@@ -284,8 +292,9 @@ public class SignUpController {
 		    	}
 		    
 		    		}
+		    		
+		    	// ComboBoxNotSelected Exception is used to help the User to be aware of the location of his input mistake! 	
 		    	}catch(comboBoxNotSelected e){
-		    		e.printStackTrace();
 		    		 popUpComboError();
 		    		 if(comBoxLang1.getValue()==null) 
 		    			 comBoxLang1.setStyle("-fx-background-color:red;");
@@ -333,48 +342,36 @@ public class SignUpController {
 						 emailNotes);
 		    	
 				if(comBoxUserType.getValue().equals("Local Guide")) {
-					 //system.addGuide(localGuide);
 					 sql.addLocalGuideToSQL(localGuide);
 					 System.out.println("local add");
 					 sql.initLocalGuide();
-//					 Main.serialize("guide4u.ser");
-//				     Main.deserialize();
 				     adminOrLoginPage(IsAdminSession,localGuide );
-		        	 
 
 				}
 				
 				if(comBoxUserType.getValue().equals("Traveller")) {
-			         //system.addTraveller(traveller);
 					 sql.addTravellerToSQL(traveller);
 					 System.out.println("trav add");
 					 sql.initTravellers();
-//					 Main.serialize("guide4u.ser");
-//				     Main.deserialize();
 				     adminOrLoginPage(IsAdminSession,traveller);
 
 
 				}
 				if(comBoxUserType.getValue().equals("Traveller and Local Guide")) {
-					//system.addGuide(localGuide);system.addTraveller(traveller);
 					 sql.addLocalGuideToSQL(localGuide); sql.addTravellerToSQL(traveller);
 					 System.out.println("both add");
 					 sql.initLocalGuide(); sql.initTravellers();
-//					 Main.serialize("guide4u.ser");
-//				     Main.deserialize();
 				     adminOrLoginPage(IsAdminSession,localGuide );
-
-
 				}
 				
-        		system.printAllData();
-//        		system.reloadLoginPage();
+
 		    	}
-		    	//else throw new comboBoxNotSelected();
+
     	else {throw new LoginException();}
     	}	catch(LoginException e) {
-			e.printStackTrace();
 			popUpLoginError();
+			
+			// Sign Up Form Error Navigator - a text box that caused the failure, Will get RED color borders.
 			if(!system.checkPassword(txtPassword)) {
 				this.txtPassword.clear();
                 this.txtPassword.setStyle("-fx-text-box-border:#ec0606");
@@ -403,6 +400,8 @@ public class SignUpController {
 		}
     	
     }
+    
+    // boolean flag is used to redirect to the correct screen after the Sign Up process ends Successfuly
     public void adminOrLoginPage(boolean flag, User user) {
     	if(flag) {
     		system.loadAdminPage();
@@ -412,6 +411,13 @@ public class SignUpController {
     		signUpSucssesfull(user);
     	}
     }
+    
+	public void setFlag(boolean IsAdminSession) {
+		this.IsAdminSession=IsAdminSession;
+	}
+	
+	
+	// Load pages methods
     public void signUpSucssesfull(User user) {
 		try {
 			
@@ -435,10 +441,7 @@ public class SignUpController {
 	        signUpSucssesfull.show();
 	        btnSignIn.getScene().getWindow().hide();
 	        
-	        
-			
-			
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -469,8 +472,6 @@ public class SignUpController {
 		system.popUpLoginError("Login Error");
 		
 	}
-	public void setFlag(boolean IsAdminSession) {
-		this.IsAdminSession=IsAdminSession;
-	}
+
 }
 

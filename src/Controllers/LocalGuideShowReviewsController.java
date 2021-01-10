@@ -92,8 +92,6 @@ public class LocalGuideShowReviewsController implements Initializable {
     
     Traveller traveller;
     
-
-
 	SystemGuide4u system; 
     
 	private final ObservableList<Review> reviewData =
@@ -101,7 +99,7 @@ public class LocalGuideShowReviewsController implements Initializable {
     
   
     
-    // Methods
+    // Getters & Setters 
     
     
     public LocalGuide getLocalGuide() {
@@ -119,6 +117,16 @@ public class LocalGuideShowReviewsController implements Initializable {
 	public void setTraveller(Traveller traveller) {
 		this.traveller = traveller;
 	}
+	
+	public void setProfileData() {
+		this.lblFullName.setText(this.localGuide.getFirstName()+" "+this.localGuide.getLastName());
+		this.lblCity.setText(this.localGuide.getCity());
+		this.lblCountry.setText(this.localGuide.getCountry());
+		this.lblRating.setText(new DecimalFormat("##.##").format(this.localGuide.getRating()));
+		
+	}
+	
+	// Buttons ActionEvent methods
 
 	@FXML
     void btnAddReviewClick(ActionEvent event) {
@@ -134,16 +142,12 @@ public class LocalGuideShowReviewsController implements Initializable {
 
     }
     
-	public void setProfileData() {
-		this.lblFullName.setText(this.localGuide.getFirstName()+" "+this.localGuide.getLastName());
-		this.lblCity.setText(this.localGuide.getCity());
-		this.lblCountry.setText(this.localGuide.getCountry());
-		this.lblRating.setText(new DecimalFormat("##.##").format(this.localGuide.getRating()));
-		
-	}
-    
+    // Initialize data methods
 	public void initReviewTableData() {
 		
+		/* Local guide rating is set after calculating the rating values of specific local Guide in their Reviews.
+		* therefore, A local guide with no Reviews will have NaN as Rating (Until the First Review to be submitted)
+		*/
 		Double sumForRating = 0.0; 
 		int cntForRating = 0;
 		for (Entry<Integer, Review> value : this.system.getReviewsList().entrySet()) {
@@ -159,9 +163,8 @@ public class LocalGuideShowReviewsController implements Initializable {
 				  System.out.println("No Match!");
 			  }
 		  }
-		  
-		 Double rating= sumForRating/cntForRating;
-		 system.getGuideByEmail(this.localGuide.getEmail()).setRating(rating);
+		Double rating= sumForRating/cntForRating;
+		system.getGuideByEmail(this.localGuide.getEmail()).setRating(rating);
 		
 		this.tableReview.setItems(reviewData);
 		this.c1_Date.setCellValueFactory(new PropertyValueFactory<Review, LocalDate>("date"));
@@ -171,9 +174,17 @@ public class LocalGuideShowReviewsController implements Initializable {
 		this.c5_reviewText.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewText"));
 		this.c6_rating.setCellValueFactory(new PropertyValueFactory<Review, Double>("rating"));
 
-			
+	
 	}
 	
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		system = Main.system;
+		
+	}
+	
+	// Load pages methods 
 	
 	public void loadLocalGuideReviewRate(LocalGuide localGuide,Traveller traveller) {
 		
@@ -203,10 +214,6 @@ public class LocalGuideShowReviewsController implements Initializable {
 		
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		system = Main.system;
-		
-	}
+
 
 }

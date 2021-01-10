@@ -29,9 +29,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+
+/*
+ * Controller for Local Guide's main page.
+ */
 public class LocalGuideDashboardController implements Initializable {
 
     @FXML
@@ -215,15 +220,8 @@ public class LocalGuideDashboardController implements Initializable {
 	private final ObservableList<Review> reviewData =
             FXCollections.observableArrayList();
     
-    public LocalGuide getLocalGuide() {
-		return localGuide;
-	}
 
-	public void setLocalGuide(LocalGuide localGuide) {
-		this.localGuide = localGuide;
-		this.lblUserName.setText(localGuide.getFirstName()+" "+localGuide.getLastName());
-	}
-
+	// Buttons ActionEvent methods
 	@FXML
     void btnLogOut(ActionEvent event) {
 	   
@@ -261,7 +259,7 @@ public class LocalGuideDashboardController implements Initializable {
     	
 
     }
-    //this.localGuide.getUnavailableDates().contains(date)
+
     @FXML
     void btnUpdateAvailibiltyClick(ActionEvent event) {
     	
@@ -271,7 +269,6 @@ public class LocalGuideDashboardController implements Initializable {
     		if(!system.getLocalGuidesList().get(this.localGuide.getEmail()).getUnavailableDates().contains(date)) {
     			sql.addLocalGuideUnavailibleDateToSQL(this.localGuide, date);
     			sql.initUnavailbleDates();
-//    			this.localGuide.getUnavailableDates().add(date);
     			this.lblNoteAvailibilty.setText("** "+date+" Was Successfully set as Unavailable Date! **");
     			
     		}else {
@@ -286,6 +283,8 @@ public class LocalGuideDashboardController implements Initializable {
     	loadPlacesAndTravels(this.localGuide);
     }
     
+    
+    // Load page method 
     public void loadPlacesAndTravels(LocalGuide localGuide2) {
 		try {
 
@@ -300,6 +299,8 @@ public class LocalGuideDashboardController implements Initializable {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Local Guide Places & Travel Options");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
 			
@@ -309,12 +310,11 @@ public class LocalGuideDashboardController implements Initializable {
 		}
 		
 	}
-    
+    // UpdateChanges to SQL Database method - collects input from local guide user and updates the SQL table
     public void updateChangesSQL() {
     	
     	LocalGuide edited = new LocalGuide();
     	edited.setPassword(this.localGuide.getPassword());
-    	System.out.println("XXXXXXXXXXXXXXX");
     	
 		try {
 			String email=this.txtEmail.getText();
@@ -326,7 +326,6 @@ public class LocalGuideDashboardController implements Initializable {
 			if(SystemGuide4u.checkFirstName(firstName)) {
 				edited.setFirstName(firstName);
 				
-				
 			}
 			
 			String lastName = this.txtLastName.getText();
@@ -334,7 +333,6 @@ public class LocalGuideDashboardController implements Initializable {
 				edited.setLastName(lastName);
 			}
 			
-
 			Gender gender= Gender.Female;
 			
 		    if(comBoxGender.getValue().equals("Male")) {
@@ -342,7 +340,9 @@ public class LocalGuideDashboardController implements Initializable {
 		    	 edited.setGender(gender);
 		    }
 		    edited.setGender(gender);
-			
+		    
+		    LocalDate dob = this.comBoxDOB.getValue();
+		    edited.setDateOfBirth(dob);
 		    
 		    String city = this.txtCity.getText();
 		    edited.setCity(city);
@@ -350,35 +350,30 @@ public class LocalGuideDashboardController implements Initializable {
 		    String country = (String) this.comBoxCountry.getValue();
 		    edited.setCountry(country);
 		    
-		    
 		    String lang1 = (String) this.comBoxLang1.getValue();
 		    edited.getLanguage().setLanguage1(lang1);
 		    
 		    String lang2 = (String) this.comBoxLang2.getValue();
-		    edited.getLanguage().setLanguage1(lang2);
+		    edited.getLanguage().setLanguage2(lang2);
 		    
 		    String lang3 = (String) this.comBoxLang3.getValue();
-		    edited.getLanguage().setLanguage1(lang3);
-		    
+		    edited.getLanguage().setLanguage3(lang3);
 		    
 		    String travelStyle1 = (String) this.comBoxTravelStyle1.getValue();
 		    edited.getTravelStyle().setTravelStyle1(travelStyle1);
 		    
 		    String travelStyle2 = (String) this.comBoxTravelStyle2.getValue();
-		    edited.getTravelStyle().setTravelStyle1(travelStyle1);
+		    edited.getTravelStyle().setTravelStyle2(travelStyle2);
 		    
 		    String travelStyle3 = (String) this.comBoxTravelStyle3.getValue();
-		    edited.getTravelStyle().setTravelStyle1(travelStyle1);
+		    edited.getTravelStyle().setTravelStyle3(travelStyle3);
 		    
 //		    String transportType = this.comBoxTransportType.getValue();
-
 		    
 		    String aboutMe = this.txtAboutMe.getText();
 		    edited.setAboutMe(aboutMe);
-		    System.out.println("GOOOOOOOOT THIS FAAAAAAAAARRRRRRRRRRRRRRRRRRRRRRRRRRR");
-		    
+
 		    sql.updateLocalGuide(edited);
-		    
 		    sql.initLocalGuide();
 		    setLocalGuide(system.getGuideByEmail(email));
 
@@ -396,12 +391,9 @@ public class LocalGuideDashboardController implements Initializable {
     }
 	
 	
-	
+	// Edit LocalGuide details - method updates details and save changes in system  Database - Unused in final version.
 	public void updateChanges() {
 		
-		
-		
-
 		try {
 			String email=this.txtEmail.getText();
 			if(system.checkValidateEmail(email)) {
@@ -477,6 +469,8 @@ public class LocalGuideDashboardController implements Initializable {
 		
 	}
 	
+	// Initialize data methods.
+	
 	public void initViewComboBox() {
 		
 		system.initCountryComBox(this.comBoxCountry);
@@ -511,32 +505,10 @@ public class LocalGuideDashboardController implements Initializable {
 		//this.comBoxTransportType.setPromptText();
 		this.txtAboutMe.setText(this.localGuide.getAboutMe());
 		this.valueRating.setText(this.localGuide.getRatingAsString());
+	
+	}
+	
 
-		
-	}
-	
-	public void setDataEditable(boolean value) {
-		
-//		this.txtEmail.setEditable(value);
-		this.txtFirstName.setEditable(value);
-		this.txtLastName.setEditable(value);
-		this.comBoxGender.setEditable(value);
-		this.comBoxDOB.setEditable(value);
-		this.txtPhone.setEditable(value);
-		this.txtCity.setEditable(value);
-		this.comBoxCountry.setEditable(value);
-		this.comBoxLang1.setEditable(value);
-		this.comBoxLang2.setEditable(value);
-		this.comBoxLang3.setEditable(value);
-		this.comBoxTravelStyle1.setEditable(value);
-		this.comBoxTravelStyle2.setEditable(value);
-		this.comBoxTravelStyle3.setEditable(value);
-		//this.comBoxTransportType.setEditable(value);
-		this.txtAboutMe.setEditable(value);
-		
-	}
-	
-	
 	public void initReviewTableData() {
 		
 		Double sumForRating = 0.0; 
@@ -577,7 +549,7 @@ public class LocalGuideDashboardController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		system =Main.system;
-		// Disable Picking Past Dates On The availability datePicker.
+		// Disable picking past dates on the availability datePicker.
 		this.datePickAvailbilty.setDayCellFactory(picker -> new DateCell() {
 	        public void updateItem(LocalDate date, boolean empty) {
 	            super.updateItem(date, empty);
@@ -586,7 +558,47 @@ public class LocalGuideDashboardController implements Initializable {
 	        }
 	    });
 		
+		// Disable picking future dates on the DOB datePicker.
+		this.comBoxDOB.setDayCellFactory(picker -> new DateCell() {
+	        public void updateItem(LocalDate date, boolean empty) {
+	            super.updateItem(date, empty);
+	            LocalDate today = LocalDate.now();
+	            setDisable(empty || date.compareTo(today) > 0 );
+	        }
+	    });
 		
+	}
+	
+	
+	// Getters & Setters 
+	
+    public LocalGuide getLocalGuide() {
+		return localGuide;
+	}
+
+	public void setLocalGuide(LocalGuide localGuide) {
+		this.localGuide = localGuide;
+		this.lblUserName.setText(localGuide.getFirstName()+" "+localGuide.getLastName());
+	}
+	
+	public void setDataEditable(boolean value) {
+		
+//		this.txtEmail.setEditable(value);
+		this.txtFirstName.setEditable(value);
+		this.txtLastName.setEditable(value);
+		this.comBoxGender.setEditable(value);
+		this.comBoxDOB.setEditable(value);
+		this.txtPhone.setEditable(value);
+		this.txtCity.setEditable(value);
+		this.comBoxCountry.setEditable(value);
+		this.comBoxLang1.setEditable(value);
+		this.comBoxLang2.setEditable(value);
+		this.comBoxLang3.setEditable(value);
+		this.comBoxTravelStyle1.setEditable(value);
+		this.comBoxTravelStyle2.setEditable(value);
+		this.comBoxTravelStyle3.setEditable(value);
+		//this.comBoxTransportType.setEditable(value);
+		this.txtAboutMe.setEditable(value);
 		
 	}
 

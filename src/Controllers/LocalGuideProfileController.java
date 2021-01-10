@@ -18,6 +18,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+
+/*
+ * Controller for Local guide profile page
+ */
 public class LocalGuideProfileController implements Initializable {
 
     @FXML
@@ -94,15 +98,17 @@ public class LocalGuideProfileController implements Initializable {
     @FXML
     private Button btnPlacesAndTravels;
     
+    @FXML
+    private Button btnReviewRate;
+    
     LocalGuide localGuide;
     
     Traveller traveller;
      
-    @FXML
-    private Button btnReviewRate;
 
     SystemGuide4u system=Main.system;
 
+    // Buttons ActionEvent methods
 	@FXML
     void btnContactClick(ActionEvent event) {
          system.loadContactLocalGuidePage(this.localGuide);
@@ -119,8 +125,6 @@ public class LocalGuideProfileController implements Initializable {
     void btnReviewRateClick(ActionEvent event) {
     	
     	loadLocalGuideReviewRate(this.localGuide,this.traveller);
-    	
-    	
 
     }
     
@@ -143,7 +147,8 @@ public class LocalGuideProfileController implements Initializable {
     	
     }
     
-
+    // Getters & Setters 
+    
 	public LocalGuide getLocalGuide() {
 		return localGuide;
 	}
@@ -151,6 +156,20 @@ public class LocalGuideProfileController implements Initializable {
 	public void setLocalGuide(LocalGuide localGuide) {
 		this.localGuide = localGuide;
 	}
+	
+	public Traveller getTraveller() {
+		return traveller;
+	}
+
+	public void setTraveller(Traveller traveller) {
+		this.traveller = traveller;
+	}
+    
+    public void hidebtnReviewRate() {
+		this.btnReviewRate.setVisible(false);
+
+    }
+	// SetTravellerAsLocalGuide - method for the option to view a traveller profile in the same Profile page format as Local guide.
 	public void setTravellerAsLocalguide (Traveller traveller) {
 		this.localGuide= system.transferTravellerToGuide(traveller);
 		btnReviewRate.setVisible(false);;
@@ -166,8 +185,6 @@ public class LocalGuideProfileController implements Initializable {
 		setTravelStyleData();
 		this.lblRating.setText(new DecimalFormat("##.##").format(this.localGuide.getRating()));
 		this.lblAbout.setText(this.localGuide.getAboutMe());
-
-		
 
 	}
 	
@@ -211,7 +228,22 @@ public class LocalGuideProfileController implements Initializable {
 		}
 	}
 	
+	public void setProfileDataWithForTraveller() {
+		
+		
+		this.lblFullName.setText(this.localGuide.getFirstName()+" "+this.localGuide.getLastName());
+		this.lblCity.setText(this.localGuide.getCity());
+		this.lblCountry.setText(this.localGuide.getCountry());
+		setLangData();
+		setTravelStyleData();
+		this.lblAbout.setText(this.localGuide.getAboutMe());
+		this.lblRating.setVisible(false);
+		this.lblOfTen.setVisible(false);
+		this.btnPlacesAndTravels.setVisible(false);
+
+}
 	
+	// Load pages methods
     public void loadPlacesAndTravels(LocalGuide localGuide) {
 		try {
 
@@ -238,14 +270,7 @@ public class LocalGuideProfileController implements Initializable {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	public void loadLocalGuideShowReviews(LocalGuide localGuide) {
 		
 		try {
@@ -271,10 +296,7 @@ public class LocalGuideProfileController implements Initializable {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
-	
 	
 	public void loadLocalGuideReviewRate(LocalGuide localGuide,Traveller traveller) {
 		
@@ -296,12 +318,9 @@ public class LocalGuideProfileController implements Initializable {
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
 			
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
     public void loadPlacesAndTravelsViaTravellerView(LocalGuide localGuide2) {
@@ -319,50 +338,24 @@ public class LocalGuideProfileController implements Initializable {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setTitle("Guide4U - Local Guide Places & Travel Options");
+			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+			stage.getIcons().add(icon);
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
-			
-			
+	
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
 	
-	
-	public Traveller getTraveller() {
-		return traveller;
-	}
 
-	public void setTraveller(Traveller traveller) {
-		this.traveller = traveller;
-	}
-    
-    public void hidebtnReviewRate() {
-		this.btnReviewRate.setVisible(false);
-
-    }
-
+    // Initialize data
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 	}
 
-	public void setProfileDataWithForTraveller() {
-		
-		
-			this.lblFullName.setText(this.localGuide.getFirstName()+" "+this.localGuide.getLastName());
-			this.lblCity.setText(this.localGuide.getCity());
-			this.lblCountry.setText(this.localGuide.getCountry());
-			setLangData();
-			setTravelStyleData();
-			this.lblAbout.setText(this.localGuide.getAboutMe());
-			this.lblRating.setVisible(false);
-			this.lblOfTen.setVisible(false);
-			this.btnPlacesAndTravels.setVisible(false);
 
-
-		
-	}
 
 }

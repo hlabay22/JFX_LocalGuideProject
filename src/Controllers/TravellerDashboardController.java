@@ -42,7 +42,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
-
+/*
+ * Controller for Traveller's main page.
+ */
 public class TravellerDashboardController implements Initializable {
 
     @FXML
@@ -141,16 +143,10 @@ public class TravellerDashboardController implements Initializable {
     
 
 
-	public ObservableList<LocalGuide> getLocalGuideData() {
-		
-		return localGuideData;
-	}
 	
 	FilteredList<LocalGuide> filterdData;
 	
-	public void refreshTable() {
-		tableLocalGuide.refresh();
-	}
+
 	
     @FXML
     void btnFindHomeClick(ActionEvent event) {
@@ -194,6 +190,8 @@ public class TravellerDashboardController implements Initializable {
     }
 	
 	
+	// Initialize data methods
+	
 	public void initUpdatedRatings() {
 		
 		HashMap<String,Double> ratings;
@@ -202,8 +200,7 @@ public class TravellerDashboardController implements Initializable {
 		}
 	}
     
-    
-	
+
 	public void initLocalGuideTable() {
 		
 		this.tableLocalGuide.setItems(localGuideData);
@@ -230,6 +227,16 @@ public class TravellerDashboardController implements Initializable {
 		  
 	}
 	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		initLocalGuideTable();
+		filterdSearchInit();
+		tableClickDetect();
+
+		
+	}
+	
+	// FilterdSearch method - live updating results by chosen parameters
 	public void filterdSearchInit() {
 		
 		filterdData = new FilteredList<>(localGuideData, b -> true);
@@ -241,7 +248,7 @@ public class TravellerDashboardController implements Initializable {
 					return true;
 				}
 				
-				//Compare firstName , lastName, city , country, language and travelstyle of every local guide with filter text
+				//Compare firstName , lastName, city , country, language and travelStyle of every local guide with filter text
 				String lowerCaseFilter = newValue.toLowerCase();
 				
 				if(localGuide.getFirstName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
@@ -278,7 +285,10 @@ public class TravellerDashboardController implements Initializable {
 			
 			  
 	}
+
+	// Table related methods 
 	
+	// Double click on table detector (Object Selection) - If double clicked - It opens a Profile page.
 	public void tableClickDetect() {
 		this.tableLocalGuide.setRowFactory( tv -> {
 		    TableRow<LocalGuide> row = new TableRow<>();
@@ -293,9 +303,14 @@ public class TravellerDashboardController implements Initializable {
 		});
 	}
 	
+	public void refreshTable() {
+		tableLocalGuide.refresh();
+	}
 	
 	
 	
+	
+	// Load pages methods 
 	
     public void loadLocalGuideInfoPage(LocalGuide localGuide,Traveller traveller) {
 		
@@ -322,6 +337,8 @@ public class TravellerDashboardController implements Initializable {
 		
 		
 	}
+    
+    // Getters & Setters 
 
 	public Traveller getTraveller() {
 		return traveller;
@@ -330,26 +347,17 @@ public class TravellerDashboardController implements Initializable {
 	public void setTraveller(Traveller traveller) {
 		this.traveller = traveller;
 		this.lblUserName.setText(traveller.getFirstName()+" "+traveller.getLastName());
-		
 	}
+	
+	public ObservableList<LocalGuide> getLocalGuideData() {
+		
+		return localGuideData;
+	}
+	
+	
+	
 	
 
 
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-	//	this.system = SystemGuide4u.getInstance();
-		initLocalGuideTable();
-		filterdSearchInit();
-		tableClickDetect();
-		initHomeTab();
-
-		
-	}
-
-	public void initHomeTab() {
-		
-		
-	}
 }

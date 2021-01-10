@@ -120,21 +120,17 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn<Traveller, String> d8_travelStyle;
 
-
-
     @FXML
     private TableColumn<Traveller, String> d10_email;
 
     @FXML
     private TableColumn<Traveller, Integer> d11_phoneNumber;
 
-
     @FXML
     private Button btnAddLocalGuide;
 
     @FXML
     private Button btnRemoveLocalGuide;
-
 
     @FXML
     private Tab tabAbout;
@@ -147,22 +143,17 @@ public class AdminController implements Initializable {
     
     private final ObservableList<LocalGuide> localGuideData =
             FXCollections.observableArrayList();
+    
     private final ObservableList<Traveller> travellerData =
             FXCollections.observableArrayList();
-    SystemGuide4u system=Main.system;
-    
-	public ObservableList<LocalGuide> getLocalGuideData() {
-			
-			return localGuideData;
-		}
-	public ObservableList<Traveller> getTravellerData() {
-		
-		return travellerData;
-	}
-		
+
 	FilteredList<String> filterdData;
 	
 	static SqlTest sql = new SqlTest();
+	
+	SystemGuide4u system=Main.system;
+	
+	// Initialize data methods
 		
 		
 	public void initLocalGuideTable() {
@@ -190,6 +181,7 @@ public class AdminController implements Initializable {
 			  }
 			  
 		}
+	
 	public void initTravellerTable() {
 		
 		this.TableTravellers.setItems(travellerData);
@@ -213,6 +205,17 @@ public class AdminController implements Initializable {
 		  }
 		  
 	}
+	
+	public void initialize(URL location, ResourceBundle resources) {
+		system=Main.system;
+		tableClickDetect();
+		// Disables the Remove buttons on screen until an Object (Traveller/Local Guide) is selected.
+		btnRemoveTraveller.disableProperty().bind(Bindings.isEmpty(TableTravellers.getSelectionModel().getSelectedItems()));
+		btnRemoveLocalGuide.disableProperty().bind(Bindings.isEmpty(tableLocalGuide.getSelectionModel().getSelectedItems()));
+
+    }
+	
+	// Button ActionEvent methods
   
     @FXML
     void btnRemoveLocalGuide(ActionEvent event) {
@@ -222,9 +225,6 @@ public class AdminController implements Initializable {
 	    	sql.initLocalGuide();
 	    	getLocalGuideData().remove(localGuide);
 	    	system.removeLocalGuide(localGuide);
-	    	System.out.println("REMOVED!!!!!!!!!!!!!!!");
-//	    	Main.serialize("guide4u.ser");
-//		    Main.deserialize();
     	} catch (Exception e) {
     		e.getMessage();
     		//system.popUpRemoveError();
@@ -239,25 +239,29 @@ public class AdminController implements Initializable {
 	    	sql.initTravellers();
 	    	getTravellerData().remove(traveller);
 	    	system.removeTraveller(traveller);
-//	    	Main.serialize("guide4u.ser");
-//		    Main.deserialize();
     	} catch (Exception e) {
     		e.getMessage();
-    		//system.popUpRemoveError();
+    		
     	}
     }
+    // Opens a sign up page for new data input.
     @FXML
     void btnAddLocalGuide(ActionEvent event) {
+    	
     	loadSignUpPage();
-    	//btnAddLocalGuide.getScene().getWindow().hide();
+    	
     }
 
+    // Opens a sign up page for new data input.
     @FXML
     void btnAddTraveller(ActionEvent event) {
+    	
     	loadSignUpPage();
-    	//btnAddTraveller.getScene().getWindow().hide();
+    	
     }
     
+    
+    // Log Out - Redirect to Login page.
     @FXML
     void btnLogOutClick(ActionEvent event) {
     	
@@ -265,97 +269,62 @@ public class AdminController implements Initializable {
     	system.reloadLoginPage();
 
     }
-
     
     
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-	//	this.system = SystemGuide4u.getInstance();
-		system=Main.system;
-		tableClickDetect();
-		btnRemoveTraveller.disableProperty().bind(Bindings.isEmpty(TableTravellers.getSelectionModel().getSelectedItems()));
-		btnRemoveLocalGuide.disableProperty().bind(Bindings.isEmpty(tableLocalGuide.getSelectionModel().getSelectedItems()));
+    // Load screen methods
 
-		//initLocalGuideTable();
-		//removeTraveller.disableProperty().bind(Bindings.isEmpty(tableLocalGuide.getSelectionModel().getSelectedItems()));
 
-    }
+	public void loadSignUpPage() {
+			
 	
-public void loadSignUpPage() {
-		
+			try {
+				Stage stage=new Stage();
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/SignUp.fxml"));
+				Parent root = loader.load();
+				Scene scene = new Scene(root);
+				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+				SignUpController signUpController = loader.<SignUpController>getController();
+				signUpController.setFlag(true);
+				stage.setScene(scene);
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setTitle("Guide4U -Guide4U - Sign Up");
+				Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
+				stage.getIcons().add(icon);
+				stage.show();
+				
+	
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+	}
 
+	public void loadLocalGuideInfoPage(LocalGuide localGuide) {
+		
 		try {
+	
 			Stage stage=new Stage();
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/SignUp.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LocalGuideProfile.fxml"));
 			Parent root = loader.load();
-//			int screenWidth = (int) Screen.getPrimary().getVisualBounds().getWidth();
-//			int screenHeight = (int) Screen.getPrimary().getVisualBounds().getHeight();
 			Scene scene = new Scene(root);
+			LocalGuideProfileController lgProfileController = loader.<LocalGuideProfileController>getController();
+			lgProfileController.setLocalGuide(localGuide);
+			lgProfileController.setProfileData();
+			lgProfileController.hidebtnReviewRate();
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			SignUpController signUpController = loader.<SignUpController>getController();
-			//SignUpController.initLocalGuideTable();
-			signUpController.setFlag(true);
 			stage.setScene(scene);
-			stage.initStyle(StageStyle.UNDECORATED);
-			stage.setTitle("Guide4U -Guide4U - Sign Up");
+			stage.setTitle("Guide4U - Local Guide Profile");
 			Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
 			stage.getIcons().add(icon);
+			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
 			
-
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-}
-	public void tableClickDetect() {
-		this.tableLocalGuide.setRowFactory( tv -> {
-		    TableRow<LocalGuide> row = new TableRow<>();
-		    row.setOnMouseClicked(event -> {
-		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-		        	LocalGuide localGuide = row.getItem();
-		        	loadLocalGuideInfoPage(localGuide);
-	
-		        }
-		    });
-		    return row ;
-		});
-		this.TableTravellers.setRowFactory( tv -> {
-		    TableRow<Traveller> row = new TableRow<>();
-		    row.setOnMouseClicked(event -> {
-		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-		        	Traveller traveller = row.getItem();
-		        	loadTravellerInfoPage(traveller);
-	
-		        }
-		    });
-		    return row ;
-		});
 	}
-public void loadLocalGuideInfoPage(LocalGuide localGuide) {
 	
-	try {
-
-		Stage stage=new Stage();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LocalGuideProfile.fxml"));
-		Parent root = loader.load();
-		Scene scene = new Scene(root);
-		LocalGuideProfileController lgProfileController = loader.<LocalGuideProfileController>getController();
-		lgProfileController.setLocalGuide(localGuide);
-		lgProfileController.setProfileData();
-		lgProfileController.hidebtnReviewRate();
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		stage.setScene(scene);
-		stage.setTitle("Guide4U - Local Guide Profile");
-		Image icon = new Image(getClass().getResourceAsStream("/img/g_logo.png"));
-		stage.getIcons().add(icon);
-		stage.initStyle(StageStyle.UNDECORATED);
-		stage.show();
-		
-		
-	} catch(Exception e) {
-		e.printStackTrace();
-	}
-}
+	
 	public void loadTravellerInfoPage(Traveller traveller) {
 		
 		try {
@@ -382,7 +351,45 @@ public void loadLocalGuideInfoPage(LocalGuide localGuide) {
 			e.printStackTrace();
 		}
 	
-}
+	}
+	
+	// Get ObservableList methods.
+	
+	public ObservableList<LocalGuide> getLocalGuideData() {
+		
+		return localGuideData;
+	}
+	
+	public ObservableList<Traveller> getTravellerData() {
+		
+		return travellerData;
+	}
+	
+	// Double click on table detector (Object Selection) - If double clicked - It opens a Profile page (on both occasions).
+	public void tableClickDetect() {
+		this.tableLocalGuide.setRowFactory( tv -> {
+		    TableRow<LocalGuide> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		        	LocalGuide localGuide = row.getItem();
+		        	loadLocalGuideInfoPage(localGuide);
+	
+		        }
+		    });
+		    return row ;
+		});
+		this.TableTravellers.setRowFactory( tv -> {
+		    TableRow<Traveller> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		        	Traveller traveller = row.getItem();
+		        	loadTravellerInfoPage(traveller);
+	
+		        }
+		    });
+		    return row ;
+		});
+	}
 
 }
 

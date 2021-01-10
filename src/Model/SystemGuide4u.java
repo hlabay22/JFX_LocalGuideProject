@@ -41,17 +41,25 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
+/*
+ * System Class - Includes all operational methods. 
+ * Singleton Usage of class instance throw whole app.
+ */
+
 public class SystemGuide4u implements java.io.Serializable{
+	
+	// Attributes 
 	protected HashMap<String, LocalGuide> localGuidesList;
 	protected HashMap<String, Traveller> travellersList;
 	protected HashMap<Integer,Review> reviewsList;
 	protected HashMap<Integer,Place> placeList;
 	protected HashMap<Integer,TravelOption> travelOptionsList;
 	protected ArrayList<Travel> travelLIST;
-
 	protected static SystemGuide4u instance = new SystemGuide4u();
 
 
+	// C'tor 
+	
 	private SystemGuide4u() {
 		super();
 		this.localGuidesList = new HashMap<String, LocalGuide>();
@@ -62,45 +70,60 @@ public class SystemGuide4u implements java.io.Serializable{
 		this.travelOptionsList = new HashMap<Integer, TravelOption>();
 	}
 	
+	
+	// Getters 
+	
 	public HashMap<Integer, Place> getPlaceList() {
 		return placeList;
 	}
-	public void setPlaceList(HashMap<Integer, Place> placeList) {
-		this.placeList = placeList;
-	}
+
 	
 	public HashMap<String, LocalGuide> getLocalGuidesList() {
 		return localGuidesList;
 	}
-	public void setLocalGuidesList(HashMap<String, LocalGuide> localGuidesList) {
-		this.localGuidesList = localGuidesList;
-	}
+
 	public HashMap<String, Traveller> getTravellersList() {
 		return travellersList;
 	}
-	public void setTravellersList(HashMap<String, Traveller> travellersList) {
-		this.travellersList = travellersList;
-	}
+
 	public static SystemGuide4u getInstance() {
 		return instance;
 	}
-	public static void setInstance(SystemGuide4u instance) {
-		SystemGuide4u.instance = instance;
-	}
-	
 	public HashMap<Integer, Review> getReviewsList() {
 		return reviewsList;
 	}
-	public void setReviewsList(HashMap<Integer, Review> reviewsList) {
-		this.reviewsList = reviewsList;
-	}
+	
 	public ArrayList<Travel> getTravelLIST() {
 		return travelLIST;
 	}
+	
+	// Setters
+
+	public void setPlaceList(HashMap<Integer, Place> placeList) {
+		this.placeList = placeList;
+	}
+	
+	public void setLocalGuidesList(HashMap<String, LocalGuide> localGuidesList) {
+		this.localGuidesList = localGuidesList;
+	}
+	
+	
+	public void setTravellersList(HashMap<String, Traveller> travellersList) {
+		this.travellersList = travellersList;
+	}
+	
+
+	public void setReviewsList(HashMap<Integer, Review> reviewsList) {
+		this.reviewsList = reviewsList;
+	}
+
 	public void setTravelLIST(ArrayList<Travel> travelLIST) {
 		this.travelLIST = travelLIST;
 	}
-    ///add
+	
+	
+    // Add Objects to system Lists methods 
+	
 	public void addGuide(LocalGuide guide) {
 		this.localGuidesList.put(guide.getEmail(), guide);
 	}
@@ -123,30 +146,31 @@ public class SystemGuide4u implements java.io.Serializable{
 	public void addLocalGuideUnavailbleDate(String localGuideEmail, LocalDate date) {
 		
 		for (Entry<String, LocalGuide> value : getLocalGuidesList().entrySet()) {
+			
 			LocalGuide guide = value.getValue();
-			System.out.println(guide.getEmail()+" \\ "+guide.getCountry());
+			
 			if(guide.getEmail().equals(localGuideEmail)) {
 				if(!getLocalGuidesList().get(localGuideEmail).getUnavailableDates().contains(date)) {
-					System.out.println(getLocalGuidesList().get(localGuideEmail).getFirstName()+"****"+getLocalGuidesList().get(localGuideEmail).getCity());
 					getLocalGuidesList().get(localGuideEmail).getUnavailableDates().add(date);
-					System.out.println(date+" was added to "+localGuideEmail+"'s list!");
 				}
-				
 			}
-			
-		
 		}
 		
 		
 	}
-	//remove
+	
+	// Remove Objects from system Lists methods
+	
 	public void removeLocalGuide(LocalGuide guide) {
 		this.localGuidesList.remove(guide.getEmail());
 	}
 	public void removeTraveller(Traveller traveller) {
 		this.travellersList.remove(traveller.getEmail());
 	}
-	//////rgx
+	
+	
+	// Check Regex methods 
+	
 	public boolean checkID(TextField id) {
 		String regEx = "^[0-9]{9}$";
 		if(id.getText().matches(regEx)) {
@@ -178,25 +202,32 @@ public class SystemGuide4u implements java.io.Serializable{
 	      return lastName.matches( "[A-Z]+([ '-][a-zA-Z]+)*" );
 	   }
 	   
-	   ///get by email
+		// Check Email & Password methods
+		
+		public boolean checkPasswordAndEmailGuide(String email, String password) {
+			return password.equals(this.localGuidesList.get(email).password);
+		}
+		
+		public boolean checkPasswordAndEmailTraveller(String email, String password) {
+			return password.equals(this.travellersList.get(email).password);
+		}
+	   
+	   
+	   
+	// Get Objects by email
 	public LocalGuide getGuideByEmail(String mail) {
-//		LocalGuide localGuide = this.localGuidesList.get(mail);
-		return this.localGuidesList.get(mail);
+		LocalGuide localGuide = this.localGuidesList.get(mail);
+		return localGuide;
 	}
+	
 	public Traveller getTravellerByMail(String mail) {
 		Traveller traveller=this.travellersList.get(mail);
 		return traveller;
 	}
 	
-	public boolean checkPasswordAndEmailGuide(String email, String password) {
-		return password.equals(this.localGuidesList.get(email).password);
-	}
+
 	
-	public boolean checkPasswordAndEmailTraveller(String email, String password) {
-		return password.equals(this.travellersList.get(email).password);
-	}
-	
-	// populate methods
+	// Populate methods - For Example and testing
 	
 	public void populateLocalGuideExample() {
 		LocalGuide lg1 = new LocalGuide("xxx@gmail.com", "asd123", "Shim", "Metz", LocalDate.of(1992,2,5), Gender.Male, "Haifa", "Israel", 503309824 , new Language("Hebrew"), new TravelStyle("Hiking"), "I Love Food", true);
@@ -220,7 +251,7 @@ public class SystemGuide4u implements java.io.Serializable{
 		
 	}
 	
-
+	// Print all users data - Unused (Only for testing)
 	public void printAllData() {
 		System.out.println("Local guides: ");
 		for(String mail: this.localGuidesList.keySet()) {
@@ -239,6 +270,7 @@ public class SystemGuide4u implements java.io.Serializable{
 		System.out.println("\n");
 		}
 	
+	// Init ComboBox methods
 	
     public <T> void initCountryComBox(ComboBox<String> comBox) {
     	
@@ -254,86 +286,6 @@ public class SystemGuide4u implements java.io.Serializable{
          comBox.setItems((ObservableList<String>) countries);
     }
     
-//    public <T> void initLanguageComBox(ComboBox <T> comBox) {
-//    	
-//    	
-//    	
-//    	ObservableList<String> languages = FXCollections.observableArrayList();
-//    	 String[] locales1 = Locale.getISOLanguages();
-//         for (String languagelist : locales1) {
-//             Locale obj = new Locale("", languagelist);
-//             String[] lang = { obj.getDisplayLanguage() };
-//             for (int x = 0; x < lang.length; x++) {
-//            	 languages.add(obj.getDisplayLanguage());
-//             }
-//         }
-//         comBox.setItems((ObservableList<T>) languages);
-//         
-//    }
-    
-    //////sort
-    public void sortGuideByRate() {
-    	///new comperable hash  
-
-         HashMap<String, Double> localGuideRate=new HashMap<String, Double>();
-         for(String mail:this.localGuidesList.keySet()) {
-        	 localGuideRate.put(mail, this.localGuidesList.get(mail).getRating());
-         }
-         
-         localGuideRate.entrySet()
-    	.stream()
-    	.sorted(HashMap.Entry.<String, Double>comparingByValue())
-    	.forEach(System.out::println);
-
-    }
-    public void sortGuideByFirstName() {
-    	///new comperable hash  
-    	 HashMap<String, String> localGuideNames=new HashMap<String, String>();
-         for(String mail:this.localGuidesList.keySet()) {
-        	 localGuideNames.put(mail, this.localGuidesList.get(mail).getFirstName());
-         }
-         
-         localGuideNames.entrySet()
-     	.stream()
-     	.sorted(HashMap.Entry.<String, String>comparingByValue())
-     	.forEach(System.out::println);
-   }
-    public void sortGuideByCountry() {
-    	///new comperable hash  
-    	 HashMap<String, String> localGuideCountry=new HashMap<String, String>();
-         for(String mail:this.localGuidesList.keySet()) {
-        	 localGuideCountry.put(mail, this.localGuidesList.get(mail).getCountry());
-         }
-         
-         localGuideCountry.entrySet()
-     	.stream()
-     	.sorted(HashMap.Entry.<String, String>comparingByValue())
-     	.forEach(System.out::println);
-   }
-    public void sortTravellerByFirstName() {
-    	///new comperable hash  
-   	 HashMap<String, String> TravellerNames=new HashMap<String, String>();
-        for(String mail:this.travellersList.keySet()) {
-        	TravellerNames.put(mail, this.travellersList.get(mail).getFirstName());
-        }
-        
-        TravellerNames.entrySet()
-    	.stream()
-    	.sorted(HashMap.Entry.<String, String>comparingByValue())
-    	.forEach(System.out::println);
-  }
-    public void sortTravellerByCountry() {
-    	///new comperable hash  
-      	 HashMap<String, String> TravellerCountry=new HashMap<String, String>();
-           for(String mail:this.travellersList.keySet()) {
-        	   TravellerCountry.put(mail, this.travellersList.get(mail).getCountry());
-           }
-           
-          TravellerCountry.entrySet()
-       	.stream()
-       	.sorted(HashMap.Entry.<String, String>comparingByValue())
-       	.forEach(System.out::println);
-     }
     public <T> void initLanguageComBox(ComboBox <String> comBox) {
     	
         SortedSet<String> allLanguages = new TreeSet<String>();
@@ -367,6 +319,80 @@ public class SystemGuide4u implements java.io.Serializable{
     	comBox.getItems().setAll("Male","Female");
     }
     
+
+    // Sorting by different Att's - Unused in final version.
+    
+    public void sortGuideByRate() {
+
+         HashMap<String, Double> localGuideRate=new HashMap<String, Double>();
+         for(String mail:this.localGuidesList.keySet()) {
+        	 localGuideRate.put(mail, this.localGuidesList.get(mail).getRating());
+         }
+         
+         localGuideRate.entrySet()
+    	.stream()
+    	.sorted(HashMap.Entry.<String, Double>comparingByValue())
+    	.forEach(System.out::println);
+
+    }
+    
+    
+    public void sortGuideByFirstName() {
+    	 HashMap<String, String> localGuideNames=new HashMap<String, String>();
+         for(String mail:this.localGuidesList.keySet()) {
+        	 localGuideNames.put(mail, this.localGuidesList.get(mail).getFirstName());
+         }
+         
+         localGuideNames.entrySet()
+     	.stream()
+     	.sorted(HashMap.Entry.<String, String>comparingByValue())
+     	.forEach(System.out::println);
+   }
+    
+    
+    public void sortGuideByCountry() {
+    	///new comperable hash  
+    	 HashMap<String, String> localGuideCountry=new HashMap<String, String>();
+         for(String mail:this.localGuidesList.keySet()) {
+        	 localGuideCountry.put(mail, this.localGuidesList.get(mail).getCountry());
+         }
+         
+         localGuideCountry.entrySet()
+     	.stream()
+     	.sorted(HashMap.Entry.<String, String>comparingByValue())
+     	.forEach(System.out::println);
+   }
+    
+    
+    public void sortTravellerByFirstName() {
+    	///new comperable hash  
+   	 HashMap<String, String> TravellerNames=new HashMap<String, String>();
+        for(String mail:this.travellersList.keySet()) {
+        	TravellerNames.put(mail, this.travellersList.get(mail).getFirstName());
+        }
+        
+        TravellerNames.entrySet()
+    	.stream()
+    	.sorted(HashMap.Entry.<String, String>comparingByValue())
+    	.forEach(System.out::println);
+  }
+    
+    
+    public void sortTravellerByCountry() {
+    	///new comperable hash  
+      	 HashMap<String, String> TravellerCountry=new HashMap<String, String>();
+           for(String mail:this.travellersList.keySet()) {
+        	   TravellerCountry.put(mail, this.travellersList.get(mail).getCountry());
+           }
+           
+          TravellerCountry.entrySet()
+       	.stream()
+       	.sorted(HashMap.Entry.<String, String>comparingByValue())
+       	.forEach(System.out::println);
+     }
+
+    
+    // Load pages methods
     
     public void reloadLoginPage() {
     	try {
@@ -381,8 +407,6 @@ public class SystemGuide4u implements java.io.Serializable{
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.show();
 			primaryStage.setResizable(false);
-			
-			
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -412,62 +436,8 @@ public class SystemGuide4u implements java.io.Serializable{
 			e.printStackTrace();
 		}
 		
-		
-		
 	}
 	
-	
-//	public void showRating(LocalGuide localGuide) {
-////		Double newRating = (this.rating+rating)/++this.raters;
-////		setRating(newRating);
-//		int cnt = 0;
-//		double sumRating = 0;
-//		for (Review r : this.getReviewsList() ) {
-//			if(r.getLocalGuide().getEmail().equals(localGuide.getEmail())) {
-//				sumRating = sumRating+r.getRating(); 
-//				cnt++;
-//			}
-//		}
-//		
-//		Double newRating = sumRating/cnt;
-//		localGuide.setRating(newRating);
-//	}
-	
-	//serialize 
-	
-	public static void writeFile() {
-		try {
-			FileOutputStream fileOut = new FileOutputStream("Hospital.ser");//name of the folder we create
-			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			out.writeObject(SystemGuide4u.getInstance());
-			out.close();
-			fileOut.close();
-			System.out.println("Writen to file");
-			
-		
-		} catch (IOException i) {
-			i.printStackTrace();
-		}
-	}
-	
-	//deserialize
-	public static void readFile() {
-		try {
-			
-			FileInputStream file = new FileInputStream("guide4u.ser");
-			ObjectInputStream in = new ObjectInputStream(file);
-			instance = (SystemGuide4u) in.readObject();
-			in.close();
-			file.close();
-			System.out.println("file found");
-
-		} catch (IOException e2) {
-			e2.printStackTrace();
-		} catch (ClassNotFoundException e3) {
-			e3.printStackTrace();
-		}
-	}
-    
     public void loadAdminPage() {
     	try {
 			Stage stage=new Stage();
@@ -513,18 +483,50 @@ public class SystemGuide4u implements java.io.Serializable{
 		}
     	
     }
-    
+	
+	// Write & Read to file methods - Unused in final version.
+	
+	public static void writeFile() {
+		try {
+			FileOutputStream fileOut = new FileOutputStream("guide4u.ser");//name of the folder we create
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(SystemGuide4u.getInstance());
+			out.close();
+			fileOut.close();
+			System.out.println("Writen to file");
+			
+		
+		} catch (IOException i) {
+			i.printStackTrace();
+		}
+	}
+	
+	
+	public static void readFile() {
+		try {
+			
+			FileInputStream file = new FileInputStream("guide4u.ser");
+			ObjectInputStream in = new ObjectInputStream(file);
+			instance = (SystemGuide4u) in.readObject();
+			in.close();
+			file.close();
+			System.out.println("file found");
+
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		} catch (ClassNotFoundException e3) {
+			e3.printStackTrace();
+		}
+	}
+	
+
+    // Transform Traveller user to Local Guide method 
     
     public LocalGuide transferTravellerToGuide(Traveller t) {
     	LocalGuide localGuide= new LocalGuide(t.getEmail(), t.getPassword(), t.getFirstName(), t.getLastName(), t.getDateOfBirth(), t.getGender(), t.getCity(), t.getCountry(), t.getPhoneNumber(), t.getLanguage(), t.getTravelStyle(), t.getAboutMe(),t.emailNotifacations);
     	return localGuide;
     }
     
-    
- 
-    
-    
-	
-	
+
 }
 	

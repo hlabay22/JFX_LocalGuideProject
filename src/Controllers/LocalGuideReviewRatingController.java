@@ -100,6 +100,8 @@ public class LocalGuideReviewRatingController implements Initializable {
     SystemGuide4u system=Main.system;
     
     static SqlTest sql = new SqlTest();
+    
+    // Buttons ActionEvent methods
 
     @FXML
     void btnExitClick(ActionEvent event) {
@@ -111,9 +113,7 @@ public class LocalGuideReviewRatingController implements Initializable {
     @FXML
     void btnSubmit(ActionEvent event) {
 
-    	
     	Review review = new Review();
-    	
     	LocalDate date = this.datePickDate.getValue();
     	Traveller t = this.traveller;
     	LocalGuide lg = this.localGuide;
@@ -122,7 +122,6 @@ public class LocalGuideReviewRatingController implements Initializable {
     	String reviewText = this.txtReveiwText.getText();
     	Double rating;
     	
-
     	
     	try {
     		
@@ -161,9 +160,12 @@ public class LocalGuideReviewRatingController implements Initializable {
     				review.setRating(rating);
     			}else throw new GeneralErrorException();
     		}else throw new GeneralErrorException();
+    		
+    		
     		sql.addReviewToSQL(review);
     		sql.initReviews();
 			Alert a = new Alert(AlertType.INFORMATION);
+			// Show Success Alert after adding Review to Database 
 			a.setTitle("Review Sent!");
 			a.setHeaderText("Review Sent!");
 			a.setContentText("Review was sent! Thank You");
@@ -171,7 +173,8 @@ public class LocalGuideReviewRatingController implements Initializable {
     		
     		
     	}catch (GeneralErrorException e) {
-    		
+    	
+    	// Show Fail Alert after failing to add Review to Database (For any Reason Of the conditions above!)
 		Alert a = new Alert(AlertType.ERROR);
 		a.setTitle("Error!");
 		a.setHeaderText("Error!");
@@ -182,28 +185,14 @@ public class LocalGuideReviewRatingController implements Initializable {
     	}
 
     }
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		system = Main.system;
-		system.initCountryComBox(this.comBoxCountry);
-		this.txtRating.setPromptText(" [0-10] ");
-		this.datePickDate.setDayCellFactory(picker -> new DateCell() {
-	        public void updateItem(LocalDate date, boolean empty) {
-	            super.updateItem(date, empty);
-	            LocalDate today = LocalDate.now();
-	            setDisable(empty || date.compareTo(today) > 0 );
-	        }
-	    });
-		
-	}
+    
+	// Getters & Setters 
 	
 	public void setProfileData() {
 		this.lblFullName.setText(this.localGuide.getFirstName()+" "+this.localGuide.getLastName());
 		this.lblCity.setText(this.localGuide.getCity());
 		this.lblCountry.setText(this.localGuide.getCountry());
 		this.lblRating.setText(new DecimalFormat("##.##").format(this.localGuide.getRating()));
-		
 	}
 
 	public LocalGuide getLocalGuide() {
@@ -221,5 +210,24 @@ public class LocalGuideReviewRatingController implements Initializable {
 	public void setTraveller(Traveller traveller) {
 		this.traveller = traveller;
 	}
+    
+    // Initialize data methods
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		system = Main.system;
+		system.initCountryComBox(this.comBoxCountry);
+		this.txtRating.setPromptText(" [0-10] ");
+		this.datePickDate.setDayCellFactory(picker -> new DateCell() {
+	        public void updateItem(LocalDate date, boolean empty) {
+	            super.updateItem(date, empty);
+	            LocalDate today = LocalDate.now();
+	            setDisable(empty || date.compareTo(today) > 0 );
+	        }
+	    });
+		
+	}
+	
+
 
 }

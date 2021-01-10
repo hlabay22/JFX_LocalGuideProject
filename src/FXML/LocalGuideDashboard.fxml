@@ -100,6 +100,11 @@
                               <Image url="@../img/homeImges/3.jpg" />
                            </image>
                         </ImageView>
+                        <Label fx:id="lblLogo_home" layoutX="924.0" layoutY="14.0" prefHeight="88.0" prefWidth="152.0" text="Guide4U" textFill="WHITE">
+                           <font>
+                              <Font name="Gill Sans MT Ext Condensed Bold" size="72.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
             </content>
           </Tab>

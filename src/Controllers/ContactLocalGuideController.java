@@ -35,6 +35,8 @@ public class ContactLocalGuideController implements Initializable {
     private ImageView imgPhoneIcon;
     
     LocalGuide localGuide;
+    
+    // Getters & Setters 
 
     public LocalGuide getLocalGuide() {
 		return localGuide;
@@ -43,19 +45,20 @@ public class ContactLocalGuideController implements Initializable {
 	public void setLocalGuide(LocalGuide localGuide2) {
 		this.localGuide = localGuide2;
 	}
-
-	@FXML
-    void btnOKclick(ActionEvent event) {
-		btnOK.getScene().getWindow().hide();
-
-    }
 	
+
 	public void setData() {
 		this.lblLocalGuideName.setText(this.localGuide.getFirstName()+" "+this.localGuide.getLastName());
 		this.lblLocalGuideEmail.setText(this.localGuide.getEmail());
 		this.lblLocalGuidePhone.setText(this.localGuide.getPhoneNumber().toString());
 		
 	}
+	
+	@FXML
+    void btnOKclick(ActionEvent event) {
+		btnOK.getScene().getWindow().hide();
+
+    }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

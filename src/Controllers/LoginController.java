@@ -28,6 +28,9 @@ import Model.Traveller;
 import application.Main;
 import javafx.fxml.Initializable;
 
+/*
+ * Login Page Controller - This is the first screen of the Application
+ */
 public class LoginController implements Initializable {
 	
 	Stage stage;
@@ -67,17 +70,21 @@ public class LoginController implements Initializable {
 	    @FXML
 	    private Button btnExit;
 
-	   // static SystemGuide4u system;
 	   SystemGuide4u system=Main.system;
+	   
+	   
+	   // Buttons ActionEvent methods 
+	   
 	    @FXML
 	    void btnExitClick(ActionEvent event) {
-	    	
+	    	// close the App.
 	    	System.exit(0);
-
 	    }
 	    
 	    @FXML
 	    void btnSignInClick(ActionEvent event) {
+	    	
+	    	// Case 1 : Admin sign in
 	    	if(txtEmail.getText().equals("admin") && (txtPassword.getText().equals("admin"))) {
 	    		loadAdminPage();
 	    	}
@@ -93,13 +100,14 @@ public class LoginController implements Initializable {
 		        else {
 		    		
 		        	try {
-		    
+		        	// Case 2 : LocalGuide sign in
 		    		if(system.getLocalGuidesList().containsKey(txtEmail.getText()) && 
 		    				system.checkPasswordAndEmailGuide(email, txtPassword.getText()))
 		    		{
 		    				LocalGuide localGuide = system.getGuideByEmail(email);
 		    				loadLocalGuideDashboad(localGuide);	    			
 		    		}
+		    		// Case 3 : Traveller sign in
 		    		else if (system.getTravellersList().containsKey(email) && 
 		    				system.checkPasswordAndEmailTraveller(email, txtPassword.getText())) {
 		    			Traveller traveller=system.getTravellerByMail(email);
@@ -110,9 +118,7 @@ public class LoginController implements Initializable {
 		    		}
 		    	
 		    	catch(LoginException e) {
-	    			e.printStackTrace();
 	    			popUpLoginError();
-	    			
 	    			this.txtEmail.clear();
 	    			this.txtPassword.clear();
 	    		}
@@ -120,9 +126,7 @@ public class LoginController implements Initializable {
 		    }
 	    		}
 	    }
-	    
-
-	    
+  
 	    @FXML
 	    void btnSignUpClick(ActionEvent event) {
 	    	loadSignUpPage();
@@ -130,17 +134,7 @@ public class LoginController implements Initializable {
 
 	    }
 
-
-
-
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
-		
-		
-	}
-	
+	// Load pages methods
 
 	public void loadSignUpPage() {
 		
@@ -159,7 +153,7 @@ public class LoginController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-public void loadAdminPage() {
+	public void loadAdminPage() {
 		
 		try {
 			stage=new Stage();
@@ -263,6 +257,14 @@ public void loadAdminPage() {
 			e.printStackTrace();
 		}
 			
+		
+	}
+	
+	// Initialize data methods 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		
 		
 	}
 

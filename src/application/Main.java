@@ -35,8 +35,12 @@ import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 	
+	
+    // Attributes set up.
 	public static SystemGuide4u system= SystemGuide4u.getInstance();
     static SqlTest sql = new SqlTest();
+    
+    // Import from txt file - Unused on final version.
 	private static void importDataFromTxtFile() throws ParseException {
         try {
             
@@ -114,6 +118,7 @@ public class Main extends Application {
 
     }
 	
+	// Serialization method - Unused on final version.
 	public static void serialize(String fileName) {
         
         try {
@@ -138,6 +143,8 @@ public class Main extends Application {
         }
 
     }
+	
+	// Serialization method - Unused on final version.
 	public static void deserialize() {
 		try {
 			FileInputStream fileIn = new FileInputStream("guide4u.ser");
@@ -181,18 +188,13 @@ public class Main extends Application {
 	
 	public static void main(String[] args) throws ParseException {
 
-
-		sql.conectTo();
+		// Establish SQL connection an initialize the data from Database.
+//		sql.conectTo();
 		sql.initLocalGuide();
 		sql.initTravellers();
-		sql.showLocalGuides();
 		sql.initReviews();
 		sql.initUnavailbleDates();
 		sql.initPlaces();
-
-
-		
-		
 		launch(args);
 	}
 }

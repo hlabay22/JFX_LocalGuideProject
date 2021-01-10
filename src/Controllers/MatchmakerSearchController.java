@@ -36,6 +36,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/*
+ * Controller for MatchMaker Search option - (Automated and Optimal match between Travellers and LocalGuides)
+ */
 public class MatchmakerSearchController implements Initializable{
 
     @FXML
@@ -50,7 +53,6 @@ public class MatchmakerSearchController implements Initializable{
     @FXML
     private Label lblFullName;
 
-   
 
     @FXML
     private Label lblCity;
@@ -137,14 +139,13 @@ public class MatchmakerSearchController implements Initializable{
     
     Traveller traveller;
     
-
     LocalGuide localGuide;
 	
 	SystemGuide4u system=Main.system;
 	
 	
 
-        
+    // Buttons ActionEvent methods    
          
     @FXML
     void btnPlacesAndTravelsClick(ActionEvent event) {
@@ -171,14 +172,12 @@ public class MatchmakerSearchController implements Initializable{
     void btnSearchClick(ActionEvent event) {
     	
     	matchmakerSearchAlgorithem();
-    	
-    	
 
     }
     
     
     
-    // Add place@travels btnActionCLick method!!!!!
+    // MatchMaker Algorithm method - process of given data information on both parties and matching pairs by 6 Levels of "Match Strength"
     
     public void matchmakerSearchAlgorithem() {
     	
@@ -208,7 +207,7 @@ public class MatchmakerSearchController implements Initializable{
 				  }
 			  }
 			  
-			  // MUST HAVE CONDITIONS ARE : match on city, country and date availiblaty.
+			  // MUST HAVE CONDITIONS ARE : match on city, country and date availability.
 			  
 			  // Option 1 - Perfect Match based On language,travel style,and age difference. [Perfect]
 			  
@@ -239,11 +238,6 @@ public class MatchmakerSearchController implements Initializable{
     	    	  showHideResult(true);
     	    	  break;
     	     }
-    	     
-    	     
-    	     
-    	     
-    	     
     	     
     	     // Option 2 - Great Match based On language, travel style. [Great]
     	     
@@ -334,8 +328,7 @@ public class MatchmakerSearchController implements Initializable{
     	     }
     	     
     	     // Option 5 - Plain Match base on MUST HAVE CONDITIONS only
-    	     
-    	     
+
     	     else if(guideCity.equalsIgnoreCase(travellerCity) &&
     	    	(guideCountry.equalsIgnoreCase(travellerCountry)) && 
     	    	(GuideIsAvliable)) {
@@ -344,13 +337,10 @@ public class MatchmakerSearchController implements Initializable{
 	   	    	  setMatchedLocalGuideDetails();
 	   	    	  showHideResult(true);
 	   	    	  break;
-    	    	 
-    	    	 
-    	    	 
+
     	     }
     	     
     	     // Option 5.1 - Plain Match base on MUST HAVE CONDITIONS without DATE AVAILIBILTY
-    	     
     	     
     	     else if(guideCity.equalsIgnoreCase(travellerCity) &&
     	    	(guideCountry.equalsIgnoreCase(travellerCountry)) && 
@@ -360,30 +350,20 @@ public class MatchmakerSearchController implements Initializable{
 	   	    	  setMatchedLocalGuideDetails();
 	   	    	  showHideResult(true);
 	   	    	  break;
-    	    	 
-    	    	 
-    	    	 
-    	     }
-    	     
 
-    	     
+    	     }
+
     	     // Option 6 - NO MATCH 
-    	     
     	     
     	     else {
     	    	 lblNote.setText("** Sorry, No Match With Any Local Guide With These Details Was Found!");
     	    	 lblNote.setVisible(true);
     	     }
     	     
-    	
-    	
     	}
-    	
-
-    	
     }
-    
 
+    // Getters & Setters 
     
     public Traveller getTraveller() {
 		return traveller;
@@ -477,7 +457,7 @@ public class MatchmakerSearchController implements Initializable{
 		}
 	}
 	
-	
+	// Load page methods
     public void loadPlacesAndTravelsViaTravellerView(LocalGuide localGuide2) {
 		try {
 
@@ -502,12 +482,14 @@ public class MatchmakerSearchController implements Initializable{
 		}
 		
 	}
-
+    
+    // Initialize data method  
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		this.system = Main.system;
 		system.initCountryComBox(this.comBoxCountry);
+		
 		// Disable Picking Past Dates On The availability datePicker.
 		this.datePick.setDayCellFactory(picker -> new DateCell() {
 	        public void updateItem(LocalDate date, boolean empty) {

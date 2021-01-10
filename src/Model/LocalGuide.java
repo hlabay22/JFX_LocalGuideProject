@@ -30,6 +30,8 @@ public class LocalGuide extends User implements java.io.Serializable {
 	
 	public LocalGuide() {
 		super();
+		this.language = new Language("lang1");
+		this.travelStyle = new TravelStyle("travelStyle1");
 	}
 	
 	public Double getRating() {
