@@ -1,6 +1,7 @@
-use guide4u;
+create database guide4u;
+/*use guide4u;*/
 
-drop table Travellers;
+/*drop table Travellers;*/
 create table Travellers (
 	first_name VARCHAR(50),
 	last_name VARCHAR(50),
@@ -41,7 +42,7 @@ insert into Travellers (first_name, last_name, email, password, dateOfBirth, gen
 insert into Travellers (first_name, last_name, email, password, dateOfBirth, gender, country, city, phoneNumber, language1, language2, language3, travelStyle1, travelStyle2, travelStyle3, about, mail) values ('Giacopo', 'Rosier', 'grosieri@myspace.com', 'fgd745', '22-Jun-1991', 'Female', 'Germany', 'Cholarg?s', '4563346508', 'Marathi', null, 'Quechua', 'Nature', null, 'Sport', 'Let''s Travel and Rock', 'no');
 insert into Travellers (first_name, last_name, email, password, dateOfBirth, gender, country, city, phoneNumber, language1, language2, language3, travelStyle1, travelStyle2, travelStyle3, about, mail) values ('Taryn', 'Shiel', 'tshielj@bing.com', 'qwe123', '21-Jan-1973', 'Female', 'United States', 'Cergy-Pontoise', '3974159558', 'Lithuanian', null, null, 'Shoping', null, null, 'I Love Travels and meeting people from all around the world', 'yes');
 
-drop table LocalGuides;
+/*drop table LocalGuides;*/
 
 create table LocalGuides (
 	first_name VARCHAR(50),
@@ -84,7 +85,7 @@ insert into LocalGuides (first_name, last_name, email, password, dateOfBirth, ge
 insert into LocalGuides (first_name, last_name, email, password, dateOfBirth, gender, country, city, phoneNumber, language1, language2, language3, travelStyle1, travelStyle2, travelStyle3, about, mail) values ('Garland', 'Breslane', 'gbreslanej@wordpress.com', 'zxd123', '31-Oct-2019', 'Female', 'Israel', 'Mosetse', '3269337907', 'Chinese', 'Indonesian', null, 'Adventure', 'Hiking', null, 'Come and explore my beatiful country', 'no');
 
 
-drop table Reviews
+/*drop table Reviews*/
 create table Reviews (
 	localGuide_email VARCHAR(50) not null ,
 	date VARCHAR(50) not null,
@@ -105,7 +106,7 @@ insert into Reviews (localGuide_email, date, traveller_email, city, country,revi
 insert into Reviews (localGuide_email, date, traveller_email, city, country,reviewText, rating) values ('mswateridge3@qq.com','31-Dec-2020','har@gmail.com','Bromma','United States','Very Good Guide! Highly Recomended',9.0);
 
 
-drop table Places
+/*drop table Places*/
 create table Places (
 	localGuide_email VARCHAR(50) not null,
 	place_name VARCHAR(50) not null,
@@ -119,7 +120,7 @@ insert into Places (localGuide_email, place_name,city, country,infoText) values 
 insert into Places (localGuide_email, place_name,city, country,infoText) values ('xxx@gmail.com','MTM HiTech Park','Haifa','Israel','Tour To MTM Hi-Tech Park');
 
 
-drop table LocalGuideUnavailibleDates
+/*drop table LocalGuideUnavailibleDates*/
 create table LocalGuideUnavailibleDates (
 	localGuide_email VARCHAR(50) not null,
 	date VARCHAR(50) not null,

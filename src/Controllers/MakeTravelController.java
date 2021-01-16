@@ -1,24 +1,24 @@
-//package Controllers;
-//
-//import java.time.LocalDate;
-//import java.util.ArrayList;
-//
-//import Model.LocalGuide;
-//import Model.Place;
-//import Model.SystemGuide4u;
-//import Model.Travel;
-//import Model.Traveller;
-//import application.Main;
-//import javafx.event.ActionEvent;
-//import javafx.fxml.FXML;
-//import javafx.scene.control.Button;
-//import javafx.scene.control.ComboBox;
-//import javafx.scene.control.Label;
-//import javafx.scene.control.Separator;
-//import javafx.scene.image.ImageView;
-//import javafx.scene.layout.Pane;
-//
-//public class MakeTravelController {
+package Controllers;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import Model.LocalGuide;
+import Model.Place;
+import Model.SystemGuide4u;
+import Model.Travel;
+import Model.Traveller;
+import application.Main;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+
+public class MakeTravelController {
 //
 //    @FXML
 //    private ImageView imgBackground;
@@ -176,5 +176,5 @@
 //    	this.traveller=traveller;
 //    	this.date=date;
 //    }
-//}
+}
 

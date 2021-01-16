@@ -190,6 +190,7 @@ import Model.User;
 	                    String reviewText= rs.getString(6);
 	                    Double rating =Double.parseDouble(rs.getString(7));
 	                    Review newReview = new Review(localGuide_email, date, traveller_email, city, country, reviewText, rating);
+	                    system.addReview(newReview);
 
 				}  
 			}  

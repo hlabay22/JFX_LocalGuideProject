@@ -220,6 +220,7 @@ public class SystemGuide4u implements java.io.Serializable{
 		return localGuide;
 	}
 	
+	
 	public Traveller getTravellerByMail(String mail) {
 		Traveller traveller=this.travellersList.get(mail);
 		return traveller;
