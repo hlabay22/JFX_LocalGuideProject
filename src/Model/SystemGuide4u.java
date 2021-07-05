@@ -46,6 +46,8 @@ import javafx.stage.StageStyle;
  * Singleton Usage of class instance throw whole app.
  */
 
+// Hi Timi!!!!
+
 public class SystemGuide4u implements java.io.Serializable{
 	
 	// Attributes 
