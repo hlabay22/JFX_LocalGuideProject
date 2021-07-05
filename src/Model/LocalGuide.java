@@ -142,7 +142,7 @@ public class LocalGuide extends User implements java.io.Serializable {
 	
 	// Remove Unavailable dates by month (executed at the End of the month) 
 	public void removeUnavailibleDatesByMonth(int month) {
-		this.unavailableDates.removeIf(m -> m.getMonthValue()==month);
+		this.unavailableDates.removeIf(d -> d.getMonthValue()==month);
 	}
 	
 
